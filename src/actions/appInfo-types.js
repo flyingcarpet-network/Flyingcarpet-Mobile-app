@@ -1,0 +1,1 @@
+export const SET_IS_LOADING_COMPLETE = 'appInfo/SET_IS_LOADING_COMPLETE';
