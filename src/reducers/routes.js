@@ -3,7 +3,7 @@
  */
 
 const initialState = {
-  scene: {} // Represents the current scene
+  routeName: 'home' // Represents the current route's name (the default route is "home")
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action = {}) {
     case "REACT_NATIVE_ROUTER_FLUX_FOCUS":
       return {
         ...state,
-        scene: action.params,
+        routeName: action.routeName,
       };
     default:
       return state;
