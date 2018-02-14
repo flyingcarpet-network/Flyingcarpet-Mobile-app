@@ -6,8 +6,13 @@ import Expo from 'expo';
 import React from 'react';
 import Routes from './src/routes';
 import { Provider } from 'react-redux';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import store from './src/store';
 import { App } from './src/containers';
+import globalStyles from './src/styles';
+
+// Setup global stylesheet variables
+EStyleSheet.build(globalStyles);
 
 class Index extends React.Component {
   render () {

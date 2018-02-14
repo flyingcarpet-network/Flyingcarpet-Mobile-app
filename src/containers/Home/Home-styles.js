@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#000000',
+    backgroundColor: '$appBackgroundColor',
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 100,
@@ -19,16 +19,16 @@ export default StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: 'rgba(0,0,0,0)',
     width: 260,
     height: 45,
-    borderColor: "rgba(255,255,255,0.7)",
+    borderColor: '$appLineColor',
     borderWidth: 1,
     borderRadius: 5,
     paddingTop: 20,
     paddingBottom: 20
   },
   buttonText: {
-    fontWeight: "600"
+    fontWeight: '$appBoldWeight'
   }
 });

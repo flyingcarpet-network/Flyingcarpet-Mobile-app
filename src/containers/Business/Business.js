@@ -1,11 +1,12 @@
 /*
- * This is the business selection scene.
+ * This is the business selection scene where the user selects the
+ * business service they would like to use from a list.
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './Business-styles';

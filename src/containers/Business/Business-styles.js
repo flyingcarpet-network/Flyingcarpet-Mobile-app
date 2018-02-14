@@ -1,25 +1,25 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#000000'
+    backgroundColor: '$appBackgroundColor'
   },
   line: {
-    borderTopColor: "rgba(255,255,255,0.7)",
+    borderTopColor: '$appLineColor',
     borderTopWidth: 1,
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20
   },
   businessTypeListWrap: {
-    marginTop: 20,
     flexDirection: 'column',
     flex: 1
   },
   businessTypeList: {
-    flex: 1
+    flex: 1,
+    paddingTop: 20
   },
   businessType: {
     padding: 10,
@@ -29,11 +29,11 @@ export default StyleSheet.create({
   },
   businessTypeText: {
     fontSize: 18,
-    color: 'white',
+    color: '$appTextColor',
     textAlign: 'center'
   },
   rightArrow: {
-    color: 'white',
+    color: '$appTextColor',
     position: 'absolute',
     right: 10,
     top: 9

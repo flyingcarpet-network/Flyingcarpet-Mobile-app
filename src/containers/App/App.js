@@ -5,12 +5,13 @@
  */
 
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import Expo, { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+import styles from './App-styles';
 import * as appInfoActions from '../../actions/appInfo';
 
 class App extends React.Component {
@@ -65,16 +66,6 @@ class App extends React.Component {
     setIsLoadingComplete(true);
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  statusBarUnderlay: {
-    height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
-});
 
 App.propTypes = {
   isLoadingComplete: PropTypes.bool.isRequired,

@@ -1,5 +1,5 @@
 /*
- * This is the home scene, where the user can select ether "Business" or "FC Owner."
+ * This is the home scene, where the user can select ether "Business," "FC Owner," or "Drone Owner."
  */
 
 import React from 'react';
@@ -30,7 +30,6 @@ export default class Home extends React.Component {
             title="FC OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
-            containerStyle={{ flex: 1 }}
           />
         </View>
         <View style={styles.buttonWrap}>
@@ -39,7 +38,6 @@ export default class Home extends React.Component {
             title="DRONE OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
-            containerStyle={{ flex: 1 }}
           />
         </View>
       </View>

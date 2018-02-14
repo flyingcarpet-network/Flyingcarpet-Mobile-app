@@ -7,15 +7,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions, Router, Reducer, Scene } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { Home, Business } from './containers';
 
-const styles = StyleSheet.create({
+// Styles for the navigation bar
+const styles = EStyleSheet.create({
   navBar: {
-    backgroundColor: 'black'
+    backgroundColor: '$appBackgroundColor'
   },
   titleStyle: {
-    color: 'white'
+    color: '$appTextColor'
   }
 });
 
