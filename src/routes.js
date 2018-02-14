@@ -7,14 +7,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions, Router, Reducer, Scene } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { StyleSheet } from 'react-native';
 import { Home, Business } from './containers';
 
-const scenes = Actions.create(
-  <Scene key="Root">
-    <Scene key="home" component={Home} />
-    <Scene key="business" component={Business} />
-  </Scene>
-);
+const styles = StyleSheet.create({
+  navBar: {
+    backgroundColor: 'black'
+  },
+  titleStyle: {
+    color: 'white'
+  }
+});
 
 class Routes extends React.Component {
   static propTypes = {
@@ -31,10 +34,17 @@ class Routes extends React.Component {
   }
 
   render () {
+    const { sceneTitle } = this.props;
+
     return (
       <Router
         createReducer={this.reducerCreate.bind(this)}
-        scenes={scenes} />
+      >
+        <Scene key="Root" navigationBarStyle={styles.navBar} titleStyle={styles.titleStyle}>
+          <Scene key="home" component={Home} />
+          <Scene key="business" component={Business} title="Business" />
+        </Scene>
+      </Router>
     );
   }
 }
