@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Actions, Router, Reducer, Scene } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Home, Business } from './containers';
+import * as containers from './containers';
 
 // Styles for the navigation bar
 const styles = EStyleSheet.create({
@@ -35,19 +35,28 @@ class Routes extends React.Component {
   }
 
   render () {
-    const { sceneTitle } = this.props;
+    const { sceneTitle, businessType } = this.props;
 
     return (
       <Router
         createReducer={this.reducerCreate.bind(this)}
       >
         <Scene key="Root" navigationBarStyle={styles.navBar} titleStyle={styles.titleStyle}>
-          <Scene key="home" component={Home} />
-          <Scene key="business" component={Business} title="Business" />
+          <Scene key="home" component={containers.Home} />
+          <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" />
+          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} />
         </Scene>
       </Router>
     );
   }
 }
 
-export default connect()(Routes);
+Routes.propTypes = {
+  businessType: PropTypes.string.isRequired
+};
+
+export default connect(
+  state => ({
+    businessType: state.business.businessType
+  })
+)(Routes);

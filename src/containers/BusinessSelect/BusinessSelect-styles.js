@@ -10,8 +10,8 @@ export default EStyleSheet.create({
     borderTopColor: '$appLineColor',
     borderTopWidth: 1,
     marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20
+    // marginLeft: 20,
+    // marginRight: 20
   },
   businessTypeListWrap: {
     flexDirection: 'column',

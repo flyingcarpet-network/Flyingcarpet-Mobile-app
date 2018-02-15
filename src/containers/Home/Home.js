@@ -18,7 +18,7 @@ export default class Home extends React.Component {
         <Text>HOME</Text>
         <View style={styles.buttonWrap}>
           <Button
-            onPress={() => Actions.business()}
+            onPress={() => Actions.businessSelect()}
             title="BUSINESS"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
@@ -26,7 +26,7 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.buttonWrap}>
           <Button
-            onPress={() => Actions.business()}
+            onPress={() => Actions.businessSelect()}
             title="FC OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
@@ -34,7 +34,7 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.buttonWrap}>
           <Button
-            onPress={() => Actions.business()}
+            onPress={() => Actions.businessSelect()}
             title="DRONE OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
