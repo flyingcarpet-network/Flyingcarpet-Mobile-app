@@ -9,6 +9,7 @@ import { Actions, Router, Reducer, Scene } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import * as containers from './containers';
+import { RightButton } from './components';
 
 // Styles for the navigation bar
 const styles = EStyleSheet.create({
@@ -47,6 +48,7 @@ class Routes extends React.Component {
           <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} />
           <Scene key="businessEstimate" component={containers.BusinessEstimate} backTitle=" " title={businessType} />
           <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" />
+          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => {}}>Attach New</RightButton>} />
         </Scene>
       </Router>
     );

@@ -34,7 +34,7 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.buttonWrap}>
           <Button
-            onPress={() => Actions.businessSelect()}
+            onPress={() => Actions.droneOwnerDetails()}
             title="DRONE OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}
