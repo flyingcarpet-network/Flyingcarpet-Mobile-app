@@ -12,7 +12,8 @@ const initialState = {
   selectedOptions: {}, // Contains all of the *selected* checkbox options (with the value "true") for the selected business
                        // service (the options vary depending on the selected business). NOTE: this object may contain other
                        // values without the value "true."
-  ethCost: 0 // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
+  ethCost: 0, // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
+  businessTransactionProcessing: false // Represents whether the transaction has started being process (a vehicle has been found to complete the task)
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -60,6 +61,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         ethCost: action.ethCost
+      };
+    case types.SET_BUSINESS_TRANSACTION_PROCESSING:
+      return {
+        ...state,
+        businessTransactionProcessing: action.businessTransactionProcessing
       };
     default:
       return state;

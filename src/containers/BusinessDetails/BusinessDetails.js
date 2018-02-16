@@ -1,6 +1,6 @@
 /*
- * This is the business selection scene where the user selects the
- * business service they would like to use from a list.
+ * This is the business details scene where the user chooses the
+ * business service options they would like to use to run the task.
  */
 
 import React from 'react';

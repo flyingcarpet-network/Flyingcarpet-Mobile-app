@@ -1,6 +1,6 @@
 /*
- * This is the business selection scene where the user selects the
- * business service they would like to use from a list.
+ * This is the business estimation scene where the user selects the price they would
+ * like to pay and gets to see an estimate of the time it will take to complete the task.
  */
 
 import React from 'react';
@@ -28,7 +28,14 @@ class BusinessEstimate extends React.Component {
 
     const ethCostAdjusted = Math.round(ethCost * 40 * 100) / 100;
     // Get a string representing how long it will take to complete the task
-    const timeToFinishString = estimateTimeToDone(businessType, ethCostAdjusted);
+    // (returns an object, e.g.: { number: 3, units: 'days' })
+    const timeToFinish = estimateTimeToDone(businessType, ethCostAdjusted);
+    let timeToFinishString;
+    if (timeToFinish.number === Infinity) { // In case the time until done is infinite
+      timeToFinishString = 'infinite time';
+    } else {
+      timeToFinishString = timeToFinish.number + ' ' + timeToFinish.units; // Construct string of the time until finished
+    }
 
     return (
       <View style={styles.container}>

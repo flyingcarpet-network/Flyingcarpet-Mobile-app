@@ -3,6 +3,12 @@
  */
 
 export default function estimateTimeToDone(businessType, ethCostAdjusted) {
+  // This function returns an object containing the number of units of time and the type of unit of time, e.g:
+  //   {
+  //      number: 3,
+  //      units: 'hours'
+  //   }
+
   // This is card-coded for now, but this should probably need to be dynamic in the future ...
   switch (businessType.toLowerCase()) {
     case 'agriculture':
@@ -10,23 +16,23 @@ export default function estimateTimeToDone(businessType, ethCostAdjusted) {
     case 'infrastructure':
       return createString(6 / ethCostAdjusted);
     default:
-      return Infinity;
+      return createString(Infinity);
   }
 }
 
 function createString(time) {
   // This function creates the number + units string representing the estimate of long the task will take
   if (time === Infinity)
-    return 'infinite time';
+    return { number: Infinity, units: 'days' };
   else if (time < (1 / 24)) {
     const mins = Math.round(time * 1440);
-    return mins + ' minute' + addSCharacterIfNotOne(mins);
+    return { number: mins, units: 'minute' + addSCharacterIfNotOne(mins) };
   } else if (time < 1) {
     const hours = Math.round(time * 24);
-    return hours + ' hour' + addSCharacterIfNotOne(hours);
+    return { number: hours, units: 'hour' + addSCharacterIfNotOne(hours) };
   } else {
     const days = Math.round(time);
-    return days + ' day' + addSCharacterIfNotOne(days);
+    return { number: days, units: 'day' + addSCharacterIfNotOne(days) };
   }
 }
 

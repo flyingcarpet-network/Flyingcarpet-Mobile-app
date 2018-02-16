@@ -51,3 +51,10 @@ export function setEthCost(ethCost) {
     ethCost
   };
 }
+
+export function setBusinessTransactionProcessing(businessTransactionProcessing) {
+  return {
+    type: types.SET_BUSINESS_TRANSACTION_PROCESSING,
+    businessTransactionProcessing
+  };
+}
