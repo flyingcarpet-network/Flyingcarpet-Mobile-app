@@ -6,11 +6,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { MapView } from 'expo';
 import { Slider, CheckBox } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
+import { FontAwesome } from '@expo/vector-icons';
 import styles from './BusinessDetails-styles';
+import getServiceCheckboxOptions from '../../utils/getServiceCheckboxOptions';
 import * as businessActions from '../../actions/business';
 
 class BusinessDetails extends React.Component {
@@ -19,17 +22,6 @@ class BusinessDetails extends React.Component {
 
     // Reset the redux router each time the component is unmounted
     reset();
-  }
-  getServiceCheckboxOptions(businessType) {
-    // This is card-coded for now, but this should probably be altered to import this data from JSON (or elsewhere...)
-    switch (businessType.toLowerCase()) {
-      case 'agriculture':
-        return ['Identify pests', 'Detect nutrient deficiencies', 'Estimate crop yield', 'Measure irrigation'];
-      case 'infrastructure':
-        return ['Heating leak', 'Damages', 'Surface estimation', 'Solar estimation'];
-      default:
-        return [];
-    }
   }
   handleMapPress = e => {
     const { addLocationCoordinate } = this.props;
@@ -41,7 +33,7 @@ class BusinessDetails extends React.Component {
     const { selectedLocationCoordinates, altitute, setAltitute, businessType, flightDirection, setFlightDirection, toggleOption, selectedOptions } = this.props;
 
     // Get an array of the different checkbox options for the business type
-    const options = this.getServiceCheckboxOptions(businessType);
+    const options = getServiceCheckboxOptions(businessType);
 
     return (
       <View style={styles.container}>
@@ -107,6 +99,12 @@ class BusinessDetails extends React.Component {
               />
             ))}
           </View>
+          <TouchableOpacity onPress={Actions.businessEstimate}>
+            <View style={styles.estimateTextWrap}>
+              <Text style={styles.estimateText}>Estimate</Text>
+              <FontAwesome name="angle-right" size={25} style={styles.rightArrow} />
+            </View>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );

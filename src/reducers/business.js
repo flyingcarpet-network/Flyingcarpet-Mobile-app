@@ -9,9 +9,10 @@ const initialState = {
   selectedLocationCoordinates: [], // An array of coordinates (lat/long pairs) representing the user's selected region on the map
   altitute: 0, // Represents the altitute for the selected business service (only used by some business services)
   flightDirection: 0, // Represents the flight direction for the selected business service (only used by some business services)
-  selectedOptions: {} // Contains all of the *selected* checkbox options (with the value "true") for the selected business
-                      // service (the options vary depending on the selected business). NOTE: this object may contain other
-                      // values without the value "true."
+  selectedOptions: {}, // Contains all of the *selected* checkbox options (with the value "true") for the selected business
+                       // service (the options vary depending on the selected business). NOTE: this object may contain other
+                       // values without the value "true."
+  ethCost: 0 // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -44,7 +45,6 @@ export default function reducer(state = initialState, action = {}) {
         flightDirection: action.flightDirection
       };
     case types.TOGGLE_OPTION:
-      console.log(state.selectedOptions[action.option]);
       return {
         ...state,
         selectedOptions: {
@@ -55,6 +55,11 @@ export default function reducer(state = initialState, action = {}) {
             true // Set the value of the option to true since no value is currently set in the selectedOptions object
           )
         }
+      };
+    case types.SET_ETH_COST:
+      return {
+        ...state,
+        ethCost: action.ethCost
       };
     default:
       return state;

@@ -44,3 +44,10 @@ export function toggleOption(option) {
     option
   };
 }
+
+export function setEthCost(ethCost) {
+  return {
+    type: types.SET_ETH_COST,
+    ethCost
+  };
+}

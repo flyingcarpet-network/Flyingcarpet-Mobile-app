@@ -44,19 +44,17 @@ export default EStyleSheet.create({
     fontSize: 24,
     color: '$appTextColor'
   },
-  optionCheckboxesWrap: {
-    height: 200,
-    alignItems: 'stretch',
-    marginTop: 10,
-    marginBottom: 30
+  taskEstimateText: {
+    paddingLeft: '20%',
+    paddingRight: '20%'
   },
-  estimateTextWrap: {
+  executeTextWrap: {
     padding: 10,
     marginTop: 10,
     marginBottom: 10,
     position: 'relative'
   },
-  estimateText: {
+  executeText: {
     fontSize: 18,
     color: '$appTextColor',
     textAlign: 'center'

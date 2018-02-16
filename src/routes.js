@@ -45,6 +45,7 @@ class Routes extends React.Component {
           <Scene key="home" component={containers.Home} />
           <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" />
           <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} />
+          <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} />
         </Scene>
       </Router>
     );
