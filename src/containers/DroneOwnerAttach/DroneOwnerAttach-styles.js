@@ -18,6 +18,19 @@ export default EStyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'column'
   },
+  cameraInstructions: {
+    flex: 0.15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  cameraInstructionText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '$appTextColor',
+    paddingLeft: '5%',
+    paddingRight: '5%'
+  },
   camera: {
     flex: 1
   },
