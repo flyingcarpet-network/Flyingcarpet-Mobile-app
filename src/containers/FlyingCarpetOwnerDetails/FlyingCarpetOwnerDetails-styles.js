@@ -15,6 +15,9 @@ export default EStyleSheet.create({
   },
   detailsWrap: {
     flex: 1,
+    flexDirection: 'column'
+  },
+  detailsWrapContentContainer: {
     alignItems: 'stretch',
     flexDirection: 'column'
   },
@@ -33,5 +36,16 @@ export default EStyleSheet.create({
   },
   instructionText: {
     paddingTop: '20%'
+  },
+  mapWrap: {
+    height: 300
+  },
+  map: {
+    flex: 1
+  },
+  mapText: {
+    color: '$appTextColor',
+    fontWeight: '$appBoldWeight',
+    fontSize: 22
   }
 });
