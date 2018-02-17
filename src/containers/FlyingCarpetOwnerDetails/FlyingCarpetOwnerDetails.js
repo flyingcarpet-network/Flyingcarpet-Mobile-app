@@ -18,12 +18,12 @@ class FlyingCarpetOwnerDetails extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.line}></View>
-        {(flyingCarpetToken.length > 0) &&
+        {!(flyingCarpetToken.length > 0) &&
           <View style={styles.detailsWrap}>
             <Text style={[styles.centralText, styles.instructionText]}>Click "Attach New" to attach a Flyingcarpet to the network.</Text>
           </View>
         }
-        {!(flyingCarpetToken.length > 0) &&
+        {(flyingCarpetToken.length > 0) &&
           <ScrollView style={styles.detailsWrap} contentContainerStyle={styles.detailsWrapContentContainer}>
             {/* This data is hard-coded for now but will obviously come from a smart-contract... */}
             <View>
