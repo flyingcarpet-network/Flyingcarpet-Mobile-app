@@ -4,9 +4,23 @@
 
 import * as types from './droneOwner-types';
 
-export function setDroneAttached(droneAttached) {
+export function setNewDroneAttached(newDroneAttached) {
   return {
-    type: types.SET_DRONE_ATTACHED,
-    droneAttached
+    type: types.SET_NEW_DRONE_ATTACHED,
+    newDroneAttached
+  };
+}
+
+export function setDroneToken(droneToken) {
+  return {
+    type: types.SET_DRONE_TOKEN,
+    droneToken
+  };
+}
+
+export function setDroneAddress(droneAddress) {
+  return {
+    type: types.SET_DRONE_ADDRESS,
+    droneAddress
   };
 }

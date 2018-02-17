@@ -9,7 +9,7 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     // The focus action is dispatched when a new screen comes into focus
-    case "REACT_NATIVE_ROUTER_FLUX_FOCUS":
+    case "REACT_NATIVE_ROUTER_FLUX_FOCUS": // This is a special value set by react-native-router-flux
       return {
         ...state,
         routeName: action.routeName,

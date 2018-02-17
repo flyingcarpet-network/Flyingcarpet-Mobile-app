@@ -20,6 +20,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "expo": "^25.0.0",
     "moment": "^2.20.1",
     "react": "16.2.0",

@@ -48,7 +48,8 @@ class Routes extends React.Component {
           <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} />
           <Scene key="businessEstimate" component={containers.BusinessEstimate} backTitle=" " title={businessType} />
           <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" />
-          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => {}}>Attach New</RightButton>} />
+          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} />
+          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" />
         </Scene>
       </Router>
     );

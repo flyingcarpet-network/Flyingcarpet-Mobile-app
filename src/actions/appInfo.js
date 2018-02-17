@@ -10,3 +10,10 @@ export function setIsLoadingComplete(isLoadingComplete) {
     isLoadingComplete
   };
 }
+
+export function setHaveCameraPermission(haveCameraPermission) {
+  return {
+    type: types.SET_HAVE_CAMERA_PERMISSION,
+    haveCameraPermission
+  };
+}
