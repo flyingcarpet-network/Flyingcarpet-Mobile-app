@@ -12,9 +12,9 @@ export default EStyleSheet.create({
     flex: 1
   },
   pin: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     backgroundColor: 'white'
   },
   leftArrow: {
