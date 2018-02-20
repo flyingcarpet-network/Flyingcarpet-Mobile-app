@@ -13,19 +13,42 @@ import { RightButton } from './components';
 
 // Styles for the navigation bar
 const styles = EStyleSheet.create({
-  navBar: {
-    backgroundColor: '$appBackgroundColor'
+  navBarDark: {
+    backgroundColor: '$appBackgroundDarkColor'
   },
-  titleStyle: {
-    color: '$appTextColor'
+  titleDark: {
+    color: '$appTextDarkColor'
+  },
+  navBarLight: {
+    backgroundColor: '#607D8B'
+  },
+  titleLight: {
+    color: 'white'
   }
 });
+
+let darkSceneArguments, lightSceneArguments;
 
 class Routes extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
+  componentWillMount() {
+    darkSceneArguments = {
+      navigationBarStyle: styles.navBarDark,
+      titleStyle: styles.titleDark,
+      backButtonTintColor: 'white',
+      backButtonTextStyle: styles.titleLight,
+      backTitle: 'Back'
+    };
 
+    lightSceneArguments = {
+      navigationBarStyle: styles.navBarLight,
+      titleStyle: styles.titleLight,
+      backButtonTintColor: 'white',
+      backButtonTextStyle: styles.titleLight
+    };
+  }
   reducerCreate(params) {
     // This function connects the router to the redux dispatching system
     const defaultReducer = Reducer(params);
@@ -34,7 +57,6 @@ class Routes extends React.Component {
       return defaultReducer(state, action);
     };
   }
-
   render () {
     const { sceneTitle, businessType } = this.props;
 
@@ -42,16 +64,16 @@ class Routes extends React.Component {
       <Router
         createReducer={this.reducerCreate.bind(this)}
       >
-        <Scene key="Root" navigationBarStyle={styles.navBar} titleStyle={styles.titleStyle}>
-          <Scene key="home" component={containers.Home} />
-          <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" />
-          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} />
-          <Scene key="businessEstimate" component={containers.BusinessEstimate} backTitle=" " title={businessType} />
-          <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" />
-          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} />
-          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" />
-          <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} />
-          <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" />
+        <Scene key="Root">
+          <Scene {...lightSceneArguments} key="home" component={containers.Home} />
+          <Scene {...lightSceneArguments} key="businessSelect" component={containers.BusinessSelect} title="Business" />
+          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} {...lightSceneArguments} />
+          <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} {...lightSceneArguments} />
+          <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" {...lightSceneArguments} />
+          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} {...darkSceneArguments} />
+          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" {...darkSceneArguments} />
+          <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} {...darkSceneArguments} />
+          <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...darkSceneArguments} />
         </Scene>
       </Router>
     );

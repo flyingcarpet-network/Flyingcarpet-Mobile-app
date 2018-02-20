@@ -26,7 +26,6 @@ class BusinessSelect extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
         <View style={styles.businessTypeListWrap}>
           <FlatList
             style={styles.businessTypeList}

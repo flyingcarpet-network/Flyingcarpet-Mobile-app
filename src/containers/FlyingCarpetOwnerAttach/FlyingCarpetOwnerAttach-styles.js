@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundColor'
+    backgroundColor: '$appBackgroundDarkColor'
   },
   line: {
     borderTopColor: '$appLineColor',
@@ -27,7 +27,7 @@ export default EStyleSheet.create({
   cameraInstructionText: {
     textAlign: 'center',
     fontSize: 18,
-    color: '$appTextColor',
+    color: '$appTextLightColor',
     paddingLeft: '5%',
     paddingRight: '5%'
   },
@@ -38,7 +38,7 @@ export default EStyleSheet.create({
     paddingTop: '20%',
     textAlign: 'center',
     fontSize: 24,
-    color: '$appTextColor',
+    color: '$appTextLightColor',
     paddingLeft: '20%',
     paddingRight: '20%'
   }

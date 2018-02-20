@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundColor'
+    backgroundColor: '$appBackgroundDarkColor'
   },
   line: {
     borderTopColor: '$appLineColor',
@@ -20,14 +20,14 @@ export default EStyleSheet.create({
   },
   detailTitle: {
     fontSize: 18,
-    color: '$appTextColor',
+    color: '$appTextLightColor',
     textAlign: 'left',
     padding: 10
   },
   centralText: {
     textAlign: 'center',
     fontSize: 24,
-    color: '$appTextColor',
+    color: '$appTextLightColor',
     paddingLeft: '20%',
     paddingRight: '20%'
   },

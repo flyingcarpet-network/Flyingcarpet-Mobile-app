@@ -4,14 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundColor'
-  },
-  line: {
-    borderTopColor: '$appLineColor',
-    borderTopWidth: 1,
-    marginTop: 20,
-    // marginLeft: 20,
-    // marginRight: 20
+    backgroundColor: '$appBackgroundLightColor'
   },
   spinnerWrap: {
     flex: 0.5,
@@ -24,7 +17,7 @@ export default EStyleSheet.create({
     flexDirection: 'row'
   },
   spinner: {
-    color: '$appTextColor'
+    color: '$appTextDarkColor'
   },
   textWrap: {
     flex: 0.5
@@ -34,7 +27,7 @@ export default EStyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
     fontSize: 24,
-    color: '$appTextColor'
+    color: '$appTextDarkColor'
   },
   taskCostText: {
     paddingTop: 30

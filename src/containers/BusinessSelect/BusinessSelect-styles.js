@@ -4,38 +4,31 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundColor'
-  },
-  line: {
-    borderTopColor: '$appLineColor',
-    borderTopWidth: 1,
-    marginTop: 20,
-    // marginLeft: 20,
-    // marginRight: 20
+    backgroundColor: '$appBackgroundLightColor'
   },
   businessTypeListWrap: {
     flexDirection: 'column',
     flex: 1
   },
   businessTypeList: {
-    flex: 1,
-    paddingTop: 20
+    flex: 1
   },
   businessType: {
-    padding: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    position: 'relative'
+    paddingTop: 20,
+    paddingBottom: 20,
+    position: 'relative',
+    borderBottomColor: '$appLineColor',
+    borderBottomWidth: 1
   },
   businessTypeText: {
     fontSize: 18,
-    color: '$appTextColor',
+    color: '$appTextDarkColor',
     textAlign: 'center'
   },
   rightArrow: {
-    color: '$appTextColor',
+    color: '$appTextDarkColor',
     position: 'absolute',
     right: 10,
-    top: 9
+    paddingTop: 20
   }
 });

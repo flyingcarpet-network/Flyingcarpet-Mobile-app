@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundColor',
+    backgroundColor: '$appBackgroundLightColor',
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 100,
@@ -24,13 +24,14 @@ export default EStyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     width: 260,
     height: 45,
-    borderColor: '$appLineColor',
+    borderColor: '$greyColor',
     borderWidth: 1,
     borderRadius: 5,
     paddingTop: 20,
     paddingBottom: 20
   },
   buttonText: {
-    fontWeight: '$appBoldWeight'
+    fontWeight: '$appBoldWeight',
+    color: '$appTextDarkColor'
   }
 });
