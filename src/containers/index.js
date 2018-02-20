@@ -6,3 +6,5 @@ export {default as BusinessEstimate} from './BusinessEstimate/BusinessEstimate';
 export {default as BusinessExecute} from './BusinessExecute/BusinessExecute';
 export {default as DroneOwnerDetails} from './DroneOwnerDetails/DroneOwnerDetails';
 export {default as DroneOwnerAttach} from './DroneOwnerAttach/DroneOwnerAttach';
+export {default as FlyingCarpetOwnerDetails} from './FlyingCarpetOwnerDetails/FlyingCarpetOwnerDetails';
+export {default as FlyingCarpetOwnerAttach} from './FlyingCarpetOwnerAttach/FlyingCarpetOwnerAttach';

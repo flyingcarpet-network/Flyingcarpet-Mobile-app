@@ -13,33 +13,39 @@ export default EStyleSheet.create({
     // marginLeft: 20,
     // marginRight: 20
   },
-  cameraWrap: {
+  detailsWrap: {
     flex: 1,
+    flexDirection: 'column'
+  },
+  detailsWrapContentContainer: {
     alignItems: 'stretch',
     flexDirection: 'column'
   },
-  cameraInstructions: {
-    flex: 0.15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column'
-  },
-  cameraInstructionText: {
-    textAlign: 'center',
+  detailTitle: {
     fontSize: 18,
     color: '$appTextColor',
-    paddingLeft: '5%',
-    paddingRight: '5%'
+    textAlign: 'left',
+    padding: 10
   },
-  camera: {
-    flex: 1
-  },
-  instructionText: {
-    paddingTop: '20%',
+  centralText: {
     textAlign: 'center',
     fontSize: 24,
     color: '$appTextColor',
     paddingLeft: '20%',
     paddingRight: '20%'
+  },
+  instructionText: {
+    paddingTop: '20%'
+  },
+  mapWrap: {
+    height: 300
+  },
+  map: {
+    flex: 1
+  },
+  mapText: {
+    color: '$appTextColor',
+    fontWeight: '$appBoldWeight',
+    fontSize: 22
   }
 });

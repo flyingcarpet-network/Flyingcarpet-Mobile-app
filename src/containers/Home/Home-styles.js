@@ -15,7 +15,9 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginTop: 40,
+    marginBottom: 40
   },
   button: {
     flex: 1,

@@ -26,7 +26,7 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.buttonWrap}>
           <Button
-            onPress={() => Actions.businessSelect()}
+            onPress={() => Actions.flyingCarpetOwnerDetails()}
             title="FC OWNER"
             textStyle={styles.buttonText}
             buttonStyle={styles.button}

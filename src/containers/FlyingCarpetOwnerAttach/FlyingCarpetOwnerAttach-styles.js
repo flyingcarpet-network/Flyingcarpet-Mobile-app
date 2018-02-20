@@ -32,7 +32,7 @@ export default EStyleSheet.create({
     paddingRight: '5%'
   },
   camera: {
-    flex: 1
+    flex: 0.85
   },
   instructionText: {
     paddingTop: '20%',

@@ -63,6 +63,9 @@ class DroneOwnerAttach extends React.Component {
         }
         {haveCameraPermission &&
           <View style={styles.cameraWrap}>
+            <View style={styles.cameraInstructions}>
+              <Text style={styles.cameraInstructionText}>Scan drone QR code...</Text>
+            </View>
             <Camera
               style={styles.camera}
               onBarCodeRead={this.handleBarCodeRead}
