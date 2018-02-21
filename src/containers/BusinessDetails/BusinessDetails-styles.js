@@ -6,7 +6,7 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   line: {
-    borderTopColor: '$appLineColor',
+    borderTopColor: '$lightBorder',
     borderTopWidth: 1
   },
   detailsMinimized: {
@@ -15,7 +15,7 @@ export default EStyleSheet.create({
   detailsWrap: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: '$appBackgroundLightColor',
+    backgroundColor: '$focusAreaDarker',
     right: '10%',
     left: 0,
     width: '90%'
@@ -36,7 +36,7 @@ export default EStyleSheet.create({
   sliderTitleIcon: {
     width: 60,
     paddingRight: 10,
-    color: '$darkGreyColor'
+    color: '$white'
   },
   sliderInnerWrap: {
     flexDirection: 'column',
@@ -47,7 +47,7 @@ export default EStyleSheet.create({
   },
   detailTitle: {
     fontSize: 20,
-    color: '$appTextDarkColor',
+    color: '$white',
     textAlign: 'left',
     flex: 0.6,
     display: 'flex'
@@ -55,18 +55,18 @@ export default EStyleSheet.create({
   centralText: {
     textAlign: 'right',
     fontSize: 20,
-    color: '$appTextDarkColor',
+    color: '$white',
     flex: 0.4,
     display: 'flex'
   },
   slider: {
     marginBottom: -4 // Because the slider bar has some extra margin/padding under it ..
   },
-  sliderTrackStyle: {
-    backgroundColor: '$greyColor'
-  },
+  // sliderTrackStyle: {
+  //   backgroundColor: '$yellow'
+  // },
   sliderThumbStyle: {
-    backgroundColor: '$darkGreyColor'
+    backgroundColor: '$greyWhite'
   },
   optionCheckboxesWrap: {
     // height: 200,
@@ -76,6 +76,15 @@ export default EStyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
+  checkboxStyle: {
+    marginBottom: 15,
+    backgroundColor: '$focusAreaLighter',
+    borderColor: '$lightBorder'
+  },
+  checkboxTextStyle: {
+    color: '$white',
+    fontWeight: 'normal'
+  },
   estimateTextWrap: {
     padding: 10,
     marginTop: 10,
@@ -84,13 +93,13 @@ export default EStyleSheet.create({
   },
   estimateText: {
     fontSize: 18,
-    color: '$appTextDarkColor',
+    color: '$white',
     textAlign: 'center'
   },
   rightArrow: {
-    color: '$appTextDarkColor',
+    color: '$white',
     position: 'absolute',
-    right: 10,
+    right: 20,
     top: 9
   }
 });

@@ -6,7 +6,7 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   line: {
-    borderTopColor: '$appLineColor',
+    borderTopColor: '$lightBorder',
     borderTopWidth: 1
   },
   detailsMinimized: {
@@ -15,7 +15,7 @@ export default EStyleSheet.create({
   detailsWrap: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: '$appBackgroundLightColor',
+    backgroundColor: '$focusAreaDarker',
     right: '10%',
     left: 0,
     width: '90%'
@@ -36,7 +36,7 @@ export default EStyleSheet.create({
   sliderTitleIcon: {
     width: 60,
     paddingRight: 10,
-    color: '$darkGreyColor'
+    color: '$white'
   },
   sliderInnerWrap: {
     flexDirection: 'column',
@@ -47,7 +47,7 @@ export default EStyleSheet.create({
   },
   detailTitle: {
     fontSize: 20,
-    color: '$appTextDarkColor',
+    color: '$white',
     textAlign: 'left',
     flex: 0.6,
     display: 'flex'
@@ -55,23 +55,23 @@ export default EStyleSheet.create({
   centralText: {
     textAlign: 'right',
     fontSize: 20,
-    color: '$appTextDarkColor',
+    color: '$white',
     flex: 0.4,
     display: 'flex'
   },
   slider: {
     marginBottom: -4
   },
-  sliderTrackStyle: {
-    backgroundColor: '$greyColor'
-  },
+  // sliderTrackStyle: {
+  //   backgroundColor: '$greyColor'
+  // },
   sliderThumbStyle: {
-    backgroundColor: '$darkGreyColor'
+    backgroundColor: '$greyWhite'
   },
   estimateText: {
     textAlign: 'center',
     fontSize: 24,
-    color: '$appTextDarkColor',
+    color: '$white',
     paddingLeft: '20%',
     paddingRight: '20%',
     paddingTop: 20,
@@ -85,91 +85,13 @@ export default EStyleSheet.create({
   },
   executeText: {
     fontSize: 18,
-    color: '$appTextDarkColor',
+    color: '$white',
     textAlign: 'center'
   },
   rightArrow: {
-    color: '$appTextDarkColor',
+    color: '$white',
     position: 'absolute',
-    right: 10,
+    right: 20,
     top: 9
   }
 });
-
-
-
-
-
-
-// import EStyleSheet from 'react-native-extended-stylesheet';
-
-// export default EStyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column'
-//   },
-//   line: {
-//     borderTopColor: '$appLineColor',
-//     borderTopWidth: 1
-//   },
-//   detailsMinimized: {
-//     right: '90%',
-//     left: 'auto'
-//   },
-//   detailsWrap: {
-//     flexDirection: 'column',
-//     flex: 1,
-//     backgroundColor: '$appBackgroundLightColor',
-//     right: '10%',
-//     left: 0,
-//     width: '90%'
-//   },
-//   detailsWrapContentContainer: {
-//     alignItems: 'stretch',
-//     flexDirection: 'column'
-//   },
-//   detailTitle: {
-//     fontSize: 18,
-//     color: '$appTextLightColor',
-//     textAlign: 'left',
-//     padding: 10
-//   },
-//   mapWrap: {
-//     height: 200,
-//     width: '100%'
-//   },
-//   map: {
-//     flex: 1
-//   },
-//   sliderWrap: {
-//     height: 100,
-//     alignItems: 'stretch',
-//     justifyContent: 'center'
-//   },
-//   centralText: {
-//     textAlign: 'center',
-//     fontSize: 24,
-//     color: '$appTextLightColor'
-//   },
-//   taskEstimateText: {
-//     paddingLeft: '20%',
-//     paddingRight: '20%'
-//   },
-//   executeTextWrap: {
-//     padding: 10,
-//     marginTop: 10,
-//     marginBottom: 10,
-//     position: 'relative'
-//   },
-//   executeText: {
-//     fontSize: 18,
-//     color: '$appTextLightColor',
-//     textAlign: 'center'
-//   },
-//   rightArrow: {
-//     color: '$appTextLightColor',
-//     position: 'absolute',
-//     right: 10,
-//     top: 9
-//   }
-// });

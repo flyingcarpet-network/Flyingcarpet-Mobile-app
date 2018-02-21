@@ -20,7 +20,7 @@ class BackgroundMap extends React.Component {
     addLocationCoordinate(e.nativeEvent.coordinate);
   }
   render() {
-    const { selectedLocationCoordinates, toggleMapOpen, mapOpen } = this.props;
+    const { selectedLocationCoordinates, toggleMapOpen, mapOpen, displayCloseButton } = this.props;
 
     return (
       <View style={styles.mapWrap}>
@@ -59,13 +59,15 @@ class BackgroundMap extends React.Component {
             </MapView.Marker>
           ))}
         </MapView>
-        <TouchableHighlight
-          style={[styles.leftArrow, ((!mapOpen) ? styles.leftArrowMapMinimized : null)]}
-          underlayColor={'#FFFFFF'}
-          onPress={toggleMapOpen}
-        >
-          <FontAwesome name={mapOpen ? 'angle-right' : 'angle-left'} size={25} style={styles.leftArrowText} />
-        </TouchableHighlight>
+        {displayCloseButton &&
+          <TouchableHighlight
+            style={[styles.leftArrow, ((!mapOpen) ? styles.leftArrowMapMinimized : null)]}
+            underlayColor={'#2F3050'}
+            onPress={toggleMapOpen}
+          >
+            <FontAwesome name={mapOpen ? 'angle-right' : 'angle-left'} size={25} style={styles.leftArrowText} />
+          </TouchableHighlight>
+        }
       </View>
     );
   }
@@ -74,7 +76,12 @@ class BackgroundMap extends React.Component {
 BackgroundMap.propTypes = {
   addLocationCoordinate: PropTypes.func.isRequired,
   toggleMapOpen: PropTypes.func.isRequired,
-  mapOpen: PropTypes.bool.isRequired
+  mapOpen: PropTypes.bool.isRequired,
+  displayCloseButton: PropTypes.bool // This is an optional prop that can be passed in
+};
+
+BackgroundMap.defaultProps = {
+  displayCloseButton: true
 };
 
 export default connect(

@@ -47,7 +47,9 @@ class BusinessDetails extends React.Component {
                   value={altitute}
                   onValueChange={setAltitute}
                   style={styles.slider}
-                  trackStyle={styles.sliderTrackStyle}
+                  // trackStyle={styles.sliderTrackStyle}
+                  minimumTrackTintColor={'#D8AC50'}
+                  maximumTrackTintColor={'#1C1D31'}
                   thumbStyle={styles.sliderThumbStyle}
                 />
               </View>
@@ -70,7 +72,9 @@ class BusinessDetails extends React.Component {
                   value={flightDirection}
                   onValueChange={setFlightDirection}
                   style={styles.slider}
-                  trackStyle={styles.sliderTrackStyle}
+                  // trackStyle={styles.sliderTrackStyle}
+                  minimumTrackTintColor={'#D8AC50'}
+                  maximumTrackTintColor={'#1C1D31'}
                   thumbStyle={styles.sliderThumbStyle}
                 />
               </View>
@@ -86,7 +90,10 @@ class BusinessDetails extends React.Component {
                 title={option}
                 checked={selectedOptions[option] === true}
                 onPress={() => toggleOption(option)}
-                containerStyle={{marginBottom: 15}}
+                containerStyle={styles.checkboxStyle}
+                textStyle={styles.checkboxTextStyle}
+                checkedColor={'#50D862'}
+                uncheckedColor={'#F2F6F5'}
               />
             ))}
           </View>

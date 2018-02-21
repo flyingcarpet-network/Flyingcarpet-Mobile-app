@@ -15,10 +15,10 @@ export default EStyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: 'white'
+    backgroundColor: '$white'
   },
   leftArrow: {
-    backgroundColor: '$appBackgroundLightTransparentColor',
+    backgroundColor: '$focusAreaDarkerTranslucent',
     position: 'absolute',
     left: 0,
     width: '8%',
@@ -34,7 +34,7 @@ export default EStyleSheet.create({
   leftArrowText: {
     lineHeight: 100,
     textAlign: 'center',
-    color: '#FFFFFF',
+    color: '$white',
     fontSize: 30
   }
 });

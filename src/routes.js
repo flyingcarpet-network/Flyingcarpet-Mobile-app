@@ -13,40 +13,27 @@ import { RightButton } from './components';
 
 // Styles for the navigation bar
 const styles = EStyleSheet.create({
-  navBarDark: {
-    backgroundColor: '$appBackgroundDarkColor'
+  navBar: {
+    backgroundColor: '$focusAreaLighter'
   },
-  titleDark: {
-    color: '$appTextDarkColor'
-  },
-  navBarLight: {
-    backgroundColor: '#607D8B'
-  },
-  titleLight: {
-    color: 'white'
+  title: {
+    color: '$white'
   }
 });
 
-let darkSceneArguments, lightSceneArguments;
+let sceneArguments;
 
 class Routes extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
   componentWillMount() {
-    darkSceneArguments = {
-      navigationBarStyle: styles.navBarDark,
-      titleStyle: styles.titleDark,
-      backButtonTintColor: 'white',
-      backButtonTextStyle: styles.titleLight,
+    sceneArguments = {
+      navigationBarStyle: styles.navBar,
+      titleStyle: styles.title,
+      backButtonTintColor: '#F2F6F5',
+      backButtonTextStyle: styles.title,
       backTitle: 'Back'
-    };
-
-    lightSceneArguments = {
-      navigationBarStyle: styles.navBarLight,
-      titleStyle: styles.titleLight,
-      backButtonTintColor: 'white',
-      backButtonTextStyle: styles.titleLight
     };
   }
   reducerCreate(params) {
@@ -65,15 +52,15 @@ class Routes extends React.Component {
         createReducer={this.reducerCreate.bind(this)}
       >
         <Scene key="Root">
-          <Scene {...lightSceneArguments} key="home" component={containers.Home} />
-          <Scene {...lightSceneArguments} key="businessSelect" component={containers.BusinessSelect} title="Business" />
-          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} {...lightSceneArguments} />
-          <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} {...lightSceneArguments} />
-          <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" {...lightSceneArguments} />
-          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} {...darkSceneArguments} />
-          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" {...darkSceneArguments} />
-          <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} {...darkSceneArguments} />
-          <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...darkSceneArguments} />
+          <Scene key="home" component={containers.Home} title="AirAI" hideNavBar={true} {...sceneArguments} />
+          <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" {...sceneArguments} />
+          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} {...sceneArguments} />
+          <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} {...sceneArguments} />
+          <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" {...sceneArguments} />
+          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
+          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" {...sceneArguments} />
+          <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
+          <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...sceneArguments} />
         </Scene>
       </Router>
     );

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Text, View, ScrollView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { MapView } from 'expo';
+import { FontAwesome } from '@expo/vector-icons';
 import styles from './FlyingCarpetOwnerDetails-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
@@ -17,7 +18,6 @@ class FlyingCarpetOwnerDetails extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
         {!(flyingCarpetToken.length > 0) &&
           <View style={styles.detailsWrap}>
             <Text style={[styles.centralText, styles.instructionText]}>Click "Attach New" to attach a Flyingcarpet to the network.</Text>
@@ -26,32 +26,43 @@ class FlyingCarpetOwnerDetails extends React.Component {
         {(flyingCarpetToken.length > 0) &&
           <ScrollView style={styles.detailsWrap} contentContainerStyle={styles.detailsWrapContentContainer}>
             {/* This data is hard-coded for now but will obviously come from a smart-contract... */}
-            <View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="code" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Model</Text>
-              <Text style={styles.centralText} numberOfLines={1}>AI2W8V</Text>
+              <Text style={styles.detailText} numberOfLines={1}>AI2W8V</Text>
             </View>
-            <View>
+            <View style={styles.line}></View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="lock" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Token</Text>
-              <Text style={styles.centralText} numberOfLines={1}>{flyingCarpetToken}</Text>
+              <Text style={styles.detailText} numberOfLines={1}>6b9a27997995304{/*{flyingCarpetToken}*/}</Text>
             </View>
-            <View>
+            <View style={styles.line}></View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="qrcode" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Address</Text>
-              <Text style={styles.centralText} numberOfLines={1}>{flyingCarpetAddress}</Text>
+              <Text style={styles.detailText} numberOfLines={1}>0xd97e1280f5d4f6709a963c87e6b9a27997995304{/*{flyingCarpetAddress}*/}</Text>
             </View>
-            <View>
+            <View style={styles.line}></View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="stack-overflow" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Capacity</Text>
-              <Text style={styles.centralText} numberOfLines={1}>10kg</Text>
+              <Text style={styles.detailText} numberOfLines={1}>10kg</Text>
             </View>
-            <View>
+            <View style={styles.line}></View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="list-ul" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Tasks for the month</Text>
-              <Text style={styles.centralText} numberOfLines={1}>14</Text>
+              <Text style={styles.detailText} numberOfLines={1}>14</Text>
             </View>
-            <View>
+            <View style={styles.line}></View>
+            <View style={styles.detailWrap}>
+              <FontAwesome name="usd" size={35} style={styles.icon} />
               <Text style={styles.detailTitle}>Money received</Text>
-              <Text style={styles.centralText} numberOfLines={1}>1.5 ETH</Text>
+              <Text style={styles.detailText} numberOfLines={1}>1.5 ETH</Text>
             </View>
             <View style={styles.mapWrap}>
-              <Text style={styles.detailTitle}>Location - increase income</Text>
+              {/* <Text style={styles.detailTitle}>Location - increase income</Text> */}
               <MapView
                 style={styles.map}
                 // NOTE: this initialRegion should be updated to get the user's current location and use it, see:
@@ -83,6 +94,7 @@ class FlyingCarpetOwnerDetails extends React.Component {
                     latitude: 37.78555,
                     longitude: -122.4054
                   }}
+                  anchor={{x: 0.5, y: 0.5}}
                 >
                   <Text style={styles.mapText}>396%</Text>
                 </MapView.Marker>
@@ -102,6 +114,7 @@ class FlyingCarpetOwnerDetails extends React.Component {
                     latitude: 37.78981,
                     longitude: -122.4509
                   }}
+                  anchor={{x: 0.5, y: 0.5}}
                 >
                   <Text style={styles.mapText}>174%</Text>
                 </MapView.Marker>

@@ -49,7 +49,9 @@ class BusinessEstimate extends React.Component {
                 value={ethCost}
                 onValueChange={setEthCost}
                 style={styles.slider}
-                trackStyle={styles.sliderTrackStyle}
+                // trackStyle={styles.sliderTrackStyle}
+                minimumTrackTintColor={'#D8AC50'}
+                maximumTrackTintColor={'#1C1D31'}
                 thumbStyle={styles.sliderThumbStyle}
               />
             </View>

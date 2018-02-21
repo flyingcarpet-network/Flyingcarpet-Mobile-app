@@ -2,9 +2,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   text: {
-    color: '$appTextLightColor',
+    color: '$white',
     fontWeight: '$appBoldWeight',
-    fontSize: 16,
-    paddingRight: 10
+    fontSize: 18,
+    paddingRight: 20
   }
 });

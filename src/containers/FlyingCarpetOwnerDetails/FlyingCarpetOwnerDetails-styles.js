@@ -4,14 +4,11 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$appBackgroundDarkColor'
+    backgroundColor: '$focusAreaDarker'
   },
   line: {
-    borderTopColor: '$appLineColor',
-    borderTopWidth: 1,
-    marginTop: 20,
-    // marginLeft: 20,
-    // marginRight: 20
+    borderTopColor: '$lightBorder',
+    borderTopWidth: 1
   },
   detailsWrap: {
     flex: 1,
@@ -21,18 +18,43 @@ export default EStyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'column'
   },
+  detailWrap: {
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: 85
+  },
+  icon: {
+    width: 55,
+    paddingRight: 10,
+    color: '$white',
+    lineHeight: 45,
+    textAlign: 'center'
+  },
   detailTitle: {
-    fontSize: 18,
-    color: '$appTextLightColor',
+    fontSize: 20,
+    color: '$white',
     textAlign: 'left',
-    padding: 10
+    // padding: 10
+    flex: 0.6,
+    lineHeight: 45
+  },
+  detailText: {
+    textAlign: 'right',
+    fontSize: 20,
+    flex: 0.4,
+    color: '$white',
+    lineHeight: 45,
+    flexWrap: 'wrap'
   },
   centralText: {
     textAlign: 'center',
     fontSize: 24,
-    color: '$appTextLightColor',
-    paddingLeft: '20%',
-    paddingRight: '20%'
+    color: '$white',
+    paddingLeft: '10%',
+    paddingRight: '10%'
   },
   instructionText: {
     paddingTop: '20%'
@@ -44,7 +66,7 @@ export default EStyleSheet.create({
     flex: 1
   },
   mapText: {
-    color: '$appTextLightColor',
+    color: '$white',
     fontWeight: '$appBoldWeight',
     fontSize: 22
   }
