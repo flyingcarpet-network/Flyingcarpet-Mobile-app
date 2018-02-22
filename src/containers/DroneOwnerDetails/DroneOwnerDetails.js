@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { FontAwesome } from '@expo/vector-icons';
 import styles from './DroneOwnerDetails-styles';
+import { HardwareDetail } from '../../components';
 import * as droneOwnerActions from '../../actions/droneOwner';
 
 class DroneOwnerDetails extends React.Component {
@@ -25,41 +25,12 @@ class DroneOwnerDetails extends React.Component {
         {(droneToken.length > 0) &&
           <View style={styles.detailsWrap}>
             {/* This data is hard-coded for now but will obviously come from a smart-contract... */}
-            <View style={styles.detailWrap}>
-              <FontAwesome name="code" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Model</Text>
-              <Text style={styles.detailText} numberOfLines={1}>AI2W8V</Text>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.detailWrap}>
-              <FontAwesome name="lock" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Token</Text>
-              <Text style={styles.detailText} numberOfLines={1}>{droneToken}</Text>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.detailWrap}>
-              <FontAwesome name="qrcode" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Address</Text>
-              <Text style={styles.detailText} numberOfLines={1}>{droneAddress}</Text>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.detailWrap}>
-              <FontAwesome name="stack-overflow" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Capacity</Text>
-              <Text style={styles.detailText} numberOfLines={1}>10kg</Text>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.detailWrap}>
-              <FontAwesome name="list-ul" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Tasks for the month</Text>
-              <Text style={styles.detailText} numberOfLines={1}>14</Text>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.detailWrap}>
-              <FontAwesome name="usd" size={35} style={styles.icon} />
-              <Text style={styles.detailTitle}>Money received</Text>
-              <Text style={styles.detailText} numberOfLines={1}>1.5 ETH</Text>
-            </View>
+            <HardwareDetail icon="code" title="Model" value="AI2W8V" />
+            <HardwareDetail icon="lock" title="Token" value={droneToken} />
+            <HardwareDetail icon="qrcode" title="Address" value={droneAddress} />
+            <HardwareDetail icon="stack-overflow" title="Capacity" value="10kg" />
+            <HardwareDetail icon="list-ul" title="Tasks for the month" value="14" />
+            <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" />
           </View>
         }
       </View>
