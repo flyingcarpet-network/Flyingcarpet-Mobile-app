@@ -24,50 +24,6 @@ export default EStyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'column'
   },
-  sliderWrap: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    flexDirection: 'row'
-  },
-  sliderTitleIcon: {
-    width: 60,
-    paddingRight: 10,
-    color: '$white'
-  },
-  sliderInnerWrap: {
-    flexDirection: 'column',
-    flex: 1
-  },
-  sliderTitlesWrap: {
-    flexDirection: 'row'
-  },
-  detailTitle: {
-    fontSize: 20,
-    color: '$white',
-    textAlign: 'left',
-    flex: 0.6,
-    display: 'flex'
-  },
-  centralText: {
-    textAlign: 'right',
-    fontSize: 20,
-    color: '$white',
-    flex: 0.4,
-    display: 'flex'
-  },
-  slider: {
-    marginBottom: -4
-  },
-  // sliderTrackStyle: {
-  //   backgroundColor: '$greyColor'
-  // },
-  sliderThumbStyle: {
-    backgroundColor: '$greyWhite'
-  },
   estimateText: {
     textAlign: 'center',
     fontSize: 24,

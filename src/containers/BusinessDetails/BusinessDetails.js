@@ -8,12 +8,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { Slider, CheckBox } from 'react-native-elements';
+import { CheckBox } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './BusinessDetails-styles';
 import getServiceCheckboxOptions from '../../utils/getServiceCheckboxOptions';
-import { BackgroundMap } from '../../components';
+import { BackgroundMap, Slider } from '../../components';
 import * as businessActions from '../../actions/business';
 
 class BusinessDetails extends React.Component {
@@ -34,54 +34,10 @@ class BusinessDetails extends React.Component {
         <BackgroundMap />
         <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
           {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.sliderWrap}>
-              <Text style={styles.sliderTitleIcon}>
-                <FontAwesome name="rocket" size={45} />
-              </Text>
-              <View style={styles.sliderInnerWrap}>
-                <View style={styles.sliderTitlesWrap}>
-                  <Text style={styles.detailTitle} numberOfLines={1}>Altitute</Text>
-                  <Text style={styles.centralText} numberOfLines={1}>{(Math.round((5 + (altitute * 25)) * 100) / 100)} Metres</Text>
-                </View>
-                <Slider
-                  value={altitute}
-                  onValueChange={setAltitute}
-                  style={styles.slider}
-                  // trackStyle={styles.sliderTrackStyle}
-                  minimumTrackTintColor={'#D8AC50'}
-                  maximumTrackTintColor={'#1C1D31'}
-                  thumbStyle={styles.sliderThumbStyle}
-                />
-              </View>
-            </View>
+            <Slider icon='rocket' title='Altitute' textValue={String(Math.round((5 + (altitute * 25)) * 100) / 100) + ' Metres'}  value={altitute} onValueChange={setAltitute} />
           }
           {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.line}></View>
-          }
-          {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.sliderWrap}>
-              <Text style={styles.sliderTitleIcon}>
-                <FontAwesome name="compass" size={45} />
-              </Text>
-              <View style={styles.sliderInnerWrap}>
-                <View style={styles.sliderTitlesWrap}>
-                  <Text style={styles.detailTitle} numberOfLines={1}>Flight Direction</Text>
-                  <Text style={styles.centralText} numberOfLines={1}>{(Math.round((flightDirection * 360) * 100) / 100)} Degrees</Text>
-                </View>
-                <Slider
-                  value={flightDirection}
-                  onValueChange={setFlightDirection}
-                  style={styles.slider}
-                  // trackStyle={styles.sliderTrackStyle}
-                  minimumTrackTintColor={'#D8AC50'}
-                  maximumTrackTintColor={'#1C1D31'}
-                  thumbStyle={styles.sliderThumbStyle}
-                />
-              </View>
-            </View>
-          }
-          {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.line}></View>
+            <Slider icon='compass' title='Flight Direction' textValue={String(Math.round((flightDirection * 360) * 100) / 100) + ' Degrees'}  value={flightDirection} onValueChange={setFlightDirection} />
           }
           <View style={styles.optionCheckboxesWrap}>
             {options.map((option, i) => (

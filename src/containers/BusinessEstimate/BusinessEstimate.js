@@ -9,12 +9,11 @@ import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { MapView } from 'expo';
-import { Slider } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
 import estimateTimeToDone from '../../utils/estimateTimeToDone';
 import styles from './BusinessEstimate-styles';
-import { BackgroundMap } from '../../components';
+import { BackgroundMap, Slider } from '../../components';
 import * as businessActions from '../../actions/business';
 
 class BusinessEstimate extends React.Component {
@@ -36,27 +35,7 @@ class BusinessEstimate extends React.Component {
       <View style={styles.container}>
         <BackgroundMap />
         <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
-          <View style={styles.sliderWrap}>
-            <Text style={styles.sliderTitleIcon}>
-              <FontAwesome name="clock-o" size={45} />
-            </Text>
-            <View style={styles.sliderInnerWrap}>
-              <View style={styles.sliderTitlesWrap}>
-                <Text style={styles.detailTitle} numberOfLines={1}>Time</Text>
-                <Text style={styles.centralText} numberOfLines={1}>{ethCostAdjusted} ETH</Text>
-              </View>
-              <Slider
-                value={ethCost}
-                onValueChange={setEthCost}
-                style={styles.slider}
-                // trackStyle={styles.sliderTrackStyle}
-                minimumTrackTintColor={'#D8AC50'}
-                maximumTrackTintColor={'#1C1D31'}
-                thumbStyle={styles.sliderThumbStyle}
-              />
-            </View>
-          </View>
-          <View style={styles.line}></View>
+          <Slider icon='clock-o' title='Time' textValue={String(ethCostAdjusted) + ' ETH'}  value={ethCost} onValueChange={setEthCost} />
           <View>
             <Text style={styles.estimateText}>Task to be done in {timeToFinishString} at {ethCostAdjusted} ETH.</Text>
           </View>
