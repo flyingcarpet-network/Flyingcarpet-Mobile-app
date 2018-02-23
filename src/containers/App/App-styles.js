@@ -4,8 +4,8 @@ export default EStyleSheet.create({
   container: {
     flex: 1
   },
-  statusBarUnderlay: {
+  androidStatusBarUnderlay: {
     height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: '$focusAreaLighter'
   }
 });

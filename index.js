@@ -5,7 +5,6 @@
 import Expo from 'expo';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StatusBar } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Routes from './src/routes';
 import store from './src/store';
@@ -20,10 +19,6 @@ class Index extends React.Component {
     return (
       <Provider store={store}>
         <App>
-          {/* Make the top status bar light colored */}
-          <StatusBar
-            barStyle="light-content"
-          />
           <Routes />
         </App>
       </Provider>

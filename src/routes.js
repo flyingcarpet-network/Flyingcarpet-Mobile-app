@@ -31,7 +31,7 @@ class Routes extends React.Component {
     sceneArguments = {
       navigationBarStyle: styles.navBar,
       titleStyle: styles.title,
-      backButtonTintColor: '#F2F6F5',
+      backButtonTintColor: EStyleSheet.value('$white'),
       backButtonTextStyle: styles.title,
       backTitle: 'Back'
     };

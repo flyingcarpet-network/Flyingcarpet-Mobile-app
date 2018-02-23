@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { CheckBox } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './BusinessDetails-styles';
 import getServiceCheckboxOptions from '../../utils/getServiceCheckboxOptions';
 import { BackgroundMap, Slider } from '../../components';
@@ -48,8 +49,8 @@ class BusinessDetails extends React.Component {
                 onPress={() => toggleOption(option)}
                 containerStyle={styles.checkboxStyle}
                 textStyle={styles.checkboxTextStyle}
-                checkedColor={'#50D862'}
-                uncheckedColor={'#F2F6F5'}
+                checkedColor={EStyleSheet.value('$green')}
+                uncheckedColor={EStyleSheet.value('$white')}
               />
             ))}
           </View>

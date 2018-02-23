@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Slider as RNESlider } from 'react-native-elements';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './Slider-styles';
 
 export default class Slider extends React.Component {
@@ -30,8 +31,8 @@ export default class Slider extends React.Component {
             value={value}
             onValueChange={onValueChange}
             style={styles.slider}
-            minimumTrackTintColor={'#D8AC50'}
-            maximumTrackTintColor={'#1C1D31'}
+            minimumTrackTintColor={EStyleSheet.value('$yellow')}
+            maximumTrackTintColor={EStyleSheet.value('$darkBackground')}
             thumbStyle={styles.sliderThumbStyle}
           />
         </View>

@@ -7,7 +7,7 @@ export default EStyleSheet.create({
   innerContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'rgba(28,29,49,0.85)'
+    backgroundColor: '$darkBackgroundTranslucent'
   },
   businessTypeListWrap: {
     flexDirection: 'row',
@@ -26,7 +26,7 @@ export default EStyleSheet.create({
     marginTop: 40
   },
   businessTypeCircle: {
-    backgroundColor: '#2F3050',
+    backgroundColor: '$focusAreaDarker',
     width: '80%',
     aspectRatio: 1,
     borderRadius: '50% - 1 + 1', // "- 1 + 1" is a hacky way to force react-native-extended-stylesheet to compute the value as a number (because borderRadius doesn't accept a percentage)

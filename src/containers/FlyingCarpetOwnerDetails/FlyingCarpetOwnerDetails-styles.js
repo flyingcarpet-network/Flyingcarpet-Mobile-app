@@ -14,21 +14,16 @@ export default EStyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'column'
   },
-  centralText: {
+  instructionText: {
     textAlign: 'center',
     fontSize: 24,
     color: '$white',
     paddingLeft: '10%',
-    paddingRight: '10%'
-  },
-  instructionText: {
+    paddingRight: '10%',
     paddingTop: '20%'
   },
   mapWrap: {
     height: 300,
     position: 'relative'
-  },
-  map: {
-    flex: 1
   }
 });

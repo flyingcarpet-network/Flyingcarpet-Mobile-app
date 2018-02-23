@@ -103,7 +103,7 @@ class BackgroundMap extends React.Component {
         {displayCloseButton &&
           <TouchableHighlight
             style={[styles.leftArrow, ((!mapOpen) ? styles.leftArrowMapMinimized : null)]}
-            underlayColor={'#2F3050'}
+            underlayColor={EStyleSheet.value('$focusAreaDarker')}
             onPress={toggleMapOpen}
           >
             <FontAwesome name={mapOpen ? 'angle-right' : 'angle-left'} size={25} style={styles.leftArrowText} />

@@ -46,7 +46,6 @@ export default EStyleSheet.create({
   button: {
     flex: 1,
     flexDirection: 'row',
-    // backgroundColor: 'rgba(0,0,0,0)',
     // backgroundColor: '$focusAreaLighter',
     // width: 260,
     // height: 45,
