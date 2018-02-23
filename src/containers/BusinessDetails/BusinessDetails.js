@@ -32,7 +32,7 @@ class BusinessDetails extends React.Component {
 
     return (
       <View style={styles.container}>
-        <BackgroundMap />
+        <BackgroundMap drawLine={(businessType.toLowerCase() === 'transport')} />
         <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
           {(businessType.toLowerCase() === 'agriculture') &&
             <Slider icon='rocket' title='Altitute' textValue={String(Math.round((5 + (altitute * 25)) * 100) / 100) + ' Metres'}  value={altitute} onValueChange={setAltitute} />
