@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { MapView } from 'expo';
-import { HardwareDetail } from '../../components';
+import { Actions } from 'react-native-router-flux';
+import { HardwareDetail, BackgroundMap } from '../../components';
 import styles from './FlyingCarpetOwnerDetails-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
@@ -18,12 +18,12 @@ class FlyingCarpetOwnerDetails extends React.Component {
 
     return (
       <View style={styles.container}>
-        {!(flyingCarpetToken.length > 0) &&
+        {(flyingCarpetToken.length > 0) &&
           <View style={styles.detailsWrap}>
             <Text style={[styles.centralText, styles.instructionText]}>Click "Attach New" to attach a Flyingcarpet to the network.</Text>
           </View>
         }
-        {(flyingCarpetToken.length > 0) &&
+        {!(flyingCarpetToken.length > 0) &&
           <ScrollView style={styles.detailsWrap} contentContainerStyle={styles.detailsWrapContentContainer}>
             {/* This data is hard-coded for now but will obviously come from a smart-contract... */}
             <HardwareDetail icon="code" title="Model" value="AI2W8V" />
@@ -33,8 +33,9 @@ class FlyingCarpetOwnerDetails extends React.Component {
             <HardwareDetail icon="list-ul" title="Tasks for the month" value="14" />
             <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" showBottomBorder={false} />
             <View style={styles.mapWrap}>
+              <BackgroundMap displayCloseButton={false} disablePolygonCreation={true} onMapPress={Actions.flyingCarpetOwnerMap} showFlyingCarpetBestLocations={true} />
               {/* <Text style={styles.detailTitle}>Location - increase income</Text> */}
-              <MapView
+              {/* <MapView
                 style={styles.map}
                 // NOTE: this initialRegion should be updated to get the user's current location and use it, see:
                 //       https://docs.expo.io/versions/latest/sdk/location.html
@@ -89,7 +90,7 @@ class FlyingCarpetOwnerDetails extends React.Component {
                 >
                   <Text style={styles.mapText}>174%</Text>
                 </MapView.Marker>
-              </MapView>
+              </MapView> */}
             </View>
           </ScrollView>
         }

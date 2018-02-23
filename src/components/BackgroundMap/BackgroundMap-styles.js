@@ -17,6 +17,11 @@ export default EStyleSheet.create({
     borderRadius: 12,
     backgroundColor: '$white'
   },
+  mapText: {
+    color: '$white',
+    fontWeight: '$appBoldWeight',
+    fontSize: 22
+  },
   leftArrow: {
     backgroundColor: '$focusAreaDarkerTranslucent',
     position: 'absolute',

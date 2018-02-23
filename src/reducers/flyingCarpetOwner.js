@@ -10,7 +10,12 @@ const initialState = {
                            // NOTE: this field is used to prevent the camera QR code reader from
                            //       firing multiple times for a successful scan.
   flyingCarpetToken: '', // This is the flyingcarpet's token that is scanned from the QR code
-  flyingCarpetAddress: '' // This is the flyingcarpet's smart contract address that is scanned from the QR code
+  flyingCarpetAddress: '', // This is the flyingcarpet's smart contract address that is scanned from the QR code
+  // NOTE: The following field is hard-coded for now, however in the future it needs to be dynamically loaded from a smart contract (and added to redux with an action)
+  flyingCarpetBestLocations: [ // This is an array of location circle objects (lat, long, and radius) that represent the most ideal nearby locations for Flying Carpets
+    {latitude: 37.78555, longitude: -122.4054, radius: 1500, label: '396%'}, // NOTE: radius is measured in metres
+    {latitude: 37.78981, longitude: -122.4509, radius: 3000, label: '170%'},
+  ]
 };
 
 export default function reducer(state = initialState, action = {}) {

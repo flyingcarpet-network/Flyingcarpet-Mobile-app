@@ -25,14 +25,10 @@ export default EStyleSheet.create({
     paddingTop: '20%'
   },
   mapWrap: {
-    height: 300
+    height: 300,
+    position: 'relative'
   },
   map: {
     flex: 1
-  },
-  mapText: {
-    color: '$white',
-    fontWeight: '$appBoldWeight',
-    fontSize: 22
   }
 });

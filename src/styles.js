@@ -11,7 +11,8 @@ export default {
   $white: '#F2F6F5', // Off-white text/icons/graphics
   $greyWhite: '#74749C', // Less important text/icons/graphics (somewhat darker than $white)
   $green: '#50D862', // Green text/icons/graphics
-  $red: '#F43181', // Red text/icons/graphics (can also use with low opacity on map)
+  $red: '#F43181', // Red text/icons/graphics
+  $redTranslucent: 'rgba(244,49,129,0.4)', // Translucent version of $red (used on map graphics)
   $yellow: '#D8AC50', // Yellow text/icons/graphics
   $lightBorder: '#363758', // Used on all borders
   // Other properties
