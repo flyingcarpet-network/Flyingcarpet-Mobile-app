@@ -17,10 +17,18 @@ export function setBusinessType(businessType) {
   };
 }
 
-export function addLocationCoordinate(locationCoordinate) {
+export function addLocationCoordinate(uniqueIdentifier, locationCoordinate) {
   return {
     type: types.ADD_LOCATION_COORDINATE,
+    uniqueIdentifier,
     locationCoordinate
+  };
+}
+
+export function removeLocationCoordinate(uniqueIdentifier) {
+  return {
+    type: types.REMOVE_LOCATION_COORDINATE,
+    uniqueIdentifier
   };
 }
 

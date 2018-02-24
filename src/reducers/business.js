@@ -6,7 +6,7 @@ import * as types from '../actions/business-types';
 
 const initialState = {
   businessType: '', // Represents the name of the type of the selected business (e.g. infrastructure, agriculture, etc.)
-  selectedLocationCoordinates: [], // An array of coordinates (lat/long pairs) representing the user's selected region on the map
+  selectedLocationCoordinates: {}, // An object of keys (unqiue strings) and coordinate values (lat/long pair objects) representing the user's selected region on the map
   altitute: 0, // Represents the altitute for the selected business service (only used by some business services)
   flightDirection: 0, // Represents the flight direction for the selected business service (only used by some business services)
   selectedOptions: {}, // Contains all of the *selected* checkbox options (with the value "true") for the selected business
@@ -31,10 +31,17 @@ export default function reducer(state = initialState, action = {}) {
     case types.ADD_LOCATION_COORDINATE:
       return {
         ...state,
-        selectedLocationCoordinates: [
+        selectedLocationCoordinates: {
           ...(state.selectedLocationCoordinates),
-          action.locationCoordinate
-        ]
+          [action.uniqueIdentifier]: action.locationCoordinate // The key is a unique string represeting the location of this particular marker
+        }
+      };
+    case types.REMOVE_LOCATION_COORDINATE:
+      // Create a new object (otherKeys) that doesn't contain the deleted key/value pair
+      const {[action.uniqueIdentifier]: _, ...otherKeys} = state.selectedLocationCoordinates;
+      return {
+        ...state,
+        selectedLocationCoordinates: otherKeys
       };
     case types.SET_ALTITUTE:
       return {
