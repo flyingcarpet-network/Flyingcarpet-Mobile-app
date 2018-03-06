@@ -16,7 +16,7 @@ export default class HardwareDetail extends React.Component {
 
     return (
       <View style={[styles.detailWrap, (showBottomBorder ? styles.borderBottom : null)]}>
-        <FontAwesome name={icon} size={35} style={styles.icon} />
+        <FontAwesome name={icon} size={28} style={styles.icon} />
         <Text style={styles.detailTitle}>{title}</Text>
         <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
       </View>

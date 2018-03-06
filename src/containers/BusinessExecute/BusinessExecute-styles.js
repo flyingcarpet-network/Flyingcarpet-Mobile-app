@@ -26,7 +26,7 @@ export default EStyleSheet.create({
     textAlign: 'left',
     paddingLeft: 40,
     paddingRight: 40,
-    fontSize: 24,
+    fontSize: 19,
     color: '$white'
   },
   taskCostText: {

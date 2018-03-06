@@ -20,7 +20,7 @@ export default class Slider extends React.Component {
     return (
       <View style={[styles.sliderWrap, (showBottomBorder ? styles.borderBottom : null)]}>
         <Text style={styles.sliderTitleIcon}>
-          <FontAwesome name={icon} size={45} />
+          <FontAwesome name={icon} size={36} />
         </Text>
         <View style={styles.sliderInnerWrap}>
           <View style={styles.sliderTitlesWrap}>

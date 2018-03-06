@@ -43,7 +43,7 @@ class BusinessEstimate extends React.Component {
           <TouchableOpacity onPress={Actions.businessExecute}>
             <View style={styles.executeTextWrap}>
               <Text style={styles.executeText}>Execute</Text>
-              <FontAwesome name="angle-right" size={25} style={styles.rightArrow} />
+              <FontAwesome name="angle-right" size={20} style={styles.rightArrow} />
             </View>
           </TouchableOpacity>
         </ScrollView>

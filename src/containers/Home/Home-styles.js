@@ -25,12 +25,12 @@ export default EStyleSheet.create({
   },
   appName: {
     color: '$white',
-    fontSize: 30
+    fontSize: 24
   },
   appSubName: {
     color: '$greyWhite',
     textAlign: 'left',
-    fontSize: 16
+    fontSize: 13
   },
   buttonWrap: {
     borderBottomColor: '$lightBorder',
@@ -56,18 +56,18 @@ export default EStyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 40,
     paddingRight: 40,
-    height: 75 // 35 (height) + 40 (padding)
+    height: 68 // 28 (height) + 40 (padding)
   },
   icon: {
     color: '$white',
-    width: 35,
-    marginRight: 20
+    width: 28,
+    marginRight: 16
   },
   buttonText: {
     fontWeight: '$appBoldWeight',
     color: '$white',
     flex: 1,
-    lineHeight: 35,
+    lineHeight: 28,
     fontSize: 16
   }
 });

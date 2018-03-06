@@ -27,7 +27,7 @@ export default EStyleSheet.create({
   },
   businessTypeCircle: {
     backgroundColor: '$focusAreaDarker',
-    width: '80%',
+    width: '70%',
     aspectRatio: 1,
     borderRadius: '50% - 1 + 1', // "- 1 + 1" is a hacky way to force react-native-extended-stylesheet to compute the value as a number (because borderRadius doesn't accept a percentage)
     flexDirection: 'column',
@@ -36,11 +36,13 @@ export default EStyleSheet.create({
   businessTypeIcon: {
     color: '$white',
     width: '100%',
+    height: '100%',
     textAlign: 'center',
-    lineHeight: '100% - 1 + 1', // "- 1 + 1" is a hacky way to force react-native-extended-stylesheet to compute the value as a number (because borderRadius doesn't accept a percentage)
+    // backgroundColor: 'red',
+    lineHeight: '90% - 1 + 1', // "- 1 + 1" is a hacky way to force react-native-extended-stylesheet to compute the value as a number (because lineHeight doesn't accept a percentage)
   },
   businessTypeText: {
-    fontSize: 14,
+    fontSize: 11,
     paddingTop: 5,
     color: '$white',
     textAlign: 'center'

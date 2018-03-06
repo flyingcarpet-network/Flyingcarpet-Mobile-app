@@ -14,14 +14,14 @@ export default EStyleSheet.create({
     borderBottomWidth: 1
   },
   icon: {
-    width: 55,
+    width: 45,
     paddingRight: 10,
     color: '$white',
     lineHeight: 45,
     textAlign: 'center'
   },
   detailTitle: {
-    fontSize: 20,
+    fontSize: 16,
     color: '$white',
     textAlign: 'left',
     // padding: 10
@@ -30,7 +30,7 @@ export default EStyleSheet.create({
   },
   detailText: {
     textAlign: 'right',
-    fontSize: 20,
+    fontSize: 16,
     flex: 0.4,
     color: '$white',
     lineHeight: 45,

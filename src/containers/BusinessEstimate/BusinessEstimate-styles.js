@@ -26,7 +26,7 @@ export default EStyleSheet.create({
   },
   estimateText: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 19,
     color: '$white',
     paddingLeft: '20%',
     paddingRight: '20%',
@@ -40,7 +40,7 @@ export default EStyleSheet.create({
     position: 'relative'
   },
   executeText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '$white',
     textAlign: 'center'
   },

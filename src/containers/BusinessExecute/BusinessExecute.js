@@ -44,7 +44,7 @@ class BusinessExecute extends React.Component {
               iterationCount="infinite" // For react-native-animatable
               duration={2000} // For react-native-animatable
               name="spinner" // For FontAwesome
-              size={160} // For FontAwesome
+              size={128} // For FontAwesome
               style={styles.spinner} // For FontAwesome
             />
           </View>

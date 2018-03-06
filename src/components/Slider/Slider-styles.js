@@ -15,9 +15,11 @@ export default EStyleSheet.create({
     borderBottomWidth: 1
   },
   sliderTitleIcon: {
-    width: 60,
-    paddingRight: 10,
-    color: '$white'
+    width: 36,
+    marginRight: 10,
+    color: '$white',
+    textAlign: 'center',
+    marginTop: 6
   },
   sliderInnerWrap: {
     flexDirection: 'column',
@@ -27,7 +29,7 @@ export default EStyleSheet.create({
     flexDirection: 'row'
   },
   detailTitle: {
-    fontSize: 20,
+    fontSize: 16,
     color: '$white',
     textAlign: 'left',
     flex: 0.6,
@@ -35,7 +37,7 @@ export default EStyleSheet.create({
   },
   valueText: {
     textAlign: 'right',
-    fontSize: 20,
+    fontSize: 16,
     color: '$white',
     flex: 0.4,
     display: 'flex'
