@@ -29,8 +29,8 @@ class App extends React.Component {
     } else { // If the assets are loaded, show the status bar and the children (router scene)
       return (
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+          {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+          {Platform.OS === 'android' && <View style={styles.androidStatusBarUnderlay} />}
           {children}
         </View>
       );

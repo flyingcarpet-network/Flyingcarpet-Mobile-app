@@ -9,22 +9,16 @@ import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { MapView } from 'expo';
-import { Slider } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
 import estimateTimeToDone from '../../utils/estimateTimeToDone';
 import styles from './BusinessEstimate-styles';
+import { BackgroundMap, Slider } from '../../components';
 import * as businessActions from '../../actions/business';
 
 class BusinessEstimate extends React.Component {
-  handleMapPress = e => {
-    const { addLocationCoordinate } = this.props;
-
-    // Add coordinate (lat/long pair) to redux for the user's pressed location
-    addLocationCoordinate(e.nativeEvent.coordinate);
-  }
   render() {
-    const { selectedLocationCoordinates, businessType, ethCost, setEthCost } = this.props;
+    const { businessType, ethCost, setEthCost, mapOpen } = this.props;
 
     const ethCostAdjusted = Math.round(ethCost * 40 * 100) / 100;
     // Get a string representing how long it will take to complete the task
@@ -39,50 +33,13 @@ class BusinessEstimate extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
-        <ScrollView style={styles.detailsWrap} contentContainerStyle={styles.detailsWrapContentContainer}>
-          <Text style={styles.detailTitle}>Select Land</Text>
-          <View style={styles.mapWrap}>
-            <MapView
-              style={styles.map}
-              // NOTE: this initialRegion should be updated to get the user's current location and use it, see:
-              //       https://docs.expo.io/versions/latest/sdk/location.html
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-              onPress={this.handleMapPress}
-            >
-              {(selectedLocationCoordinates.length >= 3) && // Only show polygon region if some coordinates have been added
-                <MapView.Polygon
-                  coordinates={selectedLocationCoordinates}
-                  strokeColor={'#ff0000'}
-                  fillColor={'rgba(0,0,0,0.5)'}
-                  strokeWidth={2}
-                />
-              }
-              {selectedLocationCoordinates.map((coordinate, i) => (
-                <MapView.Marker
-                  key={i}
-                  coordinate={coordinate}
-                />
-              ))}
-            </MapView>
-          </View>
-          <View style={styles.sliderWrap}>
-            <Text style={styles.detailTitle}>Time</Text>
-            <Text style={styles.centralText}>{ethCostAdjusted} ETH</Text>
-            <Slider
-              value={ethCost}
-              onValueChange={setEthCost}
-            />
-          </View>
+        <BackgroundMap />
+        <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
+          <Slider icon='clock-o' title='Time' textValue={String(ethCostAdjusted) + ' ETH'}  value={ethCost} onValueChange={setEthCost} />
           <View>
-            <Text style={styles.detailTitle}>Estimate</Text>
-            <Text style={[styles.centralText, styles.taskEstimateText]}>Task to be done in {timeToFinishString} at {ethCostAdjusted} ETH.</Text>
+            <Text style={styles.estimateText}>Task to be done in {timeToFinishString} at {ethCostAdjusted} ETH.</Text>
           </View>
+          <View style={styles.line}></View>
           <TouchableOpacity onPress={Actions.businessExecute}>
             <View style={styles.executeTextWrap}>
               <Text style={styles.executeText}>Execute</Text>
@@ -96,21 +53,19 @@ class BusinessEstimate extends React.Component {
 }
 
 BusinessEstimate.propTypes = {
-  selectedLocationCoordinates: PropTypes.array.isRequired,
-  addLocationCoordinate: PropTypes.func.isRequired,
   ethCost: PropTypes.number.isRequired,
   setEthCost: PropTypes.func.isRequired,
-  businessType: PropTypes.string.isRequired
+  businessType: PropTypes.string.isRequired,
+  mapOpen: PropTypes.bool.isRequired
 };
 
 export default connect(
   state => ({
-    selectedLocationCoordinates: state.business.selectedLocationCoordinates,
     ethCost: state.business.ethCost,
-    businessType: state.business.businessType
+    businessType: state.business.businessType,
+    mapOpen: state.business.mapOpen
   }),
   dispatch => ({
-    addLocationCoordinate: bindActionCreators(businessActions.addLocationCoordinate, dispatch),
     setEthCost: bindActionCreators(businessActions.setEthCost, dispatch)
   })
 )(BusinessEstimate);

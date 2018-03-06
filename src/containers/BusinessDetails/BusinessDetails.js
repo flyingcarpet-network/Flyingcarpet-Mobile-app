@@ -8,12 +8,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { MapView } from 'expo';
-import { Slider, CheckBox } from 'react-native-elements';
+import { CheckBox } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './BusinessDetails-styles';
 import getServiceCheckboxOptions from '../../utils/getServiceCheckboxOptions';
+import { BackgroundMap, Slider } from '../../components';
 import * as businessActions from '../../actions/business';
 
 class BusinessDetails extends React.Component {
@@ -23,71 +24,21 @@ class BusinessDetails extends React.Component {
     // Reset the redux router each time the component is unmounted
     reset();
   }
-  handleMapPress = e => {
-    const { addLocationCoordinate } = this.props;
-
-    // Add coordinate (lat/long pair) to redux for the user's pressed location
-    addLocationCoordinate(e.nativeEvent.coordinate);
-  }
   render() {
-    const { selectedLocationCoordinates, altitute, setAltitute, businessType, flightDirection, setFlightDirection, toggleOption, selectedOptions } = this.props;
+    const { altitute, setAltitute, businessType, flightDirection, setFlightDirection, toggleOption, selectedOptions, mapOpen } = this.props;
 
     // Get an array of the different checkbox options for the business type
     const options = getServiceCheckboxOptions(businessType);
 
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
-        <ScrollView style={styles.detailsWrap} contentContainerStyle={styles.detailsWrapContentContainer}>
-          <Text style={styles.detailTitle}>Select Land</Text>
-          <View style={styles.mapWrap}>
-            <MapView
-              style={styles.map}
-              // NOTE: this initialRegion should be updated to get the user's current location and use it, see:
-              //       https://docs.expo.io/versions/latest/sdk/location.html
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-              onPress={this.handleMapPress}
-            >
-              {(selectedLocationCoordinates.length >= 3) && // Only show polygon region if some coordinates have been added
-                <MapView.Polygon
-                  coordinates={selectedLocationCoordinates}
-                  strokeColor={'#ff0000'}
-                  fillColor={'rgba(0,0,0,0.5)'}
-                  strokeWidth={2}
-                />
-              }
-              {selectedLocationCoordinates.map((coordinate, i) => (
-                <MapView.Marker
-                  key={i}
-                  coordinate={coordinate}
-                />
-              ))}
-            </MapView>
-          </View>
+        <BackgroundMap />
+        <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
           {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.sliderWrap}>
-              <Text style={styles.detailTitle}>Select Altitute</Text>
-              <Text style={styles.centralText}>{(Math.round((5 + (altitute * 25)) * 100) / 100)} Metres</Text>
-              <Slider
-                value={altitute}
-                onValueChange={setAltitute}
-              />
-            </View>
+            <Slider icon='rocket' title='Altitute' textValue={String(Math.round((5 + (altitute * 25)) * 100) / 100) + ' Metres'}  value={altitute} onValueChange={setAltitute} />
           }
           {(businessType.toLowerCase() === 'agriculture') &&
-            <View style={styles.sliderWrap}>
-              <Text style={styles.detailTitle}>Select Flight Direction</Text>
-              <Text style={styles.centralText}>{(Math.round((flightDirection * 360) * 100) / 100)} Degrees</Text>
-              <Slider
-                value={flightDirection}
-                onValueChange={setFlightDirection}
-              />
-            </View>
+            <Slider icon='compass' title='Flight Direction' textValue={String(Math.round((flightDirection * 360) * 100) / 100) + ' Degrees'}  value={flightDirection} onValueChange={setFlightDirection} />
           }
           <View style={styles.optionCheckboxesWrap}>
             {options.map((option, i) => (
@@ -96,9 +47,14 @@ class BusinessDetails extends React.Component {
                 title={option}
                 checked={selectedOptions[option] === true}
                 onPress={() => toggleOption(option)}
+                containerStyle={styles.checkboxStyle}
+                textStyle={styles.checkboxTextStyle}
+                checkedColor={EStyleSheet.value('$green')}
+                uncheckedColor={EStyleSheet.value('$white')}
               />
             ))}
           </View>
+          <View style={styles.line}></View>
           <TouchableOpacity onPress={Actions.businessEstimate}>
             <View style={styles.estimateTextWrap}>
               <Text style={styles.estimateText}>Estimate</Text>
@@ -112,8 +68,6 @@ class BusinessDetails extends React.Component {
 }
 
 BusinessDetails.propTypes = {
-  selectedLocationCoordinates: PropTypes.array.isRequired,
-  addLocationCoordinate: PropTypes.func.isRequired,
   altitute: PropTypes.number.isRequired,
   setAltitute: PropTypes.func.isRequired,
   businessType: PropTypes.string.isRequired,
@@ -121,16 +75,17 @@ BusinessDetails.propTypes = {
   setFlightDirection: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   toggleOption: PropTypes.func.isRequired,
-  selectedOptions: PropTypes.object.isRequired
+  selectedOptions: PropTypes.object.isRequired,
+  mapOpen: PropTypes.bool.isRequired
 };
 
 export default connect(
   state => ({
-    selectedLocationCoordinates: state.business.selectedLocationCoordinates,
     altitute: state.business.altitute,
     businessType: state.business.businessType,
     flightDirection: state.business.flightDirection,
-    selectedOptions: state.business.selectedOptions
+    selectedOptions: state.business.selectedOptions,
+    mapOpen: state.business.mapOpen
   }),
   dispatch => ({
     addLocationCoordinate: bindActionCreators(businessActions.addLocationCoordinate, dispatch),

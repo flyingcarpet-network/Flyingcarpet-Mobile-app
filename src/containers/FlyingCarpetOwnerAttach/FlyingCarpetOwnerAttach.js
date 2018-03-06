@@ -55,7 +55,6 @@ class FlyingCarpetOwnerAttach extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
         {(!haveCameraPermission) &&
           <View style={styles.detailsWrap}>
             <Text style={styles.instructionText}>To attach a flyingCarpet, please enable camera permissions in settings.</Text>

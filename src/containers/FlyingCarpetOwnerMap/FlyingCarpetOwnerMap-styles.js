@@ -1,10 +1,11 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
-  text: {
-    color: '$white',
-    fontWeight: '$appBoldWeight',
-    fontSize: 18,
-    paddingRight: 20
+  container: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
   }
 });

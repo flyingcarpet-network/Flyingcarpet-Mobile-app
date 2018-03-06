@@ -36,7 +36,6 @@ class BusinessExecute extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.line}></View>
         <View style={styles.spinnerWrap}>
           <View style={styles.spinnerInnerWrap}>
             <FontAwesomeAnimatable

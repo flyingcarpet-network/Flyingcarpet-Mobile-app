@@ -13,7 +13,8 @@ const initialState = {
                        // service (the options vary depending on the selected business). NOTE: this object may contain other
                        // values without the value "true."
   ethCost: 0, // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
-  businessTransactionProcessing: false // Represents whether the transaction has started being process (a vehicle has been found to complete the task)
+  businessTransactionProcessing: false, // Represents whether the transaction has started being process (a vehicle has been found to complete the task)
+  mapOpen: false // Represents whether the map is open on ether the BusinessDetails or BusinessEstimate dialogs
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -66,6 +67,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         businessTransactionProcessing: action.businessTransactionProcessing
+      };
+    case types.TOGGLE_MAP_OPEN:
+      return {
+        ...state,
+        mapOpen: !(state.mapOpen)
       };
     default:
       return state;

@@ -58,3 +58,9 @@ export function setBusinessTransactionProcessing(businessTransactionProcessing) 
     businessTransactionProcessing
   };
 }
+
+export function toggleMapOpen() {
+  return {
+    type: types.TOGGLE_MAP_OPEN
+  };
+}
