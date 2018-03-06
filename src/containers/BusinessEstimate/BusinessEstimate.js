@@ -33,7 +33,7 @@ class BusinessEstimate extends React.Component {
 
     return (
       <View style={styles.container}>
-        <BackgroundMap />
+        <BackgroundMap drawLine={(businessType.toLowerCase() === 'transport')} />
         <ScrollView style={[styles.detailsWrap, (mapOpen ? styles.detailsMinimized : null)]} contentContainerStyle={styles.detailsWrapContentContainer}>
           <Slider icon='clock-o' title='Time' textValue={String(ethCostAdjusted) + ' ETH'}  value={ethCost} onValueChange={setEthCost} />
           <View>

@@ -17,19 +17,39 @@ class BackgroundMap extends React.Component {
   handleMapPress = e => {
     const { addLocationCoordinate, disablePolygonCreation, onMapPress } = this.props;
 
+    // If "coordinate" is not defined, then it means the marker was pressed ("coordinate" is not passed when the marker is directly pressed), thus we don't add this marker.
+    // NOTE: this happens because the MapView's onPress callback is called regardless of whether the press event also trigger the Marker's onPress callback also.
+    if (!('coordinate' in e.nativeEvent)) {
+      return;
+    }
+
     // If polygon creation isn't disabled, add the pressed location to the polygon coordinates array
     if (!disablePolygonCreation) {
-      // Add coordinate (lat/long pair) to redux for the user's pressed location
-      addLocationCoordinate(e.nativeEvent.coordinate);
+      // Add coordinate (lat/long pair) to redux for the user's pressed location and include an "identifier"
+      // field which is a unqiue string value representing the unique exact position of this marker
+      addLocationCoordinate(
+        String(e.nativeEvent.coordinate.latitude) + String(e.nativeEvent.coordinate.longitude),
+        e.nativeEvent.coordinate
+      );
     }
 
     // Run the custom map press callback if it's not null
     if (onMapPress !== null)
       onMapPress();
   }
-  render() {
-    const { selectedLocationCoordinates, toggleMapOpen, mapOpen, displayCloseButton, disablePolygonCreation, showFlyingCarpetBestLocations, flyingCarpetBestLocations, onMapPress } = this.props;
+  handleMarkerPress = e => {
+    const { removeLocationCoordinate } = this.props;
 
+    // NOTE: We don't need to check if polygon creation is disabled, since markers are only show if it is disabled
+    
+    // Remove the coordinate (lat/long pair) from redux for the marker at the location that the user pressed
+    removeLocationCoordinate(e.nativeEvent.id);
+  }
+  render() {
+    const { selectedLocationCoordinates, toggleMapOpen, mapOpen, displayCloseButton, disablePolygonCreation, showFlyingCarpetBestLocations, flyingCarpetBestLocations, onMapPress, drawLine } = this.props;
+
+    // Depending on the optional "drawLine" argument, we ether draw a line or a polygon (default) 
+    const PolygonOrLine = (drawLine ? MapView.Polyline : MapView.Polygon);
     return (
       <View style={styles.mapWrap}>
         <MapView
@@ -59,24 +79,29 @@ class BackgroundMap extends React.Component {
           customMapStyle={[{"elementType":"geometry","stylers":[{"color":"#1d2c4d"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#8ec3b9"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#1a3646"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"color":"#4b6878"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#64779e"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"color":"#4b6878"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#334e87"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#023e58"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#283d6a"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#6f9ba5"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#023e58"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#3C7680"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#304a7d"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#98a5be"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#2c6675"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#255763"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#b0d5ce"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#023e58"}]},{"featureType":"transit","elementType":"labels.text.fill","stylers":[{"color":"#98a5be"}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"transit.line","elementType":"geometry.fill","stylers":[{"color":"#283d6a"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#3a4762"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#0e1626"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#4e6d70"}]}]}
         >
           {/* If polygon creation isn't disabled, display the polygon on the map */}
-          {(!disablePolygonCreation) && (selectedLocationCoordinates.length >= 3) && // Only show polygon region if some coordinates have been added
-            <MapView.Polygon
-              coordinates={selectedLocationCoordinates}
+          {(!disablePolygonCreation) && (Object.keys(selectedLocationCoordinates).length >= 2) && // Only show polygon region if some coordinates have been added
+            <PolygonOrLine
+              coordinates={Object.values(selectedLocationCoordinates)}
               strokeColor={EStyleSheet.value('$focusAreaLighter')}
               fillColor={EStyleSheet.value('$focusAreaDarkerTranslucent')}
               strokeWidth={2}
             />
           }
           {/* If polygon creation isn't disabled, display the markers on the map that outline the polygon */}
-          {(!disablePolygonCreation) && selectedLocationCoordinates.map((coordinate, i) => (
+          {(!disablePolygonCreation) && Object.values(selectedLocationCoordinates).map((coordinate, i) => {
+            // This is the unique identifier for the marker (based on it's exact lat/long location)
+            const uniqueID = String(coordinate.latitude) + String(coordinate.longitude);
+            return (
             <MapView.Marker
-              key={'createdMarker_' + i}
+              key={uniqueID} // We need to ensure each marker has a unique "key" value so that React can diff efficiently (since markers are added and removed)
               coordinate={coordinate}
+              identifier={uniqueID}
               anchor={{x: 0.5, y: 0.5}}
+              onPress={this.handleMarkerPress}
             >
               <View style={styles.pin} />
-            </MapView.Marker>
-          ))}
+            </MapView.Marker>);
+          })}
           {/* If the functionality to display the best (most profitable) flying carpet locations is enabled, then we display all of the best location circles and markers */}
           {showFlyingCarpetBestLocations && flyingCarpetBestLocations.map((coordinate, i) => (
             // Circles
@@ -116,6 +141,7 @@ class BackgroundMap extends React.Component {
 
 BackgroundMap.propTypes = {
   addLocationCoordinate: PropTypes.func.isRequired,
+  removeLocationCoordinate: PropTypes.func.isRequired,
   toggleMapOpen: PropTypes.func.isRequired,
   mapOpen: PropTypes.bool.isRequired,
   flyingCarpetBestLocations: PropTypes.array.isRequired,
@@ -123,14 +149,16 @@ BackgroundMap.propTypes = {
   disablePolygonCreation: PropTypes.bool, // This is an optional prop that disables the ability to create a polygon/markers by pressing on the map
   onMapPress: PropTypes.func, // This is a custom callback function that is run whenever the map is pressed (not related to polygon creation functionality).
                               // NOTE: When this callback is defined, the user cannot interact with the map at all (since any press on the map triggers the callback).
-  showFlyingCarpetBestLocations: PropTypes.bool // This is an optional prop that makes it so that the map also display the ideal (most profitable) locations to place flying carpets
+  showFlyingCarpetBestLocations: PropTypes.bool, // This is an optional prop that makes it so that the map also display the ideal (most profitable) locations to place flying carpets
+  drawLine: PropTypes.bool // If passed, instead of a polygon a line will be drawn connecting the markers in the order they were added (a polygon is drawn by default if this argument is not passed)
 };
 
 BackgroundMap.defaultProps = {
   displayCloseButton: true,
   disablePolygonCreation: false,
   onMapPress: null,
-  showFlyingCarpetBestLocations: false
+  showFlyingCarpetBestLocations: false,
+  drawLine: false
 };
 
 export default connect(
@@ -141,6 +169,7 @@ export default connect(
   }),
   dispatch => ({
     addLocationCoordinate: bindActionCreators(businessActions.addLocationCoordinate, dispatch),
-    toggleMapOpen: bindActionCreators(businessActions.toggleMapOpen, dispatch)
+    toggleMapOpen: bindActionCreators(businessActions.toggleMapOpen, dispatch),
+    removeLocationCoordinate: bindActionCreators(businessActions.removeLocationCoordinate, dispatch)
   })
 )(BackgroundMap);
