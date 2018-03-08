@@ -14,6 +14,20 @@ export default EStyleSheet.create({
     paddingTop: 50,
     paddingBottom: 30,
     paddingLeft: 40,
+    paddingRight: 40,
+    flexDirection: 'row'
+  },
+  appName: {
+    color: '$white',
+    fontSize: 24,
+    flex: 1
+  },
+  cogWrap: {
+    flex: 1
+  },
+  cog: {
+    color: '$white',
+    textAlign: 'right'
   },
   appSubNameWrap: {
     borderBottomColor: '$lightBorder',
@@ -22,10 +36,6 @@ export default EStyleSheet.create({
     paddingTop: 20,
     paddingBottom: 30,
     paddingLeft: 40
-  },
-  appName: {
-    color: '$white',
-    fontSize: 24
   },
   appSubName: {
     color: '$greyWhite',

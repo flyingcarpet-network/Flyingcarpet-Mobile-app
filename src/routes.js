@@ -5,9 +5,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Actions, Router, Reducer, Scene } from 'react-native-router-flux';
+import { Actions, Router, Reducer, Scene, Lightbox } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { FontAwesome } from '@expo/vector-icons';
 import * as containers from './containers';
 import { RightButton } from './components';
 
@@ -51,18 +52,22 @@ class Routes extends React.Component {
       <Router
         createReducer={this.reducerCreate.bind(this)}
       >
-        <Scene key="Root">
-          <Scene key="home" component={containers.Home} title="AirAI" hideNavBar={true} {...sceneArguments} />
-          <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" {...sceneArguments} />
-          <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} {...sceneArguments} />
-          <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} {...sceneArguments} />
-          <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" {...sceneArguments} />
-          <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
-          <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" {...sceneArguments} />
-          <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
-          <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...sceneArguments} />
-          <Scene key="flyingCarpetOwnerMap" component={containers.FlyingCarpetOwnerMap} title="Increase Income" {...sceneArguments} />
-        </Scene>
+        <Lightbox>
+          <Scene key="Root" renderRightButton={<RightButton onPress={() => Actions.settingsLightbox()}><FontAwesome name={'cog'} size={28} /></RightButton>}>
+            <Scene key="home" component={containers.Home} title="" hideNavBar={true} {...sceneArguments} />
+            <Scene key="businessSelect" component={containers.BusinessSelect} title="Business" {...sceneArguments} />
+            <Scene key="businessDetails" component={containers.BusinessDetails} title={businessType} {...sceneArguments} />
+            <Scene key="businessEstimate" component={containers.BusinessEstimate} title={businessType} {...sceneArguments} />
+            <Scene key="businessExecute" component={containers.BusinessExecute} title="Final" {...sceneArguments} />
+            <Scene key="droneOwnerDetails" component={containers.DroneOwnerDetails} title="Drone" renderRightButton={<RightButton onPress={() => Actions.droneOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
+            <Scene key="droneOwnerAttach" component={containers.DroneOwnerAttach} title="Add Drone" {...sceneArguments} />
+            <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach New</RightButton>} {...sceneArguments} />
+            <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...sceneArguments} />
+            <Scene key="flyingCarpetOwnerMap" component={containers.FlyingCarpetOwnerMap} title="Increase Income" {...sceneArguments} />
+          </Scene>
+          {/* Lightbox Scenes */}
+          <Scene key="settingsLightbox" component={containers.Settings} />
+        </Lightbox>
       </Router>
     );
   }

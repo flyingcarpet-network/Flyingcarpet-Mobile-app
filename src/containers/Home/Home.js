@@ -18,6 +18,9 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         <View style={styles.appNameWrap}>
           <Text style={styles.appName}>Flyingcarpet</Text>
+          <TouchableOpacity style={styles.cogWrap} onPress={Actions.settingsLightbox}>
+            <FontAwesome name={'cog'} size={28} style={styles.cog} />
+          </TouchableOpacity>
         </View>
         <View style={styles.appSubNameWrap}>
           <Text style={styles.appSubName}>NAVIGATION</Text>
