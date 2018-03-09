@@ -16,7 +16,7 @@ export default EStyleSheet.create({
   },
   centralText: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 19,
     color: '$white',
     paddingLeft: '10%',
     paddingRight: '10%'

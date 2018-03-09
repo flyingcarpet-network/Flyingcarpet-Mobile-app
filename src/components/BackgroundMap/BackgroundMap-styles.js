@@ -20,7 +20,7 @@ export default EStyleSheet.create({
   mapText: {
     color: '$white',
     fontWeight: '$appBoldWeight',
-    fontSize: 22
+    fontSize: 18
   },
   leftArrow: {
     backgroundColor: '$focusAreaDarkerTranslucent',
@@ -40,6 +40,6 @@ export default EStyleSheet.create({
     lineHeight: 100,
     textAlign: 'center',
     color: '$white',
-    fontSize: 30
+    fontSize: 24
   }
 });

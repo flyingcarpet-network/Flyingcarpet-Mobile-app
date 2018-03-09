@@ -25,7 +25,6 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   optionCheckboxesWrap: {
-    // height: 200,
     alignItems: 'stretch',
     marginTop: 15,
     marginBottom: 5,
@@ -39,7 +38,8 @@ export default EStyleSheet.create({
   },
   checkboxTextStyle: {
     color: '$white',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
+    fontSize: 13
   },
   estimateTextWrap: {
     padding: 10,
@@ -48,7 +48,7 @@ export default EStyleSheet.create({
     position: 'relative'
   },
   estimateText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '$white',
     textAlign: 'center'
   },

@@ -16,7 +16,12 @@ export default class HardwareDetail extends React.Component {
 
     return (
       <View style={[styles.detailWrap, (showBottomBorder ? styles.borderBottom : null)]}>
-        <FontAwesome name={icon} size={35} style={styles.icon} />
+        {(icon.length > 0) &&
+          <FontAwesome name={icon} size={28} style={styles.icon} />
+        }
+        {(icon.length === 0) &&
+          <Text style={styles.icon} />
+        }
         <Text style={styles.detailTitle}>{title}</Text>
         <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
       </View>
@@ -25,12 +30,13 @@ export default class HardwareDetail extends React.Component {
 }
 
 HardwareDetail.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   showBottomBorder: PropTypes.bool // Represents whether a thin light border should be displayed at the bottom of the component
 };
 
 HardwareDetail.defaultProps = {
+  icon: '',
   showBottomBorder: true
 };

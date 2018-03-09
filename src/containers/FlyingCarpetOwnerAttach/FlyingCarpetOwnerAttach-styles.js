@@ -19,7 +19,7 @@ export default EStyleSheet.create({
   },
   cameraInstructionText: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 14,
     color: '$white',
     paddingLeft: '5%',
     paddingRight: '5%'
@@ -30,7 +30,7 @@ export default EStyleSheet.create({
   instructionText: {
     paddingTop: '20%',
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 19,
     color: '$white',
     paddingLeft: '10%',
     paddingRight: '10%'

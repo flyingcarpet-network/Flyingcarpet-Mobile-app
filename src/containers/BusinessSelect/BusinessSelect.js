@@ -71,7 +71,7 @@ class BusinessSelect extends React.Component {
               /* Note, the wrap is a different width if it's one of the first two services listed (hence the additional style) */
               <TouchableOpacity key={i} style={styles.businessTypeWrap} onPress={() => this.selectBusiness(service.name)}>
                 <View style={styles.businessTypeCircle}>
-                  <FontAwesome name={service.icon} size={50} style={styles.businessTypeIcon} />
+                  <FontAwesome name={service.icon} size={30} style={styles.businessTypeIcon} />
                 </View>
                 <Text style={styles.businessTypeText}>{service.name}</Text>
               </TouchableOpacity>

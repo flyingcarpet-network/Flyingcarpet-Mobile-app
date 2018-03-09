@@ -18,25 +18,28 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         <View style={styles.appNameWrap}>
           <Text style={styles.appName}>Flyingcarpet</Text>
+          <TouchableOpacity style={styles.cogWrap} onPress={Actions.settingsLightbox}>
+            <FontAwesome name={'cog'} size={28} style={styles.cog} />
+          </TouchableOpacity>
         </View>
         <View style={styles.appSubNameWrap}>
           <Text style={styles.appSubName}>NAVIGATION</Text>
         </View>
         <View style={styles.buttonWrap}>
           <TouchableOpacity style={styles.button} onPress={Actions.businessSelect}>
-            <FontAwesome name={'briefcase'} size={35} style={styles.icon} />
+            <FontAwesome name={'briefcase'} size={28} style={styles.icon} />
             <Text style={styles.buttonText}>BUSINESS</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonWrap}>
           <TouchableOpacity style={styles.button} onPress={Actions.flyingCarpetOwnerDetails}>
-            <FontAwesome name={'plug'} size={35} style={styles.icon} />
+            <FontAwesome name={'plug'} size={28} style={styles.icon} />
             <Text style={styles.buttonText}>FC OWNER</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonWrap}>
           <TouchableOpacity style={styles.button} onPress={Actions.droneOwnerDetails}>
-            <FontAwesome name={'rocket'} size={35} style={styles.icon} />
+            <FontAwesome name={'rocket'} size={28} style={styles.icon} />
             <Text style={styles.buttonText}>DRONE OWNER</Text>
           </TouchableOpacity>
         </View>
