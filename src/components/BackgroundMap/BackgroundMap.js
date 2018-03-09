@@ -11,9 +11,20 @@ import { MapView } from 'expo';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './BackgroundMap-styles';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import * as businessActions from '../../actions/business';
 
 class BackgroundMap extends React.Component {
+  componentDidMount() {
+    setTimeout(() => { // 1/1000 second timeout prevents timing issue on Android
+      const { selectedLocationCoordinates } = this.props;
+
+      // If there are ANY coordinates in redux, we fit the map to those coordinates...
+      if (Object.values(selectedLocationCoordinates).length > 0) {
+        this.map.fitToCoordinates(Object.values(selectedLocationCoordinates));
+      }
+    }, 1);
+  }
   handleMapPress = e => {
     const { addLocationCoordinate, disablePolygonCreation, onMapPress } = this.props;
 
@@ -62,6 +73,7 @@ class BackgroundMap extends React.Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
+          ref={ref => { this.map = ref; }}
           onPress={this.handleMapPress}
           // Only allow interaction with the map if there is no custom map press callback defined
           zoomEnabled={onMapPress === null}
@@ -133,6 +145,85 @@ class BackgroundMap extends React.Component {
           >
             <FontAwesome name={mapOpen ? 'angle-right' : 'angle-left'} size={25} style={styles.leftArrowText} />
           </TouchableHighlight>
+        }
+        {(displayCloseButton && mapOpen) && // If we're on the "increase revenue" dialog OR if the map is not minimized (on the business dialogs)
+          <GooglePlacesAutocomplete
+            placeholder='Search'
+            minLength={2} // minimum length of text to search
+            autoFocus={false}
+            returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+            listViewDisplayed={false} // true/false/undefined
+            fetchDetails={true}
+            renderDescription={row => row.description} // custom description render
+            onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+              this.map.fitToCoordinates([
+                { // North-East
+                  latitude: details.geometry.viewport.northeast.lat,
+                  longitude: details.geometry.viewport.northeast.lng
+                },
+                { // South-West
+                  latitude: details.geometry.viewport.southwest.lat,
+                  longitude: details.geometry.viewport.southwest.lng
+                }
+              ]);
+            }}
+            // getDefaultValue={() => ''}
+            query={{
+              // available options: https://developers.google.com/places/web-service/autocomplete
+              key: 'AIzaSyB3n7NNfrgiJ1KMOi2vgQ5GOIwBmkfyrHI',
+              language: 'en', // language of the results
+              // types: '(cities)' // default: 'geocode'
+            }}
+            
+            styles={{
+              container: {
+                backgroundColor: 'rgba(0,0,0,0)',
+                flex: 0.22
+              },
+              textInputContainer: {
+                width: '100%',
+                backgroundColor: EStyleSheet.value('$focusAreaDarker'),
+                borderTopWidth: 0,
+                borderBottomWidth: 0
+              },
+              listView: {
+                backgroundColor: EStyleSheet.value('$focusAreaDarker'),
+                borderTopWidth: 0,
+                borderBottomWidth: 0
+              },
+              description: {
+                fontWeight: 'bold',
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+                color: EStyleSheet.value('$white')
+              },
+              poweredContainer: {
+                display: 'none'
+              },
+              separator: {
+                display: 'none'
+              }
+            }}
+            
+            // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+            // currentLocationLabel="Current location"
+            nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+            GoogleReverseGeocodingQuery={{
+              // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+            }}
+            GooglePlacesSearchQuery={{
+              // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+              rankby: 'distance' // ,
+              // types: 'food'
+            }}
+
+            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+            // predefinedPlaces={[homePlace, workPlace]}
+
+            debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+            // renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
+            // renderRightButton={() => <Text>Custom text after the input</Text>}
+          />
         }
       </View>
     );
