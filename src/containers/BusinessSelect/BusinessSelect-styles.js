@@ -38,8 +38,8 @@ export default EStyleSheet.create({
     width: '100%',
     height: '100%',
     textAlign: 'center',
-    // backgroundColor: 'red',
-    lineHeight: '90% - 1 + 1', // "- 1 + 1" is a hacky way to force react-native-extended-stylesheet to compute the value as a number (because lineHeight doesn't accept a percentage)
+    top: '50%',
+    marginTop: -15
   },
   businessTypeText: {
     fontSize: 11,

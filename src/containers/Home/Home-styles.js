@@ -20,10 +20,10 @@ export default EStyleSheet.create({
   appName: {
     color: '$white',
     fontSize: 24,
-    flex: 1
+    flex: 0.8
   },
   cogWrap: {
-    flex: 1
+    flex: 0.2
   },
   cog: {
     color: '$white',

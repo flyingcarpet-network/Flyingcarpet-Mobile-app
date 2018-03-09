@@ -73,7 +73,7 @@ class BusinessSelect extends React.Component {
                 <View style={styles.businessTypeCircle}>
                   <FontAwesome name={service.icon} size={30} style={styles.businessTypeIcon} />
                 </View>
-                <Text style={styles.businessTypeText}>{service.name}</Text>
+                <Text style={styles.businessTypeText} numberOfLines={1}>{service.name}</Text>
               </TouchableOpacity>
             ))}
           </View>
