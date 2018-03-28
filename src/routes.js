@@ -64,6 +64,7 @@ class Routes extends React.Component {
             <Scene key="flyingCarpetOwnerDetails" component={containers.FlyingCarpetOwnerDetails} title="Flyingcarpet" renderRightButton={<RightButton onPress={() => Actions.flyingCarpetOwnerAttach()}>Attach</RightButton>} {...sceneArguments} />
             <Scene key="flyingCarpetOwnerAttach" component={containers.FlyingCarpetOwnerAttach} title="Add Flyingcarpet" {...sceneArguments} />
             <Scene key="flyingCarpetOwnerMap" component={containers.FlyingCarpetOwnerMap} title="Increase Income" {...sceneArguments} />
+            <Scene key="flyingCarpetOwnerChannels" component={containers.FlyingCarpetOwnerChannels} title="Flyingcarpet Channels" {...sceneArguments} />
           </Scene>
           {/* Lightbox Scenes */}
           <Scene key="settingsLightbox" component={containers.Settings} />

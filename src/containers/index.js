@@ -9,4 +9,5 @@ export { default as DroneOwnerAttach } from './DroneOwnerAttach/DroneOwnerAttach
 export { default as FlyingCarpetOwnerDetails } from './FlyingCarpetOwnerDetails/FlyingCarpetOwnerDetails';
 export { default as FlyingCarpetOwnerAttach } from './FlyingCarpetOwnerAttach/FlyingCarpetOwnerAttach';
 export { default as FlyingCarpetOwnerMap } from './FlyingCarpetOwnerMap/FlyingCarpetOwnerMap';
+export { default as FlyingCarpetOwnerChannels } from './FlyingCarpetOwnerChannels/FlyingCarpetOwnerChannels';
 export { default as Settings } from './Settings/Settings';

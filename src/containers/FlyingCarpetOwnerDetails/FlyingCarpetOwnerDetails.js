@@ -32,7 +32,7 @@ class FlyingCarpetOwnerDetails extends React.Component {
             <HardwareDetail icon="stack-overflow" title="Capacity" value="10kg" />
             <HardwareDetail icon="list-ul" title="Tasks for the month" value="14" />
             <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={Actions.flyingCarpetOwnerChannels}>
               <HardwareDetail icon="link" title="Connected Channels" pressable={true} showBottomBorder={false} />
             </TouchableOpacity>
             <View style={styles.mapWrap}>
