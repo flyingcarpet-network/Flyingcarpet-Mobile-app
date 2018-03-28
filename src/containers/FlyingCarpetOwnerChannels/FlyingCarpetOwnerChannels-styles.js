@@ -12,10 +12,15 @@ export default EStyleSheet.create({
     borderTopWidth: 0
   },
   channelInfoContainer: {
-    borderBottomColor: '$lightBorder'
+    borderBottomColor: '$lightBorder',
+    marginTop: 0,
+    padding: 0
   },
-  channelInfoContainerNoBorder: {
-    borderBottomWidth: 0
+  channelInfoHeadersContainer: {
+    backgroundColor: '$darkBackgroundVeryTranslucent'
+  },
+  channelInfoInnerContainer: {
+    height: 65 // (85 - 20)
   },
   nameHeaderText: {
     fontSize: 14,
@@ -29,18 +34,30 @@ export default EStyleSheet.create({
   },
   leftChannelInfo: {
     height: 25,
-    flex: 0.7
+    flex: 0.7,
+    margin: 0,
+    padding: 0
   },
   rightChannelInfo: {
     height: 50,
-    flex: 0.3
+    flex: 0.3,
+    margin: 0,
+    padding: 0
   },
   title: {
-    color: '$white'
+    color: '$white',
+    lineHeight: 32,
+    height: 32,
+    margin: 0,
+    paddingTop: 0
   },
   subtitle: {
     color: '$greyWhite',
-    fontWeight: '$normalWeight'
+    fontWeight: '$normalWeight',
+    height: 32,
+    lineHeight: 32,
+    margin: 0,
+    padding: 0
   },
   rightTitle: {
     color: '$white'

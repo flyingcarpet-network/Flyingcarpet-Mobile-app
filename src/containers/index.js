@@ -10,4 +10,5 @@ export { default as FlyingCarpetOwnerDetails } from './FlyingCarpetOwnerDetails/
 export { default as FlyingCarpetOwnerAttach } from './FlyingCarpetOwnerAttach/FlyingCarpetOwnerAttach';
 export { default as FlyingCarpetOwnerMap } from './FlyingCarpetOwnerMap/FlyingCarpetOwnerMap';
 export { default as FlyingCarpetOwnerChannels } from './FlyingCarpetOwnerChannels/FlyingCarpetOwnerChannels';
+export { default as FlyingCarpetOwnerChannelDetails } from './FlyingCarpetOwnerChannelDetails/FlyingCarpetOwnerChannelDetails';
 export { default as Settings } from './Settings/Settings';

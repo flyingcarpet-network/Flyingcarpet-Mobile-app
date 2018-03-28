@@ -24,3 +24,10 @@ export function setFlyingCarpetAddress(flyingCarpetAddress) {
     flyingCarpetAddress
   };
 }
+
+export function setChannelData(channelData) {
+  return {
+    type: types.SET_CHANNEL_DATA,
+    channelData
+  };
+}

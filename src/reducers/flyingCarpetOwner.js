@@ -15,7 +15,8 @@ const initialState = {
   flyingCarpetBestLocations: [ // This is an array of location circle objects (lat, long, and radius) that represent the most ideal nearby locations for Flying Carpets
     {latitude: 37.78555, longitude: -122.4054, radius: 1500, label: '396%'}, // NOTE: radius is measured in metres
     {latitude: 37.78981, longitude: -122.4509, radius: 3000, label: '170%'},
-  ]
+  ],
+  channelData: {} // This represents the channel data of the currently selected channel
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -34,6 +35,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         flyingCarpetAddress: action.flyingCarpetAddress
+      };
+    case types.SET_CHANNEL_DATA:
+      return {
+        ...state,
+        channelData: action.channelData
       };
     default:
       return state;
