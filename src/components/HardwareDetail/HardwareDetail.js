@@ -12,7 +12,7 @@ import styles from './HardwareDetail-styles';
 
 export default class HardwareDetail extends React.Component {
   render() {
-    const { icon, title, value, showBottomBorder } = this.props;
+    const { icon, title, value, showBottomBorder, pressable } = this.props;
 
     return (
       <View style={[styles.detailWrap, (showBottomBorder ? styles.borderBottom : null)]}>
@@ -23,7 +23,14 @@ export default class HardwareDetail extends React.Component {
           <Text style={styles.icon} />
         }
         <Text style={styles.detailTitle}>{title}</Text>
-        <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
+        {(!pressable) &&
+          <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
+        }
+        {pressable &&
+          <Text style={styles.detailText}>
+            <FontAwesome name="angle-right" size={28} style={styles.icon} />
+          </Text>
+        }
       </View>
     );
   }
@@ -32,11 +39,14 @@ export default class HardwareDetail extends React.Component {
 HardwareDetail.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  showBottomBorder: PropTypes.bool // Represents whether a thin light border should be displayed at the bottom of the component
+  value: PropTypes.string,
+  showBottomBorder: PropTypes.bool, // Represents whether a thin light border should be displayed at the bottom of the component
+  pressable: PropTypes.bool // Represents whether a right arrow should be showen instead of a "value" (true when HardwareDetail is being used a button)
 };
 
 HardwareDetail.defaultProps = {
   icon: '',
-  showBottomBorder: true
+  showBottomBorder: true,
+  value: '',
+  pressable: false
 };
