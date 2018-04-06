@@ -1,5 +1,5 @@
 /*
- * This is the flyingcarpet owner scene where the user can view their flyingcarpet details or attach a new flyingcarpet.
+ * This is the state channel details scene where the user view their the details of a particular state channel (associated with a FC or drone).
  */
 
 import React from 'react';
@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { HardwareDetail } from '../../components';
-import styles from './FlyingCarpetOwnerChannelDetails-styles';
+import styles from './ChannelDetails-styles';
 
-class FlyingCarpetOwnerChannelDetails extends React.Component {
+class ChannelDetails extends React.Component {
   render() {
     const { channelData } = this.props;
 
@@ -30,7 +30,7 @@ class FlyingCarpetOwnerChannelDetails extends React.Component {
   }
 }
 
-FlyingCarpetOwnerChannelDetails.propTypes = {
+ChannelDetails.propTypes = {
   channelData: PropTypes.object.isRequired
 };
 
@@ -38,4 +38,4 @@ export default connect(
   state => ({
     channelData: state.flyingCarpetOwner.channelData
   })
-)(FlyingCarpetOwnerChannelDetails);
+)(ChannelDetails);

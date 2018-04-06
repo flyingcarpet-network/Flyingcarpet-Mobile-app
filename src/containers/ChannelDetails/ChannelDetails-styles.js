@@ -13,17 +13,5 @@ export default EStyleSheet.create({
   detailsWrapContentContainer: {
     alignItems: 'stretch',
     flexDirection: 'column'
-  },
-  instructionText: {
-    textAlign: 'center',
-    fontSize: 19,
-    color: '$white',
-    paddingLeft: '10%',
-    paddingRight: '10%',
-    paddingTop: '20%'
-  },
-  mapWrap: {
-    height: 300,
-    position: 'relative'
   }
 });

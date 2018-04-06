@@ -1,5 +1,5 @@
 /*
- * This is the flyingcarpet owner channels scene where the user can view the open state channels that their flyingcarpet is conencted to.
+ * This is the drone owner channels scene where the user can view the open state channels that their drone is conencted to.
  */
 
 import React from 'react';
@@ -10,41 +10,50 @@ import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import { HardwareDetail } from '../../components';
-import styles from './FlyingCarpetOwnerChannels-styles';
+import styles from './DroneOwnerChannels-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
 // Just some hard-coded data for now:
 const channels = [
   {
-    name: "Mike's home drone",
+    name: "Sam's flying carpet",
     partnerAddress: "0xD551234Ae421e3BCBA99A0Da6d736074f22192FF",
     channelAddress: "0xF34Df51234Ae421e9CBA9A0Da6d736074f2217A7",
-    balance: 4.42,
+    balance: 7.12,
     state: 'opened',
     revealTime: 30,
     settleTime: 600
   },
   {
-    name: "Agro Ltd Drone #17",
+    name: "Mines Ltd FlyingCarpet #1",
     partnerAddress: "0xF121234Ae421e3BCBA9229A0Da6d736074f192aC",
     channelAddress: "0xE4Df51234Ae421e9CBA9A0Da6d7360754f2217A7",
-    balance: 1.00,
+    balance: 2.00,
     state: 'opened',
     revealTime: 30,
     settleTime: 60
   },
   {
-    name: "Agro Ltd Drone #18",
+    name: "Mines Ltd FlyingCarpet #2",
     partnerAddress: "0xA781234Ae421eBCBA993A0Da6d736074f22ff192",
     channelAddress: "0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71",
-    balance: 0.92,
+    balance: 0.12,
     state: 'opened',
     revealTime: 30,
     settleTime: 31
+  },
+  {
+    name: "south region flyingcarpet",
+    partnerAddress: "0xA781234Ae421eBCBA993A0Da6d736074f22ff192",
+    channelAddress: "0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71",
+    balance: 0.73,
+    state: 'opened',
+    revealTime: 25,
+    settleTime: 45
   }
 ];
 
-class FlyingCarpetOwnerChannels extends React.Component {
+class DroneOwnerChannels extends React.Component {
   handleChannelPress = channel => {
     const { setChannelData } = this.props;
 
@@ -97,7 +106,7 @@ class FlyingCarpetOwnerChannels extends React.Component {
   }
 }
 
-FlyingCarpetOwnerChannels.propTypes = {
+DroneOwnerChannels.propTypes = {
   setChannelData: PropTypes.func.isRequired
 };
 
@@ -106,4 +115,4 @@ export default connect(
   dispatch => ({
     setChannelData: bindActionCreators(flyingCarpetOwnerActions.setChannelData, dispatch)
   })
-)(FlyingCarpetOwnerChannels);
+)(DroneOwnerChannels);
