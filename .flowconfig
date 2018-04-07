@@ -31,11 +31,15 @@
 
 ; Ignore various node_modules
 <PROJECT_ROOT>/node_modules/react-native-gesture-handler/.*
-<PROJECT_ROOT>/node_modules/expo/.*
 <PROJECT_ROOT>/node_modules/react-navigation/.*
 <PROJECT_ROOT>/node_modules/xdl/.*
 <PROJECT_ROOT>/node_modules/reqwest/.*
 <PROJECT_ROOT>/node_modules/metro-bundler/.*
+
+<PROJECT_ROOT>/node_modules/metro/.*
+<PROJECT_ROOT>/node_modules/react-native-router-flux/.*
+<PROJECT_ROOT>/node_modules/react-native-tab-view/.*
+<PROJECT_ROOT>/node_modules/react-native/local-cli/.*
 
 [include]
 
@@ -69,7 +73,10 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(5[0-6]\\|[1-4][0-9]\\|
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
-unsafe.enable_getters_and_setters=true
+[untyped]
+; Prevent type errors
+<PROJECT_ROOT>/node_modules/react-native/Libraries/.*
+<PROJECT_ROOT>/node_modules/expo/src/*
 
 [version]
-^0.56.0
+^0.68.0
