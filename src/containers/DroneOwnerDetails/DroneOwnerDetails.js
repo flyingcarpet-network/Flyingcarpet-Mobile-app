@@ -5,8 +5,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
+import { Actions } from 'react-native-router-flux';
 import styles from './DroneOwnerDetails-styles';
 import { HardwareDetail } from '../../components';
 import * as droneOwnerActions from '../../actions/droneOwner';
@@ -31,6 +32,9 @@ class DroneOwnerDetails extends React.Component {
             <HardwareDetail icon="stack-overflow" title="Capacity" value="10kg" />
             <HardwareDetail icon="list-ul" title="Tasks for the month" value="14" />
             <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" />
+            <TouchableOpacity onPress={Actions.droneOwnerChannels}>
+              <HardwareDetail icon="link" title="Connected Channels" pressable />
+            </TouchableOpacity>
           </View>
         }
       </View>

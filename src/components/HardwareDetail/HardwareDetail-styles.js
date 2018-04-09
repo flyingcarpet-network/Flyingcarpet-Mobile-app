@@ -25,13 +25,19 @@ export default EStyleSheet.create({
     color: '$white',
     textAlign: 'left',
     // padding: 10
-    flex: 0.6,
+    flex: 0.5,
     lineHeight: 45
+  },
+  red: {
+    color: '$red'
+  },
+  green: {
+    color: '$green'
   },
   detailText: {
     textAlign: 'right',
     fontSize: 16,
-    flex: 0.4,
+    flex: 0.5,
     color: '$white',
     lineHeight: 45,
     flexWrap: 'wrap'

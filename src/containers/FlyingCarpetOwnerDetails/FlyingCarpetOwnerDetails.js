@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import { HardwareDetail, BackgroundMap } from '../../components';
@@ -31,7 +31,10 @@ class FlyingCarpetOwnerDetails extends React.Component {
             <HardwareDetail icon="qrcode" title="Address" value="0xd97e1280f5d4f6709a963c87e6b9a27997995304" />
             <HardwareDetail icon="stack-overflow" title="Capacity" value="10kg" />
             <HardwareDetail icon="list-ul" title="Tasks for the month" value="14" />
-            <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" showBottomBorder={false} />
+            <HardwareDetail icon="usd" title="Money received" value="1.5 ETH" />
+            <TouchableOpacity onPress={Actions.flyingCarpetOwnerChannels}>
+              <HardwareDetail icon="link" title="Connected Channels" pressable={true} showBottomBorder={false} />
+            </TouchableOpacity>
             <View style={styles.mapWrap}>
               <BackgroundMap displayCloseButton={false} disablePolygonCreation={true} onMapPress={Actions.flyingCarpetOwnerMap} showFlyingCarpetBestLocations={true} />
             </View>

@@ -12,18 +12,27 @@ import styles from './HardwareDetail-styles';
 
 export default class HardwareDetail extends React.Component {
   render() {
-    const { icon, title, value, showBottomBorder } = this.props;
+    const { icon, title, value, showBottomBorder, pressable, redText, greenText } = this.props;
 
+    // Configure any optional color changes
+    const extraColorStyles = (redText ? styles.red : (greenText ? styles.green : null));
     return (
       <View style={[styles.detailWrap, (showBottomBorder ? styles.borderBottom : null)]}>
         {(icon.length > 0) &&
-          <FontAwesome name={icon} size={28} style={styles.icon} />
+          <FontAwesome name={icon} size={28} style={[styles.icon, extraColorStyles]} />
         }
         {(icon.length === 0) &&
           <Text style={styles.icon} />
         }
-        <Text style={styles.detailTitle}>{title}</Text>
-        <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
+        <Text style={[styles.detailTitle, extraColorStyles]}>{title}</Text>
+        {(!pressable) &&
+          <Text style={styles.detailText} numberOfLines={1}>{value}</Text>
+        }
+        {pressable &&
+          <Text style={styles.detailText}>
+            <FontAwesome name="angle-right" size={28} style={styles.icon} />
+          </Text>
+        }
       </View>
     );
   }
@@ -32,11 +41,18 @@ export default class HardwareDetail extends React.Component {
 HardwareDetail.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  showBottomBorder: PropTypes.bool // Represents whether a thin light border should be displayed at the bottom of the component
+  value: PropTypes.string,
+  showBottomBorder: PropTypes.bool, // Represents whether a thin light border should be displayed at the bottom of the component
+  pressable: PropTypes.bool, // Represents whether a right arrow should be showen instead of a "value" (true when HardwareDetail is being used a button)
+  redText: PropTypes.bool, // Represents whether the text should be in a red font
+  greenText: PropTypes.bool // Represents whether the text should be in a green font
 };
 
 HardwareDetail.defaultProps = {
   icon: '',
-  showBottomBorder: true
+  showBottomBorder: true,
+  value: '',
+  pressable: false,
+  redText: false,
+  greenText: false
 };

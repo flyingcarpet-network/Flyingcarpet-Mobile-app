@@ -6,6 +6,7 @@ export default {
   // Dark color scheme
   $darkBackground: '#1C1D31', // Used for backgrounds with other Views on top (no white text/icons directly on this color)
   $darkBackgroundTranslucent: 'rgba(28,29,49,0.85)', // Translucent version of $darkBackground (used on BusinessSelect container background)
+  $darkBackgroundVeryTranslucent: 'rgba(28,29,49,0.2)', // More translucent version of $darkBackground
   $focusAreaDarker: '#2F3050', // Used for areas with text/icons directly on it (e.g. side bar or a search bar)
   $focusAreaLighter: '#3A3B61', // Used for areas with text/icons directly on it (e.g. top bar and focused areas)
   $focusAreaDarkerTranslucent: 'rgba(47,48,80,0.9)', // A translucent version of $focusAreaLighter
@@ -17,5 +18,6 @@ export default {
   $yellow: '#D8AC50', // Yellow text/icons/graphics
   $lightBorder: '#363758', // Used on all borders
   // Other properties
+  $normalWeight: '400',
   $appBoldWeight: '600' // Used for any bold text
 };
