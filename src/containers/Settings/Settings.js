@@ -1,16 +1,17 @@
 /*
  * This is the settings dialog which is displayed in a lightbox on top of the current scene.
+ * @flow
  */
 
-import React from 'react';
+import * as React from 'react';
 import { View, TouchableOpacity, StatusBar } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './Settings-styles';
 import { HardwareDetail } from '../../components';
 
-export default class Settings extends React.Component {
-  render() {
+export default class Settings extends React.Component<{}> {
+  render(): React.Node {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={Actions.pop} style={styles.closeWrap}>

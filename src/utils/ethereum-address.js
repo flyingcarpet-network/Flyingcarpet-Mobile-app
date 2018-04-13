@@ -1,4 +1,5 @@
 /*
+ * NOTE: We do not use flow since this is a local copy of an existing open-source package.
  * From here: https://github.com/cilphex/ethereum-address
  */
 

@@ -1,9 +1,9 @@
 /*
  * This is the drone owner scene where the user can view their drone details or attach a new drone.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -14,18 +14,29 @@ import parseQRCodeData from '../../utils/parseQRCodeData';
 import * as droneOwnerActions from '../../actions/droneOwner';
 import * as appInfoActions from '../../actions/appInfo';
 
-class DroneOwnerAttach extends React.Component {
-  async componentWillMount() {
+type Props = {
+  newDroneAttached: boolean,
+  setNewDroneAttached: boolean => {},
+  haveCameraPermission: boolean,
+  setHaveCameraPermission: boolean => {},
+  droneToken: string,
+  setDroneToken: string => {},
+  droneAddress: string,
+  setDroneAddress: string => {}
+};
+
+class DroneOwnerAttach extends React.Component<Props> {
+  async componentWillMount(): Promise<void> {
     const { setHaveCameraPermission, setNewDroneAttached } = this.props;
 
     // Ensure that the newDroneAttached is reset since the dialog is just opening
     setNewDroneAttached(false);
 
     // Request access to the camera if it is not already granted
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status: string } = await Permissions.askAsync(Permissions.CAMERA);
     setHaveCameraPermission(status === 'granted');
   }
-  handleBarCodeRead = scannedObj => {
+  handleBarCodeRead = (scannedObj: {data: string}): void => {
     const { setDroneToken, setDroneAddress, newDroneAttached, setNewDroneAttached } = this.props;
 
     if (newDroneAttached)
@@ -36,8 +47,8 @@ class DroneOwnerAttach extends React.Component {
       return alert('There was an error reading the encoding of the QR code!');
 
     // Get the address and token from the QR code data (if it was formatted correctly)
-    const qrCodeData = parseQRCodeData(scannedObj.data, 'drone');
-    if (qrCodeData === false) { // Check if there was an error (meaning the data wasn't formatted correctly)
+    const qrCodeData: ?{token: string, address: string} = parseQRCodeData(scannedObj.data, 'drone');
+    if (!qrCodeData) { // Check if there was an error (meaning the data wasn't formatted correctly)
       return alert('There was an error reading the encoding of the QR code!');
     }
 
@@ -50,7 +61,7 @@ class DroneOwnerAttach extends React.Component {
     alert('The drone was successfully attached!');
     Actions.pop();
   }
-  render() {
+  render(): React.Node {
     const { haveCameraPermission } = this.props;
 
     return (
@@ -76,17 +87,6 @@ class DroneOwnerAttach extends React.Component {
     );
   }
 }
-
-DroneOwnerAttach.propTypes = {
-  newDroneAttached: PropTypes.bool.isRequired,
-  setNewDroneAttached: PropTypes.func.isRequired,
-  haveCameraPermission: PropTypes.bool.isRequired,
-  setHaveCameraPermission: PropTypes.func.isRequired,
-  droneToken: PropTypes.string.isRequired,
-  setDroneToken: PropTypes.func.isRequired,
-  droneAddress: PropTypes.string.isRequired,
-  setDroneAddress: PropTypes.func.isRequired
-};
 
 export default connect(
   state => ({

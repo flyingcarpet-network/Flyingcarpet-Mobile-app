@@ -1,9 +1,9 @@
 /*
  * This is the flyingcarpet owner scene where the user can view their flyingcarpet details or attach a new flyingcarpet.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -14,18 +14,29 @@ import parseQRCodeData from '../../utils/parseQRCodeData';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 import * as appInfoActions from '../../actions/appInfo';
 
-class FlyingCarpetOwnerAttach extends React.Component {
-  async componentWillMount() {
+type Props = {
+  newFlyingCarpetAttached: boolean,
+  setNewFlyingCarpetAttached: boolean => {},
+  haveCameraPermission: boolean,
+  setHaveCameraPermission: boolean => {},
+  flyingCarpetToken: string,
+  setFlyingCarpetToken: string => {},
+  flyingCarpetAddress: string,
+  setFlyingCarpetAddress: string => {}
+};
+
+class FlyingCarpetOwnerAttach extends React.Component<Props> {
+  async componentWillMount(): Promise<void> {
     const { setHaveCameraPermission, setNewFlyingCarpetAttached } = this.props;
 
     // Ensure that the newFlyingCarpetAttached is reset since the dialog is just opening
     setNewFlyingCarpetAttached(false);
 
     // Request access to the camera if it is not already granted
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status: string } = await Permissions.askAsync(Permissions.CAMERA);
     setHaveCameraPermission(status === 'granted');
   }
-  handleBarCodeRead = scannedObj => {
+  handleBarCodeRead = (scannedObj: {data: string}): void => {
     const { setFlyingCarpetToken, setFlyingCarpetAddress, newFlyingCarpetAttached, setNewFlyingCarpetAttached } = this.props;
 
     if (newFlyingCarpetAttached)
@@ -37,7 +48,7 @@ class FlyingCarpetOwnerAttach extends React.Component {
 
     // Get the address and token from the QR code data (if it was formatted correctly)
     const qrCodeData = parseQRCodeData(scannedObj.data, 'flyingcarpet');
-    if (qrCodeData === false) { // Check if there was an error (meaning the data wasn't formatted correctly)
+    if (!qrCodeData) { // Check if there was an error (meaning the data wasn't formatted correctly)
       return alert('There was an error reading the encoding of the QR code!');
     }
 
@@ -50,7 +61,7 @@ class FlyingCarpetOwnerAttach extends React.Component {
     alert('The Flyingcarpet was successfully attached!');
     Actions.pop();
   }
-  render() {
+  render(): React.Node {
     const { haveCameraPermission } = this.props;
 
     return (
@@ -76,17 +87,6 @@ class FlyingCarpetOwnerAttach extends React.Component {
     );
   }
 }
-
-FlyingCarpetOwnerAttach.propTypes = {
-  newFlyingCarpetAttached: PropTypes.bool.isRequired,
-  setNewFlyingCarpetAttached: PropTypes.func.isRequired,
-  haveCameraPermission: PropTypes.bool.isRequired,
-  setHaveCameraPermission: PropTypes.func.isRequired,
-  flyingCarpetToken: PropTypes.string.isRequired,
-  setFlyingCarpetToken: PropTypes.func.isRequired,
-  flyingCarpetAddress: PropTypes.string.isRequired,
-  setFlyingCarpetAddress: PropTypes.func.isRequired
-};
 
 export default connect(
   state => ({

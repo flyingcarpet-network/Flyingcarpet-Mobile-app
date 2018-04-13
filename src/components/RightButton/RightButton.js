@@ -1,14 +1,19 @@
 /*
  * This component is used in `routes.js` as right button on the navigation bar
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './RightButton-styles';
 
-export default class RightButton extends React.Component {
-  render() {
+type Props = {
+  children?: React.Node,
+  onPress: () => {}
+};
+
+export default class RightButton extends React.Component<Props> {
+  render(): React.Node {
     const { children, onPress } = this.props;
 
     return (
@@ -16,8 +21,3 @@ export default class RightButton extends React.Component {
     );
   }
 }
-
-RightButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  onPress: PropTypes.func.isRequired
-};

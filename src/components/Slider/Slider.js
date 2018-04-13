@@ -3,18 +3,30 @@
  * value next to each other above a slider. Internally the react-native-elements slider
  * is used to create the slider. The component is used to input business data on the the
  * business dialogs.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Slider as RNESlider } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './Slider-styles';
 
-export default class Slider extends React.Component {
-  render() {
+type Props = {
+  icon: string,
+  title: string,
+  textValue: string, // Represents the textual value to be displayed about the slider
+  value: number, // Represents the numeric value used to calculate the slider position
+  onValueChange: number => {}, // The function that is called every time the slider values changes
+  showBottomBorder: boolean // Represents whether a thin light border should be displayed at the bottom of the component
+};
+
+export default class Slider extends React.Component<Props> {
+  static defaultProps = {
+    showBottomBorder: true
+  };
+  render(): React.Node {
     const { icon, title, textValue, value, onValueChange, showBottomBorder } = this.props;
 
     return (
@@ -40,16 +52,3 @@ export default class Slider extends React.Component {
     );
   }
 }
-
-Slider.propTypes = {
-  icon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  textValue: PropTypes.string.isRequired, // Represents the textual value to be displayed about the slider
-  value: PropTypes.number.isRequired, // Represents the numeric value used to calculate the slider position
-  onValueChange: PropTypes.func.isRequired, // The function that is called every time the slider values changes
-  showBottomBorder: PropTypes.bool // Represents whether a thin light border should be displayed at the bottom of the component
-};
-
-Slider.defaultProps = {
-  showBottomBorder: true
-};

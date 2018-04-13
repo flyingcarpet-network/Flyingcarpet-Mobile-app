@@ -37,7 +37,6 @@
 <PROJECT_ROOT>/node_modules/metro-bundler/.*
 
 <PROJECT_ROOT>/node_modules/metro/.*
-<PROJECT_ROOT>/node_modules/react-native-router-flux/.*
 <PROJECT_ROOT>/node_modules/react-native-tab-view/.*
 <PROJECT_ROOT>/node_modules/react-native/local-cli/.*
 
@@ -49,6 +48,7 @@ node_modules/react-native/flow/
 node_modules/expo/flow/
 
 [options]
+include_warnings=true
 emoji=true
 
 module.system=haste
@@ -75,8 +75,14 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [untyped]
 ; Prevent type errors
-<PROJECT_ROOT>/node_modules/react-native/Libraries/.*
-<PROJECT_ROOT>/node_modules/expo/src/*
+<PROJECT_ROOT>/node_modules/react-native/*
+<PROJECT_ROOT>/node_modules/expo/*
+<PROJECT_ROOT>/node_modules/react-native-router-flux/.*
+
+[lints]
+# all=off by default
+all=warn
+untyped-import=off
 
 [version]
 ^0.68.0

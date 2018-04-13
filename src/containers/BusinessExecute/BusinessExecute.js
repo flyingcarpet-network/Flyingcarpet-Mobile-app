@@ -1,10 +1,10 @@
 /*
  * This is the business execution scene that the user sees once the task is being
  * executed.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -15,10 +15,17 @@ import estimateTimeToDone from '../../utils/estimateTimeToDone';
 import styles from './BusinessExecute-styles';
 import * as businessActions from '../../actions/business';
 
-FontAwesomeAnimatable = Animatable.createAnimatableComponent(FontAwesome);
+const FontAwesomeAnimatable = Animatable.createAnimatableComponent(FontAwesome);
 
-class BusinessExecute extends React.Component {
-  componentDidMount() {
+type Props = {
+  ethCost: number,
+  businessType: string,
+  setBusinessTransactionProcessing: boolean => {},
+  businessTransactionProcessing: boolean
+};
+
+class BusinessExecute extends React.Component<Props> {
+  componentDidMount(): void {
     const { setBusinessTransactionProcessing } = this.props;
 
     setTimeout(
@@ -26,13 +33,13 @@ class BusinessExecute extends React.Component {
       4000
     );
   }
-  render() {
-    const { selectedLocationCoordinates, businessType, ethCost, setEthCost, businessTransactionProcessing } = this.props;
+  render(): React.Node {
+    const { businessType, ethCost, businessTransactionProcessing } = this.props;
 
-    const ethCostAdjusted = Math.round(ethCost * 40 * 100) / 100;
+    const ethCostAdjusted: number = Math.round(ethCost * 40 * 100) / 100;
     // Get a string representing how long it will take to complete the task
     // (returns an object, e.g.: { number: 3, units: 'days' })
-    const timeToFinish = estimateTimeToDone(businessType, ethCostAdjusted);
+    const timeToFinish: {number: number, units: string} = estimateTimeToDone(businessType, ethCostAdjusted);
 
     return (
       <View style={styles.container}>
@@ -64,13 +71,6 @@ class BusinessExecute extends React.Component {
     );
   }
 }
-
-BusinessExecute.propTypes = {
-  ethCost: PropTypes.number.isRequired,
-  businessType: PropTypes.string.isRequired,
-  setBusinessTransactionProcessing: PropTypes.func.isRequired,
-  businessTransactionProcessing: PropTypes.bool.isRequired
-};
 
 export default connect(
   state => ({

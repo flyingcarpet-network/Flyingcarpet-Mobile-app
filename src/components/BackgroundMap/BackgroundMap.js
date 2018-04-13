@@ -1,31 +1,57 @@
 /*
  * This component is used in `routes.js` as right button on the navigation bar
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { View, TouchableHighlight, Text } from 'react-native';
+import { View, TouchableHighlight, Text, NativeTouchEvent, ResponderSyntheticEvent } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { MapView } from 'expo';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FontAwesome } from '@expo/vector-icons';
-import styles from './BackgroundMap-styles';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { type MapCoordinateCircle, type MapCoordinate } from '../../types';
+import config from '../../config';
+import getValues from '../../utils/getValues';
 import * as businessActions from '../../actions/business';
+import styles from './BackgroundMap-styles';
 
-class BackgroundMap extends React.Component {
+type Props = {
+  addLocationCoordinate: (string, number) => {},
+  removeLocationCoordinate: string => {},
+  toggleMapOpen: () => {},
+  mapOpen: boolean,
+  flyingCarpetBestLocations: Array<MapCoordinateCircle>,
+  selectedLocationCoordinates: {[string]: MapCoordinate},
+  displayCloseButton: boolean, // This is an optional prop that can be passed in
+  disablePolygonCreation: boolean, // This is an optional prop that disables the ability to create a polygon/markers by pressing on the map
+  onMapPress: () => {}, // This is a custom callback function that is run whenever the map is pressed (not related to polygon creation functionality).
+                        // NOTE: When this callback is defined, the user cannot interact with the map at all (since any press on the map triggers the callback).
+  showFlyingCarpetBestLocations: boolean, // This is an optional prop that makes it so that the map also display the ideal (most profitable) locations to place flying carpets
+  drawLine: boolean // If passed, instead of a polygon a line will be drawn connecting the markers in the order they were added (a polygon is drawn by default if this argument is not passed)
+};
+
+class BackgroundMap extends React.Component<Props> {
+  static defaultProps = {
+    displayCloseButton: true,
+    disablePolygonCreation: false,
+    onMapPress: null,
+    showFlyingCarpetBestLocations: false,
+    drawLine: false
+  };
+  map;
   componentDidMount() {
     setTimeout(() => { // 1/1000 second timeout prevents timing issue on Android
       const { selectedLocationCoordinates } = this.props;
 
       // If there are ANY coordinates in redux, we fit the map to those coordinates...
-      if (Object.values(selectedLocationCoordinates).length > 0) {
-        this.map.fitToCoordinates(Object.values(selectedLocationCoordinates));
+      if (this.map && this.map.fitToCoordinates && Object.keys(selectedLocationCoordinates).length > 0) {
+        this.map.fitToCoordinates(getValues(selectedLocationCoordinates));
       }
     }, 1);
   }
-  handleMapPress = e => {
+  handleMapPress = (e: ResponderSyntheticEvent<NativeTouchEvent>): void => {
     const { addLocationCoordinate, disablePolygonCreation, onMapPress } = this.props;
 
     // If "coordinate" is not defined, then it means the marker was pressed ("coordinate" is not passed when the marker is directly pressed), thus we don't add this marker.
@@ -48,7 +74,7 @@ class BackgroundMap extends React.Component {
     if (onMapPress !== null)
       onMapPress();
   }
-  handleMarkerPress = e => {
+  handleMarkerPress = (e: ResponderSyntheticEvent<NativeTouchEvent>): void => {
     const { removeLocationCoordinate } = this.props;
 
     // NOTE: We don't need to check if polygon creation is disabled, since markers are only show if it is disabled
@@ -56,7 +82,7 @@ class BackgroundMap extends React.Component {
     // Remove the coordinate (lat/long pair) from redux for the marker at the location that the user pressed
     removeLocationCoordinate(e.nativeEvent.id);
   }
-  render() {
+  render(): React.Node {
     const { selectedLocationCoordinates, toggleMapOpen, mapOpen, displayCloseButton, disablePolygonCreation, showFlyingCarpetBestLocations, flyingCarpetBestLocations, onMapPress, drawLine } = this.props;
 
     // Depending on the optional "drawLine" argument, we ether draw a line or a polygon (default) 
@@ -73,7 +99,7 @@ class BackgroundMap extends React.Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-          ref={ref => { this.map = ref; }}
+          ref={(ref: ?{fitToCoordinates: Array<MapCoordinate> => {}}) => { this.map = ref; }}
           onPress={this.handleMapPress}
           // Only allow interaction with the map if there is no custom map press callback defined
           zoomEnabled={onMapPress === null}
@@ -93,14 +119,14 @@ class BackgroundMap extends React.Component {
           {/* If polygon creation isn't disabled, display the polygon on the map */}
           {(!disablePolygonCreation) && (Object.keys(selectedLocationCoordinates).length >= 2) && // Only show polygon region if some coordinates have been added
             <PolygonOrLine
-              coordinates={Object.values(selectedLocationCoordinates)}
+              coordinates={getValues(selectedLocationCoordinates)}
               strokeColor={EStyleSheet.value('$focusAreaLighter')}
               fillColor={EStyleSheet.value('$focusAreaDarkerTranslucent')}
               strokeWidth={2}
             />
           }
           {/* If polygon creation isn't disabled, display the markers on the map that outline the polygon */}
-          {(!disablePolygonCreation) && Object.values(selectedLocationCoordinates).map((coordinate, i) => {
+          {(!disablePolygonCreation) && getValues(selectedLocationCoordinates).map((coordinate: MapCoordinate, i: number) => {
             // This is the unique identifier for the marker (based on it's exact lat/long location)
             const uniqueID = String(coordinate.latitude) + String(coordinate.longitude);
             return (
@@ -115,7 +141,7 @@ class BackgroundMap extends React.Component {
             </MapView.Marker>);
           })}
           {/* If the functionality to display the best (most profitable) flying carpet locations is enabled, then we display all of the best location circles and markers */}
-          {showFlyingCarpetBestLocations && flyingCarpetBestLocations.map((coordinate, i) => (
+          {showFlyingCarpetBestLocations && flyingCarpetBestLocations.map((coordinate: MapCoordinateCircle, i: number) => (
             // Circles
             <MapView.Circle
               key={'bestFCLocationCircle_' + i}
@@ -126,7 +152,7 @@ class BackgroundMap extends React.Component {
               fillColor={EStyleSheet.value('$redTranslucent')}
             />
           ))}
-          {showFlyingCarpetBestLocations && flyingCarpetBestLocations.map((region, i) => (
+          {showFlyingCarpetBestLocations && flyingCarpetBestLocations.map((region: MapCoordinateCircle, i: number) => (
             // Markers
             <MapView.Marker
               key={'bestFCLocationMarker_' + i}
@@ -155,102 +181,53 @@ class BackgroundMap extends React.Component {
             listViewDisplayed={false} // true/false/undefined
             fetchDetails={true}
             renderDescription={row => row.description} // custom description render
-            onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-              this.map.fitToCoordinates([
-                { // North-East
-                  latitude: details.geometry.viewport.northeast.lat,
-                  longitude: details.geometry.viewport.northeast.lng
-                },
-                { // South-West
-                  latitude: details.geometry.viewport.southwest.lat,
-                  longitude: details.geometry.viewport.southwest.lng
-                }
-              ]);
+            onPress={(
+              _,
+              details: ?{geometry: {viewport: {
+                          northeast: {lat: number, lng: number},
+                          southwest: {lat: number, lng: number}
+                        }}} = null
+            ) => { // 'details' is provided when fetchDetails = true
+              // Must ensure that the map instance instance variable and details argument exist (to prevent flow errors)
+              if (this.map && this.map.fitToCoordinates && details) {
+                this.map.fitToCoordinates([
+                  { // North-East
+                    latitude: details.geometry.viewport.northeast.lat,
+                    longitude: details.geometry.viewport.northeast.lng
+                  },
+                  { // South-West
+                    latitude: details.geometry.viewport.southwest.lat,
+                    longitude: details.geometry.viewport.southwest.lng
+                  }
+                ]);
+              }
             }}
-            // getDefaultValue={() => ''}
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
-              key: 'AIzaSyB3n7NNfrgiJ1KMOi2vgQ5GOIwBmkfyrHI',
+              key: config.googlePlacesAPIWebServiceKey,
               language: 'en', // language of the results
               // types: '(cities)' // default: 'geocode'
             }}
-            
             styles={{
-              container: {
-                backgroundColor: 'rgba(0,0,0,0)',
-                flex: 0.22
-              },
-              textInputContainer: {
-                width: '100%',
-                backgroundColor: EStyleSheet.value('$focusAreaDarker'),
-                borderTopWidth: 0,
-                borderBottomWidth: 0
-              },
-              listView: {
-                backgroundColor: EStyleSheet.value('$focusAreaDarker'),
-                borderTopWidth: 0,
-                borderBottomWidth: 0
-              },
-              description: {
-                fontWeight: 'bold',
-                borderTopWidth: 0,
-                borderBottomWidth: 0,
-                color: EStyleSheet.value('$white')
-              },
-              poweredContainer: {
-                display: 'none'
-              },
-              separator: {
-                display: 'none'
-              }
+              container: styles.autocompleteContainer,
+              textInputContainer: styles.autocompleteTextInputContainer,
+              listView: styles.autocompleteListView,
+              description: styles.autocompleteDescription,
+              poweredContainer: styles.autocompletePoweredContainer,
+              separator: styles.autocompleteSeparator
             }}
-            
-            // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-            // currentLocationLabel="Current location"
             nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-            GoogleReverseGeocodingQuery={{
-              // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-            }}
             GooglePlacesSearchQuery={{
               // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-              rankby: 'distance' // ,
-              // types: 'food'
+              rankby: 'distance'
             }}
-
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-            // predefinedPlaces={[homePlace, workPlace]}
-
-            debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-            // renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
-            // renderRightButton={() => <Text>Custom text after the input</Text>}
           />
         }
       </View>
     );
   }
 }
-
-BackgroundMap.propTypes = {
-  addLocationCoordinate: PropTypes.func.isRequired,
-  removeLocationCoordinate: PropTypes.func.isRequired,
-  toggleMapOpen: PropTypes.func.isRequired,
-  mapOpen: PropTypes.bool.isRequired,
-  flyingCarpetBestLocations: PropTypes.array.isRequired,
-  displayCloseButton: PropTypes.bool, // This is an optional prop that can be passed in
-  disablePolygonCreation: PropTypes.bool, // This is an optional prop that disables the ability to create a polygon/markers by pressing on the map
-  onMapPress: PropTypes.func, // This is a custom callback function that is run whenever the map is pressed (not related to polygon creation functionality).
-                              // NOTE: When this callback is defined, the user cannot interact with the map at all (since any press on the map triggers the callback).
-  showFlyingCarpetBestLocations: PropTypes.bool, // This is an optional prop that makes it so that the map also display the ideal (most profitable) locations to place flying carpets
-  drawLine: PropTypes.bool // If passed, instead of a polygon a line will be drawn connecting the markers in the order they were added (a polygon is drawn by default if this argument is not passed)
-};
-
-BackgroundMap.defaultProps = {
-  displayCloseButton: true,
-  disablePolygonCreation: false,
-  onMapPress: null,
-  showFlyingCarpetBestLocations: false,
-  drawLine: false
-};
 
 export default connect(
   state => ({

@@ -1,9 +1,9 @@
 /*
  * This is the drone owner scene where the user can view their drone details or attach a new drone.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -12,8 +12,13 @@ import styles from './DroneOwnerDetails-styles';
 import { HardwareDetail } from '../../components';
 import * as droneOwnerActions from '../../actions/droneOwner';
 
-class DroneOwnerDetails extends React.Component {
-  render() {
+type Props = {
+  droneToken: string,
+  droneAddress: string
+};
+
+class DroneOwnerDetails extends React.Component<Props> {
+  render(): React.Node {
     const { droneToken, droneAddress } = this.props;
 
     return (
@@ -41,11 +46,6 @@ class DroneOwnerDetails extends React.Component {
     );
   }
 }
-
-DroneOwnerDetails.propTypes = {
-  droneToken: PropTypes.string.isRequired,
-  droneAddress: PropTypes.string.isRequired
-};
 
 export default connect(
   state => ({

@@ -1,5 +1,6 @@
 /*
  * Here we combine the reducers.
+ * @flow
  */
 
 import { combineReducers } from 'redux';

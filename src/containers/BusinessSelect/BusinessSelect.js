@@ -1,10 +1,10 @@
 /*
  * This is the business selection scene where the user selects the
  * business service they would like to use from a list.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -14,8 +14,12 @@ import styles from './BusinessSelect-styles';
 import * as businessActions from '../../actions/business';
 import { BackgroundMap } from '../../components';
 
-class BusinessSelect extends React.Component {
-  selectBusiness = businessType => {
+type Props = {
+  setBusinessType: string => {}
+};
+
+class BusinessSelect extends React.Component<Props> {
+  selectBusiness = (businessType: string): void => {
     const { setBusinessType } = this.props;
 
     // Save the name of the business type to redux
@@ -24,8 +28,8 @@ class BusinessSelect extends React.Component {
     // Move user to businessDetails scene
     Actions.businessDetails();
   }
-  render() {
-    const services = [
+  render(): React.Node {
+    const services: Array<{name: string, icon: string}> = [
       {
         name: 'Infrastructure',
         icon: 'building'
@@ -67,7 +71,7 @@ class BusinessSelect extends React.Component {
           <View style={styles.businessTypeListWrap}>
             {/* This spacers makes it so that the first row only contains two service icons */}
             <View style={styles.spacer}></View>
-            {services.map((service, i) => (
+            {services.map((service: {icon: string, name: string}, i: number): React.Node => (
               /* Note, the wrap is a different width if it's one of the first two services listed (hence the additional style) */
               <TouchableOpacity key={i} style={styles.businessTypeWrap} onPress={() => this.selectBusiness(service.name)}>
                 <View style={styles.businessTypeCircle}>
@@ -82,10 +86,6 @@ class BusinessSelect extends React.Component {
     );
   }
 }
-
-BusinessSelect.propTypes = {
-  setBusinessType: PropTypes.func.isRequired
-};
 
 export default connect(
   null,

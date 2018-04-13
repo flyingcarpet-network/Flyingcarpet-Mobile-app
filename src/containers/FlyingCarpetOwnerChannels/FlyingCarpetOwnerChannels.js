@@ -1,20 +1,21 @@
 /*
  * This is the flyingcarpet owner channels scene where the user can view the open state channels that their flyingcarpet is conencted to.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import { HardwareDetail } from '../../components';
+import { type Channel } from '../../types';
 import styles from './FlyingCarpetOwnerChannels-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
 // Just some hard-coded data for now:
-const channels = [
+const channels: Array<Channel> = [
   {
     name: "Mike's home drone",
     partnerAddress: "0xD551234Ae421e3BCBA99A0Da6d736074f22192FF",
@@ -44,8 +45,12 @@ const channels = [
   }
 ];
 
-class FlyingCarpetOwnerChannels extends React.Component {
-  handleChannelPress = channel => {
+type Props = {
+  setChannelData: Channel => {}
+};
+
+class FlyingCarpetOwnerChannels extends React.Component<Props> {
+  handleChannelPress = (channel: Channel) : void => {
     const { setChannelData } = this.props;
 
     // Change highlighted channel data (in Redux)
@@ -54,7 +59,7 @@ class FlyingCarpetOwnerChannels extends React.Component {
     // Change route
     Actions.channelDetails();
   }
-  render() {
+  render(): React.Node {
     return (
       <View style={styles.container}>
         {/*(flyingCarpetToken.length > 0) &&
@@ -72,7 +77,7 @@ class FlyingCarpetOwnerChannels extends React.Component {
             rightTitleStyle={[styles.rightTitle, styles.balanceHeaderText]}
             hideChevron
           />
-          {channels.map((channel, i) => (
+          {channels.map((channel: Channel, i: number) : React.Node => (
             <TouchableOpacity key={i} onPress={() => this.handleChannelPress(channel)}>
               <ListItem
                 title={channel.name + ' - ' + channel.settleTime + 'm left'}
@@ -96,10 +101,6 @@ class FlyingCarpetOwnerChannels extends React.Component {
     );
   }
 }
-
-FlyingCarpetOwnerChannels.propTypes = {
-  setChannelData: PropTypes.func.isRequired
-};
 
 export default connect(
   null,

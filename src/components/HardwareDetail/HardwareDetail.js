@@ -2,16 +2,34 @@
  * This is a presentational component that display an icon, a title, and a value all in a row.
  * The component is used to display hardware information on both the Drone and FlyingCarpet
  * owner pages.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './HardwareDetail-styles';
 
-export default class HardwareDetail extends React.Component {
-  render() {
+type Props = {
+  icon: string,
+  title: string,
+  value: string,
+  showBottomBorder: boolean, // Represents whether a thin light border should be displayed at the bottom of the component
+  pressable: boolean, // Represents whether a right arrow should be showen instead of a "value" (true when HardwareDetail is being used a button)
+  redText: boolean, // Represents whether the text should be in a red font
+  greenText: boolean // Represents whether the text should be in a green font
+};
+
+export default class HardwareDetail extends React.Component<Props> {
+  static defaultProps = {
+    icon: '',
+    showBottomBorder: true,
+    value: '',
+    pressable: false,
+    redText: false,
+    greenText: false
+  };
+  render(): React.Node {
     const { icon, title, value, showBottomBorder, pressable, redText, greenText } = this.props;
 
     // Configure any optional color changes
@@ -37,22 +55,3 @@ export default class HardwareDetail extends React.Component {
     );
   }
 }
-
-HardwareDetail.propTypes = {
-  icon: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  showBottomBorder: PropTypes.bool, // Represents whether a thin light border should be displayed at the bottom of the component
-  pressable: PropTypes.bool, // Represents whether a right arrow should be showen instead of a "value" (true when HardwareDetail is being used a button)
-  redText: PropTypes.bool, // Represents whether the text should be in a red font
-  greenText: PropTypes.bool // Represents whether the text should be in a green font
-};
-
-HardwareDetail.defaultProps = {
-  icon: '',
-  showBottomBorder: true,
-  value: '',
-  pressable: false,
-  redText: false,
-  greenText: false
-};

@@ -1,10 +1,10 @@
 /*
  * Here we setup all of the router and all of the scenes.
  * For reference of the router setup, see: https://github.com/lynndylanhurley/react-native-router-flux#reduxflux
+ * @flow
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Actions, Router, Reducer, Scene, Lightbox } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -22,12 +22,21 @@ const styles = EStyleSheet.create({
   }
 });
 
-let sceneArguments;
+// Define sceneArguments type
+let sceneArguments: {
+  navigationBarStyle: {},
+  titleStyle: string,
+  backButtonTintColor: string,
+  backButtonTextStyle: string,
+  backTitle: string
+};
 
-class Routes extends React.Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  };
+type Props = {
+  dispatch: {} => {},
+  businessType: string
+};
+
+class Routes extends React.Component<Props> {
   componentWillMount() {
     sceneArguments = {
       navigationBarStyle: styles.navBar,
@@ -37,16 +46,16 @@ class Routes extends React.Component {
       backTitle: 'Back'
     };
   }
-  reducerCreate(params) {
+  reducerCreate(params: {}): {} {
     // This function connects the router to the redux dispatching system
-    const defaultReducer = Reducer(params);
-    return (state, action) => {
+    const defaultReducer: (({}, {}) => {}) = Reducer(params);
+    return (state: {}, action: {}) => {
       this.props.dispatch(action)
       return defaultReducer(state, action);
     };
   }
   render () {
-    const { sceneTitle, businessType } = this.props;
+    const { businessType } = this.props;
 
     return (
       <Router
@@ -75,10 +84,6 @@ class Routes extends React.Component {
     );
   }
 }
-
-Routes.propTypes = {
-  businessType: PropTypes.string.isRequired
-};
 
 export default connect(
   state => ({

@@ -1,23 +1,37 @@
 /*
  * This reducer is for general app information
+ * @flow
  */
 
 import * as types from '../actions/business-types';
+import { type MapCoordinate } from '../types/MapCoordinate';
 
-const initialState = {
-  businessType: '', // Represents the name of the type of the selected business (e.g. infrastructure, agriculture, etc.)
-  selectedLocationCoordinates: {}, // An object of keys (unqiue strings) and coordinate values (lat/long pair objects) representing the user's selected region on the map
-  altitute: 0, // Represents the altitute for the selected business service (only used by some business services)
-  flightDirection: 0, // Represents the flight direction for the selected business service (only used by some business services)
-  selectedOptions: {}, // Contains all of the *selected* checkbox options (with the value "true") for the selected business
-                       // service (the options vary depending on the selected business). NOTE: this object may contain other
-                       // values without the value "true."
-  ethCost: 0, // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
-  businessTransactionProcessing: false, // Represents whether the transaction has started being process (a vehicle has been found to complete the task)
-  mapOpen: false // Represents whether the map is open on ether the BusinessDetails or BusinessEstimate dialogs
+type StateTypes = {
+  businessType: string, // Represents the name of the type of the selected business (e.g. infrastructure, agriculture, etc.)
+  selectedLocationCoordinates: {[string]: MapCoordinate}, // An object of keys (unqiue strings) and coordinate values (lat/long pair objects)
+                                                                                       // representing the user's selected region on the map
+  altitute: number, // Represents the altitute for the selected business service (only used by some business services)
+  flightDirection: number, // Represents the flight direction for the selected business service (only used by some business services)
+  selectedOptions: {[string]: mixed}, // Contains all of the *selected* checkbox options (with the value "true") for the selected business
+                                           // service (the options vary depending on the selected business). NOTE: this object may contain other
+                                           // values without the value "true."
+  ethCost: number, // Represents the amount the user willing to spend to run the business service (used to also calculate the time required to complete the task)
+  businessTransactionProcessing: boolean, // Represents whether the transaction has started being process (a vehicle has been found to complete the task)
+  mapOpen: boolean // Represents whether the map is open on ether the BusinessDetails or BusinessEstimate dialogs
 };
 
-export default function reducer(state = initialState, action = {}) {
+const initialState: StateTypes = {
+  businessType: '',
+  selectedLocationCoordinates: {},
+  altitute: 0,
+  flightDirection: 0,
+  selectedOptions: {},
+  ethCost: 0,
+  businessTransactionProcessing: false,
+  mapOpen: false
+};
+
+export default function reducer(state: StateTypes = initialState, action: {[string]: mixed} = {}): {} {
   switch (action.type) {
     case types.RESET:
       return {
@@ -33,12 +47,12 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         selectedLocationCoordinates: {
           ...(state.selectedLocationCoordinates),
-          [action.uniqueIdentifier]: action.locationCoordinate // The key is a unique string represeting the location of this particular marker
+          [String(action.uniqueIdentifier)]: action.locationCoordinate // The key is a unique string represeting the location of this particular marker
         }
       };
     case types.REMOVE_LOCATION_COORDINATE:
       // Create a new object (otherKeys) that doesn't contain the deleted key/value pair
-      const {[action.uniqueIdentifier]: _, ...otherKeys} = state.selectedLocationCoordinates;
+      const {[String(action.uniqueIdentifier)]: _, ...otherKeys} = state.selectedLocationCoordinates;
       return {
         ...state,
         selectedLocationCoordinates: otherKeys
@@ -58,8 +72,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         selectedOptions: {
           ...(state.selectedOptions),
-          [action.option]: ((action.option in state.selectedOptions) ?
-            !(state.selectedOptions[action.option]) // Toggle the boolean value of the option
+          [String(action.option)]: ((String(action.option) in state.selectedOptions) ?
+            !(state.selectedOptions[String(action.option)]) // Toggle the boolean value of the option
             :
             true // Set the value of the option to true since no value is currently set in the selectedOptions object
           )

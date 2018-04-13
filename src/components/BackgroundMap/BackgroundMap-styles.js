@@ -1,3 +1,7 @@
+/*
+ * @flow
+ */
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
@@ -45,5 +49,33 @@ export default EStyleSheet.create({
     textAlign: 'center',
     color: '$white',
     fontSize: 24
+  },
+  /** react-native-google-places-autocomplete Component Styles  **/
+  autocompleteContainer: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    flex: 0.22
+  },
+  autocompleteTextInputContainer: {
+    width: '100%',
+    backgroundColor: '$focusAreaDarker',
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  autocompleteListView: {
+    backgroundColor: '$focusAreaDarker',
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  autocompleteDescription: {
+    fontWeight: 'bold',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    color: '$white'
+  },
+  autocompletePoweredContainer: {
+    display: 'none'
+  },
+  autocompleteSeparator: {
+    display: 'none'
   }
 });

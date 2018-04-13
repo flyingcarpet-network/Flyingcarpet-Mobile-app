@@ -1,10 +1,10 @@
 /*
  * This is the business details scene where the user chooses the
  * business service options they would like to use to run the task.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -17,18 +17,30 @@ import getServiceCheckboxOptions from '../../utils/getServiceCheckboxOptions';
 import { BackgroundMap, Slider } from '../../components';
 import * as businessActions from '../../actions/business';
 
-class BusinessDetails extends React.Component {
-  componentWillUnmount() {
+type Props = {
+  altitute: number,
+  setAltitute: number => {},
+  businessType: string,
+  flightDirection: number,
+  setFlightDirection: number => {},
+  reset: () => {},
+  toggleOption: string => {},
+  selectedOptions: {},
+  mapOpen: boolean
+};
+
+class BusinessDetails extends React.Component<Props> {
+  componentWillUnmount(): void {
     const { reset } = this.props;
 
     // Reset the redux router each time the component is unmounted
     reset();
   }
-  render() {
+  render(): React.Node {
     const { altitute, setAltitute, businessType, flightDirection, setFlightDirection, toggleOption, selectedOptions, mapOpen } = this.props;
 
     // Get an array of the different checkbox options for the business type
-    const options = getServiceCheckboxOptions(businessType);
+    const options: Array<string> = getServiceCheckboxOptions(businessType);
 
     return (
       <View style={styles.container}>
@@ -41,7 +53,7 @@ class BusinessDetails extends React.Component {
             <Slider icon='compass' title='Flight Direction' textValue={String(Math.round((flightDirection * 360) * 100) / 100) + ' Degrees'}  value={flightDirection} onValueChange={setFlightDirection} />
           }
           <View style={styles.optionCheckboxesWrap}>
-            {options.map((option, i) => (
+            {options.map((option: string, i: number) => (
               <CheckBox
                 key={i}
                 title={option}
@@ -66,18 +78,6 @@ class BusinessDetails extends React.Component {
     );
   }
 }
-
-BusinessDetails.propTypes = {
-  altitute: PropTypes.number.isRequired,
-  setAltitute: PropTypes.func.isRequired,
-  businessType: PropTypes.string.isRequired,
-  flightDirection: PropTypes.number.isRequired,
-  setFlightDirection: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
-  toggleOption: PropTypes.func.isRequired,
-  selectedOptions: PropTypes.object.isRequired,
-  mapOpen: PropTypes.bool.isRequired
-};
 
 export default connect(
   state => ({

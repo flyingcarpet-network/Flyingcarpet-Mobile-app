@@ -1,9 +1,9 @@
 /*
  * This is the flyingcarpet owner scene where the user can view their flyingcarpet details or attach a new flyingcarpet.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -12,8 +12,13 @@ import { HardwareDetail, BackgroundMap } from '../../components';
 import styles from './FlyingCarpetOwnerDetails-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
-class FlyingCarpetOwnerDetails extends React.Component {
-  render() {
+type Props = {
+  flyingCarpetToken: string,
+  flyingCarpetAddress: string
+};
+
+class FlyingCarpetOwnerDetails extends React.Component<Props> {
+  render(): React.Node {
     const { flyingCarpetToken, flyingCarpetAddress } = this.props;
 
     return (
@@ -44,11 +49,6 @@ class FlyingCarpetOwnerDetails extends React.Component {
     );
   }
 }
-
-FlyingCarpetOwnerDetails.propTypes = {
-  flyingCarpetToken: PropTypes.string.isRequired,
-  flyingCarpetAddress: PropTypes.string.isRequired
-};
 
 export default connect(
   state => ({

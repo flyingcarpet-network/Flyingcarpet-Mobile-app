@@ -1,5 +1,6 @@
 /*
  * This file defines all of the app's global style variables
+ * @flow
  */
 
 export default {

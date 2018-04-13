@@ -1,16 +1,21 @@
 /*
  * This is the state channel details scene where the user view their the details of a particular state channel (associated with a FC or drone).
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { HardwareDetail } from '../../components';
+import { type Channel } from '../../types/Channel';
 import styles from './ChannelDetails-styles';
 
-class ChannelDetails extends React.Component {
-  render() {
+type Props = {
+  channelData: Channel
+};
+
+class ChannelDetails extends React.Component<Props> {
+  render(): React.Node {
     const { channelData } = this.props;
 
     return (
@@ -29,10 +34,6 @@ class ChannelDetails extends React.Component {
     );
   }
 }
-
-ChannelDetails.propTypes = {
-  channelData: PropTypes.object.isRequired
-};
 
 export default connect(
   state => ({

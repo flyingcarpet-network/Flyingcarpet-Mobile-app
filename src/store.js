@@ -1,9 +1,13 @@
+/*
+ * @flow
+ */
+
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 
 // Redux middleware
-const middleware = [/* ...middleware (i.e. thunk) */];
+const middleware: Array<() => {}> = [/* ...middleware (i.e. thunk) */];
 
 // Compose with devTools if in development, otherwise use standard redux compose
 const composeWithDevToolsIfDev = (composeWithDevTools ? composeWithDevTools : compose);

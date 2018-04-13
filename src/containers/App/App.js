@@ -2,20 +2,26 @@
  * This is the app container that wraps around the router. All scenes are rendered inside of this
  * container--as its children. This container handles the loading of asynchronous assets (such as
  * fonts and images) and also handles displaying the top status bar.
+ * @flow
  */
 
-import React from 'react';
+import * as React from 'react';
 import { Platform, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import Expo, { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './App-styles';
 import * as appInfoActions from '../../actions/appInfo';
 
-class App extends React.Component {
-  render() {
+type Props = {
+  isLoadingComplete: boolean,
+  setIsLoadingComplete: boolean => {},
+  children?: React.Node
+};
+
+class App extends React.Component<Props> {
+  render(): React.Node {
     const { children, isLoadingComplete } = this.props;
 
     if (!isLoadingComplete) { // If the assets are still loading, show a loading screen
@@ -37,7 +43,7 @@ class App extends React.Component {
     }
   }
 
-  _loadResourcesAsync = async () => {
+  _loadResourcesAsync = async (): Promise<Array<void>> => {
     // Here we list all of the assets to be pre-loaded
     return Promise.all([
       // Asset.loadAsync([
@@ -54,23 +60,18 @@ class App extends React.Component {
     ]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error: string): void => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);
   };
 
-  _handleFinishLoading = () => {
+  _handleFinishLoading = (): void => {
     const { setIsLoadingComplete } = this.props;
     // Now we mark the loading as complete in redux
     setIsLoadingComplete(true);
   };
 }
-
-App.propTypes = {
-  isLoadingComplete: PropTypes.bool.isRequired,
-  setIsLoadingComplete: PropTypes.func.isRequired
-};
 
 export default connect(
   state => ({

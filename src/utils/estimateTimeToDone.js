@@ -1,8 +1,9 @@
 /*
  * This function is used to estimate how long it will take to complete a task given the ETH budget.
+ * @flow
  */
 
-export default function estimateTimeToDone(businessType, ethCostAdjusted) {
+export default function estimateTimeToDone(businessType: string, ethCostAdjusted: number): {number: number, units: string} {
   // This function returns an object containing the number of units of time and the type of unit of time, e.g:
   //   {
   //      number: 3,
@@ -20,7 +21,7 @@ export default function estimateTimeToDone(businessType, ethCostAdjusted) {
   }
 }
 
-function createString(time) {
+function createString(time: number): { number: number, units: string } {
   // This function creates the number + units string representing the estimate of long the task will take
   if (time === Infinity)
     return { number: Infinity, units: 'days' };
@@ -36,7 +37,7 @@ function createString(time) {
   }
 }
 
-function addSCharacterIfNotOne(number) {
+function addSCharacterIfNotOne(number: number): string {
   // This function is used to add an "s" to the end of a word if the number argument is NOT equal to one (e.g. "days" vs "day")
   return (number !== 1) ? 's' : '';
 }
