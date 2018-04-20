@@ -1,9 +1,10 @@
 /*
- * This is the flyingcarpet owner scene where the user can view their flyingcarpet details or attach a new flyingcarpet.
+ * This is the flyingcarpet owner scene where the user can view their flyingcarpet details or
+ * attach a new flyingcarpet.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -14,50 +15,82 @@ import parseQRCodeData from '../../utils/parseQRCodeData';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 import * as appInfoActions from '../../actions/appInfo';
 
-class FlyingCarpetOwnerAttach extends React.Component {
-  async componentWillMount() {
+type Props = {
+  newFlyingCarpetAttached: boolean,
+  setNewFlyingCarpetAttached: boolean => {},
+  haveCameraPermission: boolean,
+  setHaveCameraPermission: boolean => {},
+  setFlyingCarpetToken: string => {},
+  setFlyingCarpetAddress: string => {}
+};
+
+class FlyingCarpetOwnerAttach extends React.Component<Props> {
+  async componentWillMount(): Promise<void> {
     const { setHaveCameraPermission, setNewFlyingCarpetAttached } = this.props;
 
     // Ensure that the newFlyingCarpetAttached is reset since the dialog is just opening
     setNewFlyingCarpetAttached(false);
 
     // Request access to the camera if it is not already granted
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status }: { status: string } = await Permissions.askAsync(Permissions.CAMERA);
     setHaveCameraPermission(status === 'granted');
   }
-  handleBarCodeRead = scannedObj => {
-    const { setFlyingCarpetToken, setFlyingCarpetAddress, newFlyingCarpetAttached, setNewFlyingCarpetAttached } = this.props;
+  handleBarCodeRead = (scannedObj: {data: string}): void => {
+    const {
+      setFlyingCarpetToken,
+      setFlyingCarpetAddress,
+      newFlyingCarpetAttached,
+      setNewFlyingCarpetAttached,
+    } = this.props;
 
-    if (newFlyingCarpetAttached)
-      return; // If flyingCarpet has been successfully set since the scene has been open, we don't allow another to be attached.
-              // NOTE: This is to prevent the success message from showing twice when a flyingCarpet is successfully attached.
+    if (newFlyingCarpetAttached) { return; } /* If flyingCarpet has been successfully set since the
+                                                scene has been open, we don't allow another to be
+                                                attached. */
+    // NOTE: This is to prevent the success message from showing twice when a flyingCarpet is
+    // successfully attached.
 
-    if (typeof scannedObj.data !== 'string')
-      return alert('There was an error reading the encoding of the QR code!');
-
-    // Get the address and token from the QR code data (if it was formatted correctly)
-    const qrCodeData = parseQRCodeData(scannedObj.data, 'flyingcarpet');
-    if (qrCodeData === false) { // Check if there was an error (meaning the data wasn't formatted correctly)
+    if (typeof scannedObj.data !== 'string') {
+      // NOTE: We disable eslint alert prevention for ease of implementation for now...
+      // eslint-disable-next-line
       return alert('There was an error reading the encoding of the QR code!');
     }
 
-    // Save the token and address values (from the QR code) to redux reducer and mark the flyingCarpet as attached
+    // Get the address and token from the QR code data (if it was formatted correctly)
+    const qrCodeData: {token?: string, address?: string} = parseQRCodeData(scannedObj.data, 'flyingcarpet');
+    if (qrCodeData.token == null || qrCodeData.address == null) { /* Check if there was an error
+                                                                     (meaning the
+                                                                     data wasn't formatted
+                                                                     correctly) */
+      // NOTE: We disable eslint alert prevention for ease of implementation for now...
+      // eslint-disable-next-line
+      return alert('There was an error reading the encoding of the QR code!');
+    }
+
+    // Save the token and address values (from the QR code) to redux reducer and mark the
+    // flyingCarpet as attached
     setFlyingCarpetToken(qrCodeData.token);
-    setFlyingCarpetAddress(qrCodeData.address);
+    if (qrCodeData.address != null) { /* This check is needed to prevent flow from complaining
+                                         about null case */
+      setFlyingCarpetAddress(qrCodeData.address);
+    }
     setNewFlyingCarpetAttached(true);
 
-    // Now we tell the user that it was successfully attached and navigate them back to the details page
-    alert('The Flyingcarpet was successfully attached!');
+    // Now we tell the user that it was successfully attached and navigate them back to the details
+    // page
+    // NOTE: We disable eslint alert prevention for ease of implementation for now...
+    alert('The Flyingcarpet was successfully attached!'); // eslint-disable-line
     Actions.pop();
   }
-  render() {
+  render(): React.Node {
     const { haveCameraPermission } = this.props;
 
     return (
       <View style={styles.container}>
         {(!haveCameraPermission) &&
           <View style={styles.detailsWrap}>
-            <Text style={styles.instructionText}>To attach a flyingCarpet, please enable camera permissions in settings.</Text>
+            <Text style={styles.instructionText}>
+              To attach a flyingCarpet, please enable camera permissions in settings.
+            </Text>
           </View>
         }
         {haveCameraPermission &&
@@ -77,28 +110,24 @@ class FlyingCarpetOwnerAttach extends React.Component {
   }
 }
 
-FlyingCarpetOwnerAttach.propTypes = {
-  newFlyingCarpetAttached: PropTypes.bool.isRequired,
-  setNewFlyingCarpetAttached: PropTypes.func.isRequired,
-  haveCameraPermission: PropTypes.bool.isRequired,
-  setHaveCameraPermission: PropTypes.func.isRequired,
-  flyingCarpetToken: PropTypes.string.isRequired,
-  setFlyingCarpetToken: PropTypes.func.isRequired,
-  flyingCarpetAddress: PropTypes.string.isRequired,
-  setFlyingCarpetAddress: PropTypes.func.isRequired
-};
-
 export default connect(
   state => ({
     newFlyingCarpetAttached: state.flyingCarpetOwner.newFlyingCarpetAttached,
     haveCameraPermission: state.appInfo.haveCameraPermission,
-    flyingCarpetToken: state.flyingCarpetOwner.flyingCarpetToken,
-    flyingCarpetAddress: state.flyingCarpetOwner.flyingCarpetAddress
   }),
   dispatch => ({
-    setNewFlyingCarpetAttached: bindActionCreators(flyingCarpetOwnerActions.setNewFlyingCarpetAttached, dispatch),
+    setNewFlyingCarpetAttached: bindActionCreators(
+      flyingCarpetOwnerActions.setNewFlyingCarpetAttached,
+      dispatch,
+    ),
     setHaveCameraPermission: bindActionCreators(appInfoActions.setHaveCameraPermission, dispatch),
-    setFlyingCarpetToken: bindActionCreators(flyingCarpetOwnerActions.setFlyingCarpetToken, dispatch),
-    setFlyingCarpetAddress: bindActionCreators(flyingCarpetOwnerActions.setFlyingCarpetAddress, dispatch)
-  })
+    setFlyingCarpetToken: bindActionCreators(
+      flyingCarpetOwnerActions.setFlyingCarpetToken,
+      dispatch,
+    ),
+    setFlyingCarpetAddress: bindActionCreators(
+      flyingCarpetOwnerActions.setFlyingCarpetAddress,
+      dispatch,
+    ),
+  }),
 )(FlyingCarpetOwnerAttach);

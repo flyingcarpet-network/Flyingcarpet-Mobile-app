@@ -1,16 +1,20 @@
+/*
+ * @flow
+ */
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   line: {
     borderTopColor: '$lightBorder',
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
   detailsMinimized: {
-    left: '-90%'
+    left: '-90%',
   },
   detailsWrap: {
     flexDirection: 'column',
@@ -18,11 +22,11 @@ export default EStyleSheet.create({
     backgroundColor: '$focusAreaDarker',
     right: '10%',
     left: 0,
-    width: '90%'
+    width: '90%',
   },
   detailsWrapContentContainer: {
     alignItems: 'stretch',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   estimateText: {
     textAlign: 'center',
@@ -31,23 +35,23 @@ export default EStyleSheet.create({
     paddingLeft: '20%',
     paddingRight: '20%',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   executeTextWrap: {
     padding: 10,
     marginTop: 10,
     marginBottom: 10,
-    position: 'relative'
+    position: 'relative',
   },
   executeText: {
     fontSize: 14,
     color: '$white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   rightArrow: {
     color: '$white',
     position: 'absolute',
     right: 20,
-    top: 9
-  }
+    top: 9,
+  },
 });

@@ -1,3 +1,7 @@
+/*
+ * @flow
+ */
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
@@ -5,6 +9,6 @@ export default EStyleSheet.create({
     color: '$white',
     fontWeight: '$appBoldWeight',
     fontSize: 18,
-    paddingRight: 20
-  }
+    paddingRight: 20,
+  },
 });

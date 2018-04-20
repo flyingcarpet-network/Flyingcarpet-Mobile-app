@@ -1,5 +1,6 @@
 /*
  * This file defines all of the app's global style variables
+ * @flow
  */
 
 export default {
@@ -19,5 +20,5 @@ export default {
   $lightBorder: '#363758', // Used on all borders
   // Other properties
   $normalWeight: '400',
-  $appBoldWeight: '600' // Used for any bold text
+  $appBoldWeight: '600', // Used for any bold text
 };

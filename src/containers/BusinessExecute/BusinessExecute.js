@@ -1,13 +1,15 @@
 /*
  * This is the business execution scene that the user sees once the task is being
  * executed.
+ * @flow
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
+// Eslint must be disabled for the next line since expo is included in package.json:
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { FontAwesome } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import moment from 'moment';
@@ -15,24 +17,34 @@ import estimateTimeToDone from '../../utils/estimateTimeToDone';
 import styles from './BusinessExecute-styles';
 import * as businessActions from '../../actions/business';
 
-FontAwesomeAnimatable = Animatable.createAnimatableComponent(FontAwesome);
+const FontAwesomeAnimatable = Animatable.createAnimatableComponent(FontAwesome);
 
-class BusinessExecute extends React.Component {
-  componentDidMount() {
+type Props = {
+  ethCost: number,
+  businessType: string,
+  setBusinessTransactionProcessing: boolean => {},
+  businessTransactionProcessing: boolean
+};
+
+class BusinessExecute extends React.Component<Props> {
+  componentDidMount(): void {
     const { setBusinessTransactionProcessing } = this.props;
 
     setTimeout(
       () => setBusinessTransactionProcessing(true),
-      4000
+      4000,
     );
   }
-  render() {
-    const { selectedLocationCoordinates, businessType, ethCost, setEthCost, businessTransactionProcessing } = this.props;
+  render(): React.Node {
+    const { businessType, ethCost, businessTransactionProcessing } = this.props;
 
-    const ethCostAdjusted = Math.round(ethCost * 40 * 100) / 100;
+    const ethCostAdjusted: number = Math.round(ethCost * 40 * 100) / 100;
     // Get a string representing how long it will take to complete the task
     // (returns an object, e.g.: { number: 3, units: 'days' })
-    const timeToFinish = estimateTimeToDone(businessType, ethCostAdjusted);
+    const timeToFinish: {number: number, units: string} = estimateTimeToDone(
+      businessType,
+      ethCostAdjusted,
+    );
 
     return (
       <View style={styles.container}>
@@ -51,13 +63,21 @@ class BusinessExecute extends React.Component {
         </View>
         <View style={styles.textWrap}>
           {(!businessTransactionProcessing) &&
-            <Text style={styles.taskExecutionText}>Finding a decentralized vehicle to perform the task and flyingcarpets to charge along the journey.</Text>
+            <Text style={styles.taskExecutionText}>
+              Finding a decentralized vehicle to perform the task and flyingcarpets to charge
+              along the journey.
+            </Text>
           }
           {businessTransactionProcessing &&
-            <Text style={styles.taskExecutionText}>Vehicle found! The result will be send to your profile before {moment().add(timeToFinish.number, timeToFinish.units).format('dddd')}.</Text>
+            <Text style={styles.taskExecutionText}>
+              Vehicle found! The result will be send to your profile before{' '}
+              {moment().add(timeToFinish.number, timeToFinish.units).format('dddd')}.
+            </Text>
           }
           {businessTransactionProcessing &&
-            <Text style={[styles.taskExecutionText, styles.taskCostText]}>Total cost: {ethCostAdjusted} ETH</Text>
+            <Text style={[styles.taskExecutionText, styles.taskCostText]}>
+              Total cost: {ethCostAdjusted} ETH
+            </Text>
           }
         </View>
       </View>
@@ -65,20 +85,16 @@ class BusinessExecute extends React.Component {
   }
 }
 
-BusinessExecute.propTypes = {
-  ethCost: PropTypes.number.isRequired,
-  businessType: PropTypes.string.isRequired,
-  setBusinessTransactionProcessing: PropTypes.func.isRequired,
-  businessTransactionProcessing: PropTypes.bool.isRequired
-};
-
 export default connect(
   state => ({
     ethCost: state.business.ethCost,
     businessType: state.business.businessType,
-    businessTransactionProcessing: state.business.businessTransactionProcessing
+    businessTransactionProcessing: state.business.businessTransactionProcessing,
   }),
   dispatch => ({
-    setBusinessTransactionProcessing: bindActionCreators(businessActions.setBusinessTransactionProcessing, dispatch)
-  })
+    setBusinessTransactionProcessing: bindActionCreators(
+      businessActions.setBusinessTransactionProcessing,
+      dispatch,
+    ),
+  }),
 )(BusinessExecute);

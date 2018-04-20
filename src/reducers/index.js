@@ -1,5 +1,6 @@
 /*
  * Here we combine the reducers.
+ * @flow
  */
 
 import { combineReducers } from 'redux';
@@ -14,5 +15,5 @@ export default combineReducers({
   appInfo,
   business,
   droneOwner,
-  flyingCarpetOwner
+  flyingCarpetOwner,
 });
