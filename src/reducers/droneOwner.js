@@ -11,31 +11,35 @@ type StateTypes = {
                              // NOTE: this field is used to prevent the camera QR code reader from
                              //       firing multiple times for a successful scan.
   droneToken: string, // This is the drone's token that is scanned from the QR code
-  droneAddress: string // This is the drone's smart contract address that is scanned from the QR code
+  droneAddress: string // This is the drone's smart contract address that is scanned from the QR
+                       // code.
 };
 
 const initialState: StateTypes = {
   newDroneAttached: false,
   droneToken: '',
-  droneAddress: ''
+  droneAddress: '',
 };
 
-export default function reducer(state: StateTypes = initialState, action: {[string]: mixed} = {}): {} {
+export default function reducer(
+  state: StateTypes = initialState,
+  action: {[string]: mixed} = {},
+): {} {
   switch (action.type) {
     case types.SET_NEW_DRONE_ATTACHED:
       return {
         ...state,
-        newDroneAttached: action.newDroneAttached
+        newDroneAttached: action.newDroneAttached,
       };
     case types.SET_DRONE_TOKEN:
       return {
         ...state,
-        droneToken: action.droneToken
+        droneToken: action.droneToken,
       };
     case types.SET_DRONE_ADDRESS:
       return {
         ...state,
-        droneAddress: action.droneAddress
+        droneAddress: action.droneAddress,
       };
     default:
       return state;

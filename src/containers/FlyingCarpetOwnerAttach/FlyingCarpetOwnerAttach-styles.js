@@ -8,28 +8,28 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$focusAreaDarker'
+    backgroundColor: '$focusAreaDarker',
   },
   cameraWrap: {
     flex: 1,
     alignItems: 'stretch',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   cameraInstructions: {
     flex: 0.15,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   cameraInstructionText: {
     textAlign: 'center',
     fontSize: 14,
     color: '$white',
     paddingLeft: '5%',
-    paddingRight: '5%'
+    paddingRight: '5%',
   },
   camera: {
-    flex: 0.85
+    flex: 0.85,
   },
   instructionText: {
     paddingTop: '20%',
@@ -37,6 +37,6 @@ export default EStyleSheet.create({
     fontSize: 19,
     color: '$white',
     paddingLeft: '10%',
-    paddingRight: '10%'
-  }
+    paddingRight: '10%',
+  },
 });

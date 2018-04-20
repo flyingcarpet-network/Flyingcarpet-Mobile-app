@@ -8,32 +8,32 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$focusAreaDarker'
+    backgroundColor: '$focusAreaDarker',
   },
   spinnerWrap: {
     flex: 0.5,
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   spinnerInnerWrap: {
     flex: 1,
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   spinner: {
-    color: '$white'
+    color: '$white',
   },
   textWrap: {
-    flex: 0.5
+    flex: 0.5,
   },
   taskExecutionText: {
     textAlign: 'left',
     paddingLeft: 40,
     paddingRight: 40,
     fontSize: 19,
-    color: '$white'
+    color: '$white',
   },
   taskCostText: {
-    paddingTop: 30
-  }
+    paddingTop: 30,
+  },
 });

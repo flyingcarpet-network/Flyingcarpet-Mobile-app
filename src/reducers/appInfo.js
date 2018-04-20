@@ -12,20 +12,23 @@ type StateTypes = {
 
 const initialState: StateTypes = {
   isLoadingComplete: false,
-  haveCameraPermission: false
+  haveCameraPermission: false,
 };
 
-export default function reducer(state: StateTypes = initialState, action: {[string]: mixed} = {}): {} {
+export default function reducer(
+  state: StateTypes = initialState,
+  action: {[string]: mixed} = {},
+): {} {
   switch (action.type) {
     case types.SET_IS_LOADING_COMPLETE:
       return {
         ...state,
-        isLoadingComplete: action.isLoadingComplete
+        isLoadingComplete: action.isLoadingComplete,
       };
     case types.SET_HAVE_CAMERA_PERMISSION:
       return {
         ...state,
-        haveCameraPermission: action.haveCameraPermission
+        haveCameraPermission: action.haveCameraPermission,
       };
     default:
       return state;

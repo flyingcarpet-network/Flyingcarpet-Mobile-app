@@ -2,6 +2,6 @@
  * @flow
  */
 
-export { Channel } from './Channel';
-export { MapCoordinateCircle } from './MapCoordinateCircle';
-export { MapCoordinate } from './MapCoordinate';
+export { ChannelType } from './ChannelType';
+export { MapCoordinateCircleType } from './MapCoordinateCircleType';
+export { MapCoordinateType } from './MapCoordinateType';

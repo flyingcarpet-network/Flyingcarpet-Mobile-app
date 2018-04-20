@@ -11,18 +11,18 @@ export default EStyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
-    height: 85
+    height: 85,
   },
   borderBottom: {
     borderBottomColor: '$lightBorder',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   icon: {
     width: 45,
     paddingRight: 10,
     color: '$white',
     lineHeight: 45,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   detailTitle: {
     fontSize: 16,
@@ -30,13 +30,13 @@ export default EStyleSheet.create({
     textAlign: 'left',
     // padding: 10
     flex: 0.5,
-    lineHeight: 45
+    lineHeight: 45,
   },
   red: {
-    color: '$red'
+    color: '$red',
   },
   green: {
-    color: '$green'
+    color: '$green',
   },
   detailText: {
     textAlign: 'right',
@@ -44,6 +44,6 @@ export default EStyleSheet.create({
     flex: 0.5,
     color: '$white',
     lineHeight: 45,
-    flexWrap: 'wrap'
-  }
+    flexWrap: 'wrap',
+  },
 });

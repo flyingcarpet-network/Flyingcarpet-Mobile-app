@@ -3,7 +3,7 @@
  * @flow
  */
 
-export type Channel = {
+export type ChannelType = {
   name: string,
   partnerAddress: string,
   channelAddress: string,

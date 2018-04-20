@@ -5,16 +5,22 @@
 
 import * as types from './appInfo-types';
 
-export function setIsLoadingComplete(isLoadingComplete: boolean): {type: string, isLoadingComplete: boolean} {
+export function setIsLoadingComplete(isLoadingComplete: boolean): {
+  type: string,
+  isLoadingComplete: boolean
+} {
   return {
     type: types.SET_IS_LOADING_COMPLETE,
-    isLoadingComplete
+    isLoadingComplete,
   };
 }
 
-export function setHaveCameraPermission(haveCameraPermission: boolean): {type: string, haveCameraPermission: boolean} {
+export function setHaveCameraPermission(haveCameraPermission: boolean): {
+  type: string,
+  haveCameraPermission: boolean
+} {
   return {
     type: types.SET_HAVE_CAMERA_PERMISSION,
-    haveCameraPermission
+    haveCameraPermission,
   };
 }

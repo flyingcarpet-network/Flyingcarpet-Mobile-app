@@ -8,24 +8,24 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$focusAreaDarker'
+    backgroundColor: '$focusAreaDarker',
   },
   detailsWrap: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   detailsWrapContentContainer: {
     alignItems: 'stretch',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   centralText: {
     textAlign: 'center',
     fontSize: 19,
     color: '$white',
     paddingLeft: '10%',
-    paddingRight: '10%'
+    paddingRight: '10%',
   },
   instructionText: {
-    paddingTop: '20%'
-  }
+    paddingTop: '20%',
+  },
 });

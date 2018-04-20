@@ -9,6 +9,6 @@ export default EStyleSheet.create({
     color: '$white',
     fontWeight: '$appBoldWeight',
     fontSize: 18,
-    paddingRight: 20
-  }
+    paddingRight: 20,
+  },
 });

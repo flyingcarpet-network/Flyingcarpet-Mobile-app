@@ -19,9 +19,9 @@ type Props = {
   setNewDroneAttached: boolean => {},
   haveCameraPermission: boolean,
   setHaveCameraPermission: boolean => {},
-  droneToken: string,
+  // droneToken: string,
   setDroneToken: string => {},
-  droneAddress: string,
+  // droneAddress: string,
   setDroneAddress: string => {}
 };
 
@@ -33,31 +33,50 @@ class DroneOwnerAttach extends React.Component<Props> {
     setNewDroneAttached(false);
 
     // Request access to the camera if it is not already granted
-    const { status: string } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status }: { status: string } = await Permissions.askAsync(Permissions.CAMERA);
     setHaveCameraPermission(status === 'granted');
   }
   handleBarCodeRead = (scannedObj: {data: string}): void => {
-    const { setDroneToken, setDroneAddress, newDroneAttached, setNewDroneAttached } = this.props;
+    const {
+      setDroneToken, setDroneAddress, newDroneAttached, setNewDroneAttached,
+    } = this.props;
 
-    if (newDroneAttached)
-      return; // If drone has been successfully set since the scene has been open, we don't allow another to be attached.
-              // NOTE: This is to prevent the success message from showing twice when a drone is successfully attached.
+    if (newDroneAttached) { return; } /* If drone has been successfully set since the scene has
+                                         been open, we don't allow another to be attached. */
+    // NOTE: This is to prevent the success message from showing twice when a drone is successfully
+    // attached.
 
-    if (typeof scannedObj.data !== 'string')
-      return alert('There was an error reading the encoding of the QR code!');
-
-    // Get the address and token from the QR code data (if it was formatted correctly)
-    const qrCodeData: ?{token: string, address: string} = parseQRCodeData(scannedObj.data, 'drone');
-    if (!qrCodeData) { // Check if there was an error (meaning the data wasn't formatted correctly)
+    if (typeof scannedObj.data !== 'string') {
+      // NOTE: We disable eslint alert prevention for ease of implementation for now...
+      // eslint-disable-next-line
       return alert('There was an error reading the encoding of the QR code!');
     }
 
-    // Save the token and address values (from the QR code) to redux reducer and mark the drone as attached
+    // Get the address and token from the QR code data (if it was formatted correctly)
+    const qrCodeData: {token?: string, address?: string} = parseQRCodeData(
+      scannedObj.data,
+      'drone',
+    );
+    if (qrCodeData.token == null || qrCodeData.address == null) { /* Check if there was an error
+                                                                     (meaning the data wasn't
+                                                                     formatted correctly) */
+      // NOTE: We disable eslint alert prevention for ease of implementation for now...
+      // eslint-disable-next-line
+      return alert('There was an error reading the encoding of the QR code!');
+    }
+
+    // Save the token and address values (from the QR code) to redux reducer and mark the
+    // drone as attached
     setDroneToken(qrCodeData.token);
-    setDroneAddress(qrCodeData.address);
+    if (qrCodeData.address != null) {
+      setDroneAddress(qrCodeData.address);
+    }
     setNewDroneAttached(true);
 
-    // Now we tell the user that it was successfully attached and navigate them back to the details page
+    // Now we tell the user that it was successfully attached and navigate them back to the
+    // details page
+    // NOTE: We disable eslint alert prevention for ease of implementation for now...
+    // eslint-disable-next-line
     alert('The drone was successfully attached!');
     Actions.pop();
   }
@@ -68,7 +87,9 @@ class DroneOwnerAttach extends React.Component<Props> {
       <View style={styles.container}>
         {(!haveCameraPermission) &&
           <View style={styles.detailsWrap}>
-            <Text style={styles.instructionText}>To attach a drone, please enable camera permissions in settings.</Text>
+            <Text style={styles.instructionText}>
+              To attach a drone, please enable camera permissions in settings.
+            </Text>
           </View>
         }
         {haveCameraPermission &&
@@ -92,13 +113,13 @@ export default connect(
   state => ({
     newDroneAttached: state.droneOwner.newDroneAttached,
     haveCameraPermission: state.appInfo.haveCameraPermission,
-    droneToken: state.droneOwner.droneToken,
-    droneAddress: state.droneOwner.droneAddress
+    // droneToken: state.droneOwner.droneToken,
+    // droneAddress: state.droneOwner.droneAddress,
   }),
   dispatch => ({
     setNewDroneAttached: bindActionCreators(droneOwnerActions.setNewDroneAttached, dispatch),
     setHaveCameraPermission: bindActionCreators(appInfoActions.setHaveCameraPermission, dispatch),
     setDroneToken: bindActionCreators(droneOwnerActions.setDroneToken, dispatch),
-    setDroneAddress: bindActionCreators(droneOwnerActions.setDroneAddress, dispatch)
-  })
+    setDroneAddress: bindActionCreators(droneOwnerActions.setDroneAddress, dispatch),
+  }),
 )(DroneOwnerAttach);

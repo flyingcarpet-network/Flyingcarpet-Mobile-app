@@ -8,15 +8,15 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '$focusAreaDarker'
+    backgroundColor: '$focusAreaDarker',
   },
   detailsWrap: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   detailsWrapContentContainer: {
     alignItems: 'stretch',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   instructionText: {
     textAlign: 'center',
@@ -24,10 +24,10 @@ export default EStyleSheet.create({
     color: '$white',
     paddingLeft: '10%',
     paddingRight: '10%',
-    paddingTop: '20%'
+    paddingTop: '20%',
   },
   mapWrap: {
     height: 300,
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 });

@@ -5,23 +5,26 @@
 
 import * as types from './droneOwner-types';
 
-export function setNewDroneAttached(newDroneAttached: boolean): {type: string, newDroneAttached: boolean} {
+export function setNewDroneAttached(newDroneAttached: boolean): {
+  type: string,
+  newDroneAttached: boolean
+} {
   return {
     type: types.SET_NEW_DRONE_ATTACHED,
-    newDroneAttached
+    newDroneAttached,
   };
 }
 
 export function setDroneToken(droneToken: string): {type: string, droneToken: string} {
   return {
     type: types.SET_DRONE_TOKEN,
-    droneToken
+    droneToken,
   };
 }
 
 export function setDroneAddress(droneAddress: string): {type: string, droneAddress: string} {
   return {
     type: types.SET_DRONE_ADDRESS,
-    droneAddress
+    droneAddress,
   };
 }

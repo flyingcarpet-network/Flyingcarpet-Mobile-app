@@ -15,5 +15,5 @@ export default combineReducers({
   appInfo,
   business,
   droneOwner,
-  flyingCarpetOwner
+  flyingCarpetOwner,
 });

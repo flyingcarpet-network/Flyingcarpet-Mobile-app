@@ -4,7 +4,8 @@
  */
 
 export default function getServiceCheckboxOptions(businessType: string): Array<string> {
-  // This is card-coded for now, but this should probably be altered to import this data from JSON (or elsewhere...)
+  // This is card-coded for now, but this should probably be altered to import this data from JSON
+  // (or elsewhere...)
   switch (businessType.toLowerCase()) {
     case 'agriculture':
       return ['Identify pests', 'Detect nutrient deficiencies', 'Estimate crop yield', 'Measure irrigation'];

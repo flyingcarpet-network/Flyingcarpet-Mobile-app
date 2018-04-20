@@ -8,16 +8,18 @@ import { Text, TouchableOpacity } from 'react-native';
 import styles from './RightButton-styles';
 
 type Props = {
-  children?: React.Node,
+  children: React.Node,
   onPress: () => {}
 };
 
-export default class RightButton extends React.Component<Props> {
-  render(): React.Node {
-    const { children, onPress } = this.props;
+function RightButton(props: Props): React.Node {
+  const { children, onPress } = props;
 
-    return (
-      <TouchableOpacity onPress={onPress}><Text style={styles.text}>{children}</Text></TouchableOpacity>
-    );
-  }
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text style={styles.text}>{children}</Text>
+    </TouchableOpacity>
+  );
 }
+
+export default RightButton;

@@ -10,10 +10,13 @@ type StateTypes = {
 };
 
 const initialState: StateTypes = {
-  routeName: 'home'
+  routeName: 'home',
 };
 
-export default function reducer(state: StateTypes = initialState, action: {[string]: mixed} = {}): {} {
+export default function reducer(
+  state: StateTypes = initialState,
+  action: {[string]: mixed} = {},
+): {} {
   switch (action.type) {
     // The focus action is dispatched when a new screen comes into focus
     case ActionConst.FOCUS: // This is a special constant value set by react-native-router-flux

@@ -19,19 +19,19 @@ export default EStyleSheet.create({
     paddingBottom: 30,
     paddingLeft: 40,
     paddingRight: 40,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   appName: {
     color: '$white',
     fontSize: 24,
-    flex: 0.8
+    flex: 0.8,
   },
   cogWrap: {
-    flex: 0.2
+    flex: 0.2,
   },
   cog: {
     color: '$white',
-    textAlign: 'right'
+    textAlign: 'right',
   },
   appSubNameWrap: {
     borderBottomColor: '$lightBorder',
@@ -39,21 +39,20 @@ export default EStyleSheet.create({
     width: '100%',
     paddingTop: 20,
     paddingBottom: 30,
-    paddingLeft: 40
+    paddingLeft: 40,
   },
   appSubName: {
     color: '$greyWhite',
     textAlign: 'left',
-    fontSize: 13
+    fontSize: 13,
   },
   buttonWrap: {
     borderBottomColor: '$lightBorder',
     borderBottomWidth: 1,
     // flex: 1,
-    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     // marginTop: 40,
     // marginBottom: 40
   },
@@ -70,18 +69,18 @@ export default EStyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 40,
     paddingRight: 40,
-    height: 68 // 28 (height) + 40 (padding)
+    height: 68, // 28 (height) + 40 (padding)
   },
   icon: {
     color: '$white',
     width: 28,
-    marginRight: 16
+    marginRight: 16,
   },
   buttonText: {
     fontWeight: '$appBoldWeight',
     color: '$white',
     flex: 1,
     lineHeight: 28,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

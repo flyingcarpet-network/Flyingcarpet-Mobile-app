@@ -7,5 +7,5 @@
 
 export default function getValues<T>(obj: {[string]: T}): Array<T> {
   const keys: string[] = Object.keys(obj);
-  return keys.map(key => obj[key]);
+  return keys.map((key: string) => obj[key]);
 }

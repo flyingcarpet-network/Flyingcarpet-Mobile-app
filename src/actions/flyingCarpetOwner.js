@@ -4,32 +4,44 @@
  */
 
 import * as types from './flyingCarpetOwner-types';
-import { type Channel } from '../types/Channel';
+import { type ChannelType } from '../types/ChannelType';
 
-export function setNewFlyingCarpetAttached(newFlyingCarpetAttached: boolean): {type: string, newFlyingCarpetAttached: boolean} {
+export function setNewFlyingCarpetAttached(newFlyingCarpetAttached: boolean): {
+  type: string,
+  newFlyingCarpetAttached: boolean
+} {
   return {
     type: types.SET_NEW_FLYING_CARPET_ATTACHED,
-    newFlyingCarpetAttached
+    newFlyingCarpetAttached,
   };
 }
 
-export function setFlyingCarpetToken(flyingCarpetToken: string): {type: string, flyingCarpetToken: string} {
+export function setFlyingCarpetToken(flyingCarpetToken: string): {
+  type: string,
+  flyingCarpetToken: string
+} {
   return {
     type: types.SET_FLYING_CARPET_TOKEN,
-    flyingCarpetToken
+    flyingCarpetToken,
   };
 }
 
-export function setFlyingCarpetAddress(flyingCarpetAddress: string): {type: string, flyingCarpetAddress: string} {
+export function setFlyingCarpetAddress(flyingCarpetAddress: string): {
+  type: string,
+  flyingCarpetAddress: string
+} {
   return {
     type: types.SET_FLYING_CARPET_ADDRESS,
-    flyingCarpetAddress
+    flyingCarpetAddress,
   };
 }
 
-export function setChannelData(channelData: Channel): {type: string, channelData: Channel} {
+export function setChannelTypeData(channelData: ChannelType): {
+  type: string,
+  channelData: ChannelType
+} {
   return {
     type: types.SET_CHANNEL_DATA,
-    channelData
+    channelData,
   };
 }

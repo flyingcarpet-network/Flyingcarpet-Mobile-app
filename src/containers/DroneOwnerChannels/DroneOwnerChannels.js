@@ -1,69 +1,70 @@
 /*
- * This is the drone owner channels scene where the user can view the open state channels that their drone is conencted to.
+ * This is the drone owner channels scene where the user can view the open state channels that
+ * their drone is conencted to.
  * @flow
  */
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import { HardwareDetail } from '../../components';
-import { type Channel } from '../../types';
+import { type ChannelType } from '../../types';
 import styles from './DroneOwnerChannels-styles';
 import * as flyingCarpetOwnerActions from '../../actions/flyingCarpetOwner';
 
 // Just some hard-coded data for now:
-const channels: Array<Channel> = [
+const channels: Array<ChannelType> = [
   {
     name: "Sam's flying carpet",
-    partnerAddress: "0xD551234Ae421e3BCBA99A0Da6d736074f22192FF",
-    channelAddress: "0xF34Df51234Ae421e9CBA9A0Da6d736074f2217A7",
+    partnerAddress: '0xD551234Ae421e3BCBA99A0Da6d736074f22192FF',
+    channelAddress: '0xF34Df51234Ae421e9CBA9A0Da6d736074f2217A7',
     balance: 7.12,
     state: 'opened',
     revealTime: 30,
-    settleTime: 600
+    settleTime: 600,
   },
   {
-    name: "Mines Ltd FlyingCarpet #1",
-    partnerAddress: "0xF121234Ae421e3BCBA9229A0Da6d736074f192aC",
-    channelAddress: "0xE4Df51234Ae421e9CBA9A0Da6d7360754f2217A7",
+    name: 'Mines Ltd FlyingCarpet #1',
+    partnerAddress: '0xF121234Ae421e3BCBA9229A0Da6d736074f192aC',
+    channelAddress: '0xE4Df51234Ae421e9CBA9A0Da6d7360754f2217A7',
     balance: 2.00,
     state: 'opened',
     revealTime: 30,
-    settleTime: 60
+    settleTime: 60,
   },
   {
-    name: "Mines Ltd FlyingCarpet #2",
-    partnerAddress: "0xA781234Ae421eBCBA993A0Da6d736074f22ff192",
-    channelAddress: "0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71",
+    name: 'Mines Ltd FlyingCarpet #2',
+    partnerAddress: '0xA881234Ae421eBCBA993A0Da6d736074f22ff192',
+    channelAddress: '0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71',
     balance: 0.12,
     state: 'opened',
     revealTime: 30,
-    settleTime: 31
+    settleTime: 31,
   },
   {
-    name: "south region flyingcarpet",
-    partnerAddress: "0xA781234Ae421eBCBA993A0Da6d736074f22ff192",
-    channelAddress: "0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71",
+    name: 'south region flyingcarpet',
+    partnerAddress: '0xA781234Ae421eBCBA993A0Da6d736074f22ff192',
+    channelAddress: '0xF4Df51234Ae421e9CBA9A0Da6d736074f2217A71',
     balance: 0.73,
     state: 'opened',
     revealTime: 25,
-    settleTime: 45
-  }
+    settleTime: 45,
+  },
 ];
 
 type Props = {
-  setChannelData: Channel => {}
+  setChannelTypeData: ChannelType => {}
 };
 
 class DroneOwnerChannels extends React.Component<Props> {
-  handleChannelPress = (channel: Channel): void => {
-    const { setChannelData } = this.props;
+  handleChannelTypePress = (channel: ChannelType): void => {
+    const { setChannelTypeData } = this.props;
 
     // Change highlighted channel data (in Redux)
-    setChannelData(channel);
+    setChannelTypeData(channel);
 
     // Change route
     Actions.channelDetails();
@@ -71,9 +72,11 @@ class DroneOwnerChannels extends React.Component<Props> {
   render(): React.Node {
     return (
       <View style={styles.container}>
-        {/*(flyingCarpetToken.length > 0) &&
+        {/* (flyingCarpetToken.length > 0) &&
           <View style={styles.detailsWrap}>
-            <Text style={styles.instructionText}>Press "open channel" to open a new state channel.</Text>
+            <Text style={styles.instructionText}>
+              Press "open channel" to open a new state channel.
+            </Text>
           </View>
         */}
         <List containerStyle={styles.list}>
@@ -82,29 +85,29 @@ class DroneOwnerChannels extends React.Component<Props> {
             titleStyle={[styles.title, styles.nameHeaderText]}
             containerStyle={[styles.channelInfoContainer, styles.channelInfoHeadersContainer]}
             rightTitleContainerStyle={styles.balanceHeader}
-            rightTitle="Channel Balance"
+            rightTitle="ChannelType Balance"
             rightTitleStyle={[styles.rightTitle, styles.balanceHeaderText]}
             hideChevron
           />
-          {channels.map((channel: Channel, i: number): React.Node => (
-            <TouchableOpacity key={i} onPress={() => this.handleChannelPress(channel)}>
+          {channels.map((channel: ChannelType): React.Node => (
+            <TouchableOpacity key={`channel_${channel.partnerAddress}`} onPress={() => this.handleChannelTypePress(channel)}>
               <ListItem
-                title={channel.name + ' - ' + channel.settleTime + 'm left'}
+                title={`${channel.name} - ${channel.settleTime}m left`}
                 titleStyle={styles.title}
                 containerStyle={styles.channelInfoContainer}
                 wrapperStyle={styles.channelInfoInnerContainer}
-                titleContainerStyle={styles.leftChannelInfo}
-                subtitleContainerStyle={styles.leftChannelInfo}
-                rightTitleContainerStyle={styles.rightChannelInfo}
+                titleContainerStyle={styles.leftChannelTypeInfo}
+                subtitleContainerStyle={styles.leftChannelTypeInfo}
+                rightTitleContainerStyle={styles.rightChannelTypeInfo}
                 subtitle={channel.partnerAddress}
                 subtitleStyle={styles.subtitle}
-                rightTitle={channel.balance + ' ETH'}
+                rightTitle={`${channel.balance} ETH`}
                 rightTitleStyle={styles.rightTitle}
                 hideChevron
               />
             </TouchableOpacity>
           ))}
-          <HardwareDetail icon="plus-circle" title="Open New Channel" greenText />
+          <HardwareDetail icon="plus-circle" title="Open New ChannelType" greenText />
         </List>
       </View>
     );
@@ -114,6 +117,6 @@ class DroneOwnerChannels extends React.Component<Props> {
 export default connect(
   null,
   dispatch => ({
-    setChannelData: bindActionCreators(flyingCarpetOwnerActions.setChannelData, dispatch)
-  })
+    setChannelTypeData: bindActionCreators(flyingCarpetOwnerActions.setChannelTypeData, dispatch),
+  }),
 )(DroneOwnerChannels);

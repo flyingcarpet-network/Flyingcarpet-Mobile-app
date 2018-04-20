@@ -1,0 +1,5 @@
+# ignore test files
+**/*.test.js
+
+# ignore ethereum-address because it is from an open-source GitHub repo (not our code)
+/src/utils/ethereum-address.js

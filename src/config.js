@@ -3,5 +3,5 @@
  */
 
 export default {
-  googlePlacesAPIWebServiceKey: 'AIzaSyBk34x9pOfnwZa8HyEUgawkoZIIWq1JXNc'
+  googlePlacesAPIWebServiceKey: 'AIzaSyBk34x9pOfnwZa8HyEUgawkoZIIWq1JXNc',
 };

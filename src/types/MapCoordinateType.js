@@ -3,7 +3,7 @@
  * @flow
  */
 
-export type MapCoordinate = {
+export type MapCoordinateType = {
   latitude: number,
   longitude: number
 };

@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
+// Eslint must be disabled for the next line since expo is included in package.json:
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './BusinessSelect-styles';
 import * as businessActions from '../../actions/business';
@@ -32,36 +34,36 @@ class BusinessSelect extends React.Component<Props> {
     const services: Array<{name: string, icon: string}> = [
       {
         name: 'Infrastructure',
-        icon: 'building'
+        icon: 'building',
       },
       {
         name: 'Agriculture',
-        icon: 'leaf'
+        icon: 'leaf',
       },
       {
         name: 'Media',
-        icon: 'newspaper-o'
+        icon: 'newspaper-o',
       },
       {
         name: 'Transport',
-        icon: 'truck'
+        icon: 'truck',
       },
       {
         name: 'Security',
-        icon: 'lock'
+        icon: 'lock',
       },
       {
         name: 'Insurance',
-        icon: 'handshake-o'
+        icon: 'handshake-o',
       },
       {
         name: 'Telecommunication',
-        icon: 'globe'
+        icon: 'globe',
       },
       {
         name: 'Mining',
-        icon: 'subway'
-      }
+        icon: 'subway',
+      },
     ];
 
     return (
@@ -70,16 +72,24 @@ class BusinessSelect extends React.Component<Props> {
         <View style={styles.innerContainer}>
           <View style={styles.businessTypeListWrap}>
             {/* This spacers makes it so that the first row only contains two service icons */}
-            <View style={styles.spacer}></View>
-            {services.map((service: {icon: string, name: string}, i: number): React.Node => (
-              /* Note, the wrap is a different width if it's one of the first two services listed (hence the additional style) */
-              <TouchableOpacity key={i} style={styles.businessTypeWrap} onPress={() => this.selectBusiness(service.name)}>
-                <View style={styles.businessTypeCircle}>
-                  <FontAwesome name={service.icon} size={30} style={styles.businessTypeIcon} />
-                </View>
-                <Text style={styles.businessTypeText} numberOfLines={1}>{service.name}</Text>
-              </TouchableOpacity>
-            ))}
+            <View style={styles.spacer} />
+            {services.map((service: {icon: string, name: string}): React.Node => {
+              /* Note, the wrap is a different width if it's one of the first two services listed
+                 (hence the additional style) */
+              const key = service.name.replace(/\W/g, '');
+              return (
+                <TouchableOpacity
+                  key={`businesses_${key}`}
+                  style={styles.businessTypeWrap}
+                  onPress={() => this.selectBusiness(service.name)}
+                >
+                  <View style={styles.businessTypeCircle}>
+                    <FontAwesome name={service.icon} size={30} style={styles.businessTypeIcon} />
+                  </View>
+                  <Text style={styles.businessTypeText} numberOfLines={1}>{service.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
       </View>
@@ -90,6 +100,6 @@ class BusinessSelect extends React.Component<Props> {
 export default connect(
   null,
   dispatch => ({
-    setBusinessType: bindActionCreators(businessActions.setBusinessType, dispatch)
-  })
+    setBusinessType: bindActionCreators(businessActions.setBusinessType, dispatch),
+  }),
 )(BusinessSelect);
